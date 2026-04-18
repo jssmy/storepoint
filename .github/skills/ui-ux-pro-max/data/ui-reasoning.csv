@@ -1,0 +1,18 @@
+product_keyword,style_match,color_match,nav_pattern,ux_focus,anti_patterns,density
+entertainment social,claymorphism vibrant flat,vibrant warm social,bottom tab 5,content-first engagement infinite scroll,avoid heavy navigation avoid enterprise-style cards,high
+gaming dark,neon cyberpunk dark mode,electric neon dark,bottom tab full-screen,achievement reward immersive,avoid white backgrounds avoid flat minimal,high
+fintech banking,minimal flat glassmorphism,trust blue navy dark,tab bar simple,trust clarity precision security,avoid clutter avoid bright neon,medium
+healthcare medical,clean minimal flat,calm trust blue clean,simple tab bar,clarity trust accessibility,avoid dark mode as default avoid gamification,low
+ecommerce retail,minimal flat vibrant,warm conversion brand,search catalog cart,product discovery conversion,avoid too many CTAs avoid cluttered grid,high
+saas dashboard,minimal flat dark mode,neutral brand accent,sidebar top nav,data density efficiency,avoid decorative animation avoid icon-only nav,high
+education learning,friendly rounded flat,friendly warm progress,tab bar progress,engagement motivation clarity,avoid dense data avoid corporate tone,medium
+developer tool,dark mode monospace carbon,monochrome dark accent,sidebar keyboard-first,efficiency keyboard precision,avoid decorative elements avoid rounded bubbly,very high
+wellness meditation,glassmorphism soft dark,calm soft lavender ambient,minimal bottom tab,calm reassurance low-pressure,avoid high-contrast jarring transitions avoid gamification,low
+travel booking,clean airy glassmorphism,sky blue warm exploration,search map browse,discovery inspiration booking confidence,avoid overwhelming density avoid dark default,medium
+creative portfolio,minimal editorial brutalism,brand-forward monochrome,single-page minimal,work-first visual impact distinctiveness,avoid generic templates avoid cluttered layout,low
+kids children,claymorphism bright playful,bright vibrant pastel,simple large-target,delight playfulness simplicity safety,avoid small touch targets avoid complex nav avoid dark,low
+luxury premium,glassmorphism minimal elegant,gold dark warm neutral,minimal deliberate,exclusivity quality craftsmanship,avoid bright neon avoid cluttered busy avoid emoji,low
+crypto blockchain,dark mode aurora,dark electric accent gold,tab bar sidebar,data portfolio trust security,avoid pastel avoid light default,high
+food restaurant,vibrant warm flat claymorphism,warm appetizing golden,tab bottom nav,visual appetite menu browsing,avoid cold clinical colors avoid heavy data,medium
+social community,claymorphism vibrant,vibrant warm social,bottom tab profile,engagement connection feed,avoid dense data-first layout,high
+news editorial,editorial minimal clean,neutral editorial monochrome,category tab top nav,reading clarity scanning speed,avoid decorative graphics avoid heavy animation,high

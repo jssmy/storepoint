@@ -1,0 +1,16 @@
+style,keywords,prompt_words,css_keywords
+Glassmorphism,glass frosted blur transparent modern,frosted glass translucent blur background subtle border luminous,backdrop-filter blur rgba background border-radius border semi-transparent
+Claymorphism,clay bubbly 3d inflated rounded colorful playful,soft inflated clay bubbly rounded pastel outline bold inner shadow,border-radius box-shadow inner-shadow pastel fill stroke outline
+Minimalism,minimal clean simple whitespace zen,breathable spacious clean simple purposeful whitespace restrained,padding margin whitespace gap serif or sans max-width centered
+Brutalism,brutalist raw bold stark unconventional,raw stark bold grid system font black white high-contrast deliberate ugly,font-weight font-size border box-shadow monospace grid strict contrast
+Neumorphism,neumorphic soft tactile extruded inset,soft shadow tactile extruded inset monochromatic subtle depth,box-shadow inner outer light-dark dual soft same-color background
+Bento Grid,bento grid modular mosaic asymmetric layout,grid mosaic card varied sizes editorial layout magazine,CSS grid grid-template gap varied row-col spans card border-radius
+Dark Mode,dark night OLED power-saving professional,dark surface muted desaturated elevated depth dim ambient,background dark surface elevated opacity layer HSL color
+Skeuomorphism,realistic texture material leather depth,photorealistic texture material surface tactile familiar object-like,gradient linear radial texture background border emboss bevel shadow
+Flat Design,flat solid icon simple color no-shadow,flat color simple solid icon geometric clean no texture no shadow,background solid color no box-shadow no gradient border minimal
+Neon Cyberpunk,neon cyberpunk dark glow electric vivid,dark glow vivid neon electric futuristic cyber night RGB,glow text-shadow filter drop-shadow saturated color neon contrast dark
+Glassmorphism Dark,glass dark frosted blur night premium,dark frosted glass blur dim translucent ambient premium night,backdrop-filter blur rgba dark background border light border-radius
+Aurora,aurora glow radiant space colorful fluid,colorful glowing fluid blob ambient halo radiant ethereal,radial-gradient multiple blur opacity blend-mode multiply screen
+Japandi,japandi warm minimal earthy organic neutral,warm minimal earthy organic wood stone muted natural,palette warm neutral sans or sans-serif generous whitespace border-radius-subtle
+Swiss International,swiss grid typography editorial stark,strict grid powerful typography editorial modernist clean structure,grid columns strict align monospace or grotesk bold large type
+Gradient Mesh,gradient mesh fluid colorful vibrant organic,smooth mesh colorful fluid organic blob multiple stops,background mesh gradient radial multiple position blob

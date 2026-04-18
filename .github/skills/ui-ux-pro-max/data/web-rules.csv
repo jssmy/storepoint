@@ -1,0 +1,16 @@
+platform,category,rule,do,dont,reference
+iOS,Navigation,Bottom Tab Bar for top-level,Use tab bar with icon and label for primary app sections,Drawer or hamburger menu for primary iOS navigation,Apple HIG
+iOS,Navigation,Navigation stack for drill-down,Push views onto navigation stack for detail screens,Full-screen modal for simple detail views that should be push,Apple HIG
+iOS,Touch,System gesture support,Support swipe-back (leading edge) and leave gesture bar unobstructed,Block back swipe with custom gesture recognizer,Apple HIG
+iOS,Safe Areas,Respect Dynamic Island and notch,Use safe area insets for all fixed headers and floating elements,Hardcode top padding for notch — breaks on new devices,Apple HIG
+iOS,Typography,SF Pro / System Font,Use system font family for native iOS feel; override for branding only,Custom font on every screen with no brand justification,Apple HIG
+iOS,Accessibility,VoiceOver reading order,Set accessibilityLabel accessibilityHint and logical reading order,Unlabeled custom controls — VoiceOver reads frame coordinates,Apple HIG WCAG
+iOS,Accessibility,Dynamic Type,Support all Dynamic Type sizes; test at accessibility-large size,Cap maxFontSizeMultiplier everywhere — fails a11y audit,Apple HIG
+Android,Navigation,Top App Bar,Use Top App Bar with navigation icon for primary structure,Hamburger menu with no visible nav — hides primary navigation,Material Design
+Android,Navigation,Bottom Nav for top-level,Bottom navigation bar for 3-5 top-level destinations,Tab bar at top of screen on small Android devices,Material Design
+Android,Touch,Ripple on all Pressable,Provide ripple effect (android_ripple or state layer) on tap,No visual press feedback — Android users expect ripple,Material Design
+Android,Safe Areas,Gesture navigation bars,Use WindowInsets to avoid content behind gesture nav bar,Hardcode navigation bar height — breaks on gesture nav config,Material Design
+Android,Typography,Roboto or Material fonts,Use Roboto as system font baseline; customize for brand,Google Sans on non-Google apps — mismatched brand expectations,Material Design
+Both,Accessibility,Touch target minimum,44x44pt (iOS) or 48x48dp (Android) minimum for all interactive elements,Icon buttons smaller than 24pt with no hitSlop,Apple HIG Material Design WCAG
+Both,Performance,Virtualize long lists,Use FlashList (Shopify) for optimal React Native list performance,ScrollView with .map() for lists > 30 items,Performance
+Both,Performance,Avoid anonymous function props,Stabilize callbacks with useCallback; objects with useMemo,Inline arrow functions in list renderItem — breaks memo,React performance

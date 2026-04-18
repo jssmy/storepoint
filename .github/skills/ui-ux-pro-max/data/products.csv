@@ -1,0 +1,36 @@
+type,category,keywords,style_recommendation,color_type,nav_pattern,ux_focus,density
+Social Media App,entertainment,social feed content vibrant community posts stories,claymorphism or vibrant flat,vibrant warm social,bottom tab 5,content-first engagement infinite scroll,high
+Video Streaming App,entertainment,video stream watch content media player,dark mode immersive,dark cinematic accent,bottom tab with player mini-bar,immersive content browsing discovery,high
+Music Player App,entertainment,music audio player streaming beats,glassmorphism dark or claymorphism,accent-forward dark or vibrant,tab bar with persistent mini-player,album art-first mood-driven,medium
+Gaming App,entertainment,game gaming score leaderboard dark vivid,neon cyberpunk or dark mode,electric neon dark,bottom tab or full-screen,engagement achievement rewards,high
+Food Delivery App,consumer,food delivery restaurant order menu,vibrant flat or claymorphism,warm appetizing,bottom tab 4,menu browsing cart checkout,high
+E-commerce Store,consumer,shop buy product ecommerce retail fashion,minimal flat or glassmorphism,brand-forward warm,search-first catalog with cart,product discovery trust conversion,high
+Travel App,consumer,travel flights hotel booking explore destination,clean airy minimal or glassmorphism,sky blue warm,search-first map-integrated,discovery inspiration booking,medium
+Fitness & Workout,consumer,fitness workout gym exercise health tracker,bold dark or vibrant flat,energetic strong,bottom tab with stats,tracking motivation progress,medium
+Recipe & Food,consumer,recipe cooking food meal kitchen,warm flat or claymorphism,warm appetizing,search + browse + saved,visual recipe browsing,medium
+SaaS Dashboard,saas,dashboard analytics data metrics admin saas,minimal flat or dark mode,neutral brand accent,sidebar navigation,data density quick actions insights,high
+Project Management,saas,project task board kanban todo team,minimal flat,neutral functional,sidebar or top nav,task management collaboration status,high
+CRM / Sales Tool,saas,crm sales pipeline contact customer b2b,minimal flat enterprise,neutral blue trust,sidebar dense nav,contact management pipeline efficiency,high
+Analytics Platform,saas,analytics data chart metrics reporting bi,dark mode or minimal,data-safe accessible,sidebar + top nav,data exploration drill-down,very high
+Developer Tool / IDE,saas,developer code api cli terminal,dark mode monospace,monochrome accent,sidebar or top nav,efficiency keyboard-first,very high
+Healthcare App,healthcare,health medical clinic patient doctor,clean minimal flat,trust calm clean,tab bar or simple nav,clarity trust accessibility,low
+Mental Health App,health,mental health wellness meditation calm anxiety,soft minimal glassmorphism,soft calm lavender,simple bottom tab,calm reassurance low-pressure,low
+Education App,education,learn course lesson quiz student,friendly rounded flat or claymorphism,friendly warm,tab bar with progress,engagement motivation progress,medium
+Kids Learning App,education,kids children learn play game interactive,claymorphism bright playful,bright vibrant pastel,simple large-target nav,delight playfulness simplicity,low
+Finance / Banking,fintech,bank finance money transfer payment account,minimal clean flat or glassmorphism,trust blue or dark premium,tab bar secure,trust clarity precision security,medium
+Crypto / DeFi,fintech,crypto defi wallet token chart blockchain,dark mode aurora glow,dark electric accent,tab bar or sidebar,data portfolio trust security,high
+Investment App,fintech,invest portfolio stock market fund returns,minimal clean dark option,trust navy or dark,tab bar,portfolio clarity growth tracking,high
+Real Estate App,consumer,real estate property rent buy listing map,clean minimal warm,earthy warm,search + map integrated,property discovery visual browsing,medium
+Job Board / Career,consumer,jobs career hiring remote work resume,clean minimal flat,professional neutral,search-first filters,search filter apply clarity,medium
+Dating App,social,dating match profile social chat,vibrant flat or glassmorphism,warm social vibrant,swipe stack + bottom tab,profile browsing match chemistry,medium
+Event App,consumer,event ticket concert show venue social,bold vibrant dark,event-forward vivid,search + calendar + map,discovery ticket purchase social,medium
+News App,content,news article read editorial journalism,editorial minimal clean,neutral editorial,bottom tab or top category nav,reading clarity scanning,high
+Photo Editor,creative,photo edit filter camera creative art,dark mode flat,dark neutral accent,bottom panel + full-screen,canvas tool precision,medium
+Portfolio / Creative,creative,portfolio creative design art work showcase,minimal editorial or brutalist,brand-forward monochrome,single-page or minimal nav,work-first visual impact,low
+Blog / Writing Platform,content,blog write read article story long-form,editorial minimal clean,neutral warm reading,minimal top nav,reading experience clarity,low
+E-learning Platform,education,course lesson video quiz certificate learning,clean flat friendly,friendly warm,sidebar or tab nav,progress engagement structured,medium
+Admin Panel,saas,admin dashboard management settings user role,minimal flat enterprise,neutral functional,sidebar dense,efficiency data management actions,very high
+Marketplace,ecommerce,marketplace buy sell listing vendor review,flat clean vibrant,warm conversion,search + browse + cart,discovery trust transaction,high
+Booking / Reservation,consumer,booking appointment reserve schedule calendar,clean minimal flat,calm trust,step-by-step flow,clarity booking confidence trust,low
+Loyalty / Rewards App,consumer,loyalty reward points membership discount,warm vibrant flat,warm brand,tab bar with balance,engagement rewards status,medium
+Meditation / Sleep App,health,meditation sleep calm breathe relax ambient,glassmorphism dark soft,dark calm ambient,minimal bottom tab,calm immersive low-pressure,low

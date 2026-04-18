@@ -1,0 +1,31 @@
+name,category,keywords,weights,variable,popular_pairing,vibe
+Inter,sans-serif,modern clean neutral minimal professional variable,100 200 300 400 500 600 700 800 900,yes,Inter,Default neutral — works everywhere
+Roboto,sans-serif,material google android clean readable,100 300 400 500 700 900,no,Roboto Mono,Standard Android material apps
+Open Sans,sans-serif,friendly readable humanist body clean,300 400 600 700 800,no,Playfair Display Raleway,Friendly readable editorial
+Lato,sans-serif,professional warm clean body rounded,100 300 400 700 900,no,Playfair Display Merriweather,Warm professional
+Poppins,sans-serif,rounded friendly modern geometric consumer,100 200 300 400 500 600 700 800 900,no,Poppins Roboto Mono,Friendly approachable consumer
+Raleway,sans-serif,elegant thin creative headers display,100 200 300 400 500 600 700 800 900,yes,Open Sans Lato,Elegant creative brand
+Nunito,sans-serif,rounded playful friendly soft education kids,200 300 400 500 600 700 800 900,yes,Nunito,Playful rounded warm
+Playfair Display,serif,elegant editorial luxury classic serif premium,400 500 600 700 800 900,yes,Lato Open Sans Source Sans 3,Elegant premium editorial
+Merriweather,serif,readable literary classic serif content blog,300 400 700 900,no,Source Sans 3 Open Sans,Readable literary trustworthy
+Lora,serif,warm literary editorial humanist serif,400 500 600 700,yes,Source Sans 3 Inter,Warm literary approachable
+Cormorant Garamond,serif,luxury refined delicate fashion editorial serif,300 400 500 600 700,yes,Proza Libre,Refined luxury delicate
+Libre Baskerville,serif,traditional trustworthy classic professional finance,400 700,no,Libre Franklin,Classic traditional trustworthy
+DM Sans,sans-serif,modern clean geometric startup product,100 200 300 400 500 600 700,yes,DM Serif Display DM Mono,Modern clean contemporary
+DM Serif Display,display,elegant editorial premium headline display,400,no,DM Sans,Elegant display editorial
+Space Grotesk,sans-serif,tech geometric modern bold startup,300 400 500 600 700,yes,Space Mono,Geometric technical bold
+Space Mono,monospace,code technical developer fixed-width mono,400 700,no,Space Grotesk,Technical developer monospace
+JetBrains Mono,monospace,code developer programming clear mono,100 200 300 400 500 600 700 800,yes,Inter Roboto,Developer code editor
+Fira Code,monospace,code programming ligature mono technical,300 400 500 600 700,yes,Lato Open Sans,Developer code ligature
+Source Code Pro,monospace,code technical clean mono programming,200 300 400 500 600 700 900,no,Source Sans 3,Clean technical mono
+Bricolage Grotesque,display,quirky creative bold playful variable display,200 300 400 500 600 700 800,yes,Bricolage Grotesque,Creative quirky distinctive
+Outfit,sans-serif,modern geometric clean variable friendly startup,100 200 300 400 500 600 700 800 900,yes,Outfit,Modern clean variable
+Work Sans,sans-serif,professional workspace clean neutral product,100 200 300 400 500 600 700 800 900,yes,Work Sans JetBrains Mono,Professional workspace efficient
+Plus Jakarta Sans,sans-serif,modern friendly geometric startup clean,200 300 400 500 600 700 800,yes,Plus Jakarta Sans,Friendly geometric modern
+Bebas Neue,display,bold condensed impact sporty uppercase,400,no,Roboto Open Sans,Bold impactful athletic
+Anton,display,bold impact condensed uppercase headlines,400,no,Roboto,Bold aggressive display
+Satoshi,sans-serif,modern bold clean geometric startup variable,300 400 500 700 900,yes,Satoshi JetBrains Mono,Bold modern distinctive startup
+Manrope,sans-serif,modern geometric clean readable startup,200 300 400 500 600 700 800,yes,Manrope,Clean readable modern
+Cabinet Grotesk,sans-serif,editorial display creative variable bold,100 200 300 400 500 600 700 800 900,yes,Clash Display,Creative editorial bold
+Clash Display,display,editorial bold display creative variable headlines,200 300 400 500 600 700,yes,Cabinet Grotesk,Strong editorial modern
+Sora,sans-serif,geometric clean minimal futuristic startup,100 200 300 400 500 600 700 800,yes,Sora,Futuristic geometric precise
