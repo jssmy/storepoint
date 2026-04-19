@@ -1,3 +1,7 @@
+<ng-template #btnContent>
+  <ng-content />
+</ng-template>
+
 @if (isLink()) {
   <a
     class="stp-btn"
@@ -10,7 +14,7 @@
     (click)="triggerRipple()"
   >
     <span class="stp-btn__content">
-      <ng-content />
+      <ng-container [ngTemplateOutlet]="btnContent" />
     </span>
   </a>
 } @else {
@@ -28,7 +32,7 @@
       <span class="stp-btn__spinner" aria-hidden="true"></span>
     }
     <span class="stp-btn__content">
-      <ng-content />
+      <ng-container [ngTemplateOutlet]="btnContent" />
     </span>
   </button>
 }

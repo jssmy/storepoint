@@ -1,7 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AppConfigService } from '../../../core/services/app-config.service';
 import { ThemeService } from '../../../core/services/theme.service';
+import { LoadingService } from '../../../core/services/loading.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { InputComponent } from '../../../shared/components/input/input.component';
 
@@ -15,8 +17,9 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   protected readonly themeService = inject(ThemeService);
+  protected readonly config = inject(AppConfigService);
+  protected readonly loadingService = inject(LoadingService);
 
-  protected readonly isLoading = signal(false);
   protected readonly submitAttempted = signal(false);
   protected readonly currentYear = new Date().getFullYear();
 
@@ -30,11 +33,14 @@ export class LoginComponent {
     this.submitAttempted.set(true);
     if (this.form.invalid) return;
 
-    this.isLoading.set(true);
-    // TODO: connect to auth service
-    await new Promise(r => setTimeout(r, 1000)); // placeholder
-    this.isLoading.set(false);
-    this.router.navigate(['/dashboard']);
+    this.loadingService.start();
+    try {
+      // TODO: connect to auth service
+      await new Promise(r => setTimeout(r, 100000)); // placeholder
+      this.router.navigate(['/dashboard']);
+    } finally {
+      this.loadingService.finish();
+    }
   }
 
   protected get identifierCtrl() {

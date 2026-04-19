@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
 
 export type ButtonVariant =
@@ -16,7 +16,7 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 
 @Component({
   selector: 'stp-button',
-  imports: [NgClass],
+  imports: [NgClass, NgTemplateOutlet],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss',
 })
@@ -53,5 +53,15 @@ export class ButtonComponent {
       this.rippleActive.set(true);
       this.rippleTimer = window.setTimeout(() => this.rippleActive.set(false), 600);
     });
+  }
+
+  protected handleClick(event: MouseEvent): void {
+    if (this.disabled() || this.loading()) return;
+    this.triggerRipple();
+    const href = this.href();
+    if (href) {
+      event.preventDefault();
+      window.open(href, this.target() ?? '_self');
+    }
   }
 }

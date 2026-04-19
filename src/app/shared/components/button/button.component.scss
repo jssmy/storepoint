@@ -43,6 +43,7 @@ $variants: (
   letter-spacing: 0.01em;
   cursor: pointer;
   user-select: none;
+  text-decoration: none;
   width: 100%;
 
   // ---- Size modifiers ----
@@ -221,4 +222,19 @@ $variants: (
 // 'default' variant without explicit style → solid primary
 .stp-btn--default:not(.stp-btn--outlined):not(.stp-btn--ghost) {
   @include btn-solid('primary', 'primary-hover', 'primary-fg', 'primary-light');
+}
+
+// Surface variants: $bg is a background token (not a brand color), so
+// ghost/outlined must use text-primary as the foreground color.
+.stp-btn--surface,
+.stp-btn--surface-alt {
+  &.stp-btn--ghost,
+  &.stp-btn--outlined {
+    --stp-btn-fg:   var(--color-text-primary);
+    --stp-btn-ring: var(--color-border);
+  }
+
+  &.stp-btn--outlined {
+    --stp-btn-border: var(--color-border);
+  }
 }
