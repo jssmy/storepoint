@@ -4,7 +4,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 interface NavItem {
   label: string;
   route: string;
-  icon: 'notices' | 'products' | 'caja' | 'dashboard';
+  icon: 'notices' | 'products' | 'caja' | 'dashboard' | 'camera';
+  fab?: boolean;
 }
 
 @Component({
@@ -17,6 +18,7 @@ export class BottomBarComponent {
   protected readonly navItems: NavItem[] = [
     { label: 'Noticias',   route: '/notices',   icon: 'notices'   },
     { label: 'Productos',  route: '/products',  icon: 'products'  },
+    { label: 'Cámara',     route: '/camera',    icon: 'camera', fab: true },
     { label: 'Caja',       route: '/caja',      icon: 'caja'      },
     { label: 'Dashboard',  route: '/dashboard', icon: 'dashboard' },
   ];

@@ -1,9 +1,9 @@
 <nav class="bottom-bar liquid-glass" aria-label="Navegación principal">
   @for (item of navItems; track item.route) {
     <a
-      class="bottom-bar__item"
+      [class]="item.fab ? 'bottom-bar__fab' : 'bottom-bar__item'"
       [routerLink]="item.route"
-      routerLinkActive="bottom-bar__item--active"
+      [routerLinkActive]="item.fab ? 'bottom-bar__fab--active' : 'bottom-bar__item--active'"
       [attr.aria-label]="item.label"
     >
       <span class="bottom-bar__icon" aria-hidden="true">
@@ -43,9 +43,19 @@
               <rect width="7" height="5" x="3" y="16" rx="1"/>
             </svg>
           }
+          @case ('camera') {
+            <!-- Camera -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+              <circle cx="12" cy="13" r="3"/>
+            </svg>
+          }
         }
       </span>
-      <span class="bottom-bar__label">{{ item.label }}</span>
+      @if (!item.fab) {
+        <span class="bottom-bar__label">{{ item.label }}</span>
+      }
     </a>
   }
 </nav>
