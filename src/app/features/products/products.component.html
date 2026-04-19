@@ -1,0 +1,183 @@
+<div class="products-page">
+
+  <!-- ── Header ────────────────────────────────────────────── -->
+  <header class="products-header">
+    <h1 class="products-header__title">Productos</h1>
+    <p class="products-header__subtitle">Busca productos de tu tienda</p>
+  </header>
+
+  <!-- ── Search bar ─────────────────────────────────────────── -->
+  <section class="products-search" aria-label="Buscar productos">
+    <div class="products-search__field">
+      <span class="products-search__icon" aria-hidden="true">
+        <!-- Search icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+      </span>
+      <input
+        class="products-search__input"
+        type="search"
+        placeholder="Buscar producto..."
+        autocomplete="off"
+        aria-label="Buscar productos"
+        [value]="searchQuery()"
+        (input)="onSearchInput($any($event.target).value)"
+      />
+      @if (searchQuery()) {
+        <button
+          class="products-search__clear"
+          type="button"
+          aria-label="Limpiar búsqueda"
+          (click)="clearSearch()"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"/>
+            <path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      }
+    </div>
+  </section>
+
+  <!-- ── Category chips ─────────────────────────────────────── -->
+  <section class="products-categories" aria-label="Filtrar por categoría">
+    <div class="products-categories__scroll" role="tablist">
+      @for (cat of categories; track cat) {
+        <stp-button
+          class="products-category-chip"
+          [class.products-category-chip--active]="activeCategory() === cat"
+          role="tab"
+          size="sm"
+          radius="full"
+          [variant]="activeCategory() === cat ? 'primary' : 'surface'"
+          [btnStyle]="activeCategory() === cat ? 'solid' : 'outlined'"
+          [attr.aria-selected]="activeCategory() === cat"
+          [attr.aria-label]="categoryLabels[cat]"
+          (click)="setCategory(cat)"
+        >
+          <span aria-hidden="true">{{ categoryIcon(cat) }}</span>
+          {{ categoryLabels[cat] }}
+        </stp-button>
+      }
+    </div>
+  </section>
+  <!-- ── Empty state (before search) ───────────────────────── -->
+  @if (!hasSearched()) {
+    <div class="products-empty-state" aria-live="polite">
+      <div class="products-empty-state__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="1.25"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+      </div>
+      <h2 class="products-empty-state__title">Busca un producto</h2>
+      <p class="products-empty-state__text">
+        Escribe el nombre de un producto o selecciona una categoría para ver los resultados.
+      </p>
+    </div>
+  }
+
+  <!-- ── No results ─────────────────────────────────────────── -->
+  @if (hasSearched() && filteredProducts().length === 0) {
+    <div class="products-empty-state" aria-live="polite">
+      <div class="products-empty-state__icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="1.25"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+          <path d="m3.3 7 8.7 5 8.7-5"/>
+          <line x1="12" x2="12" y1="22" y2="12"/>
+        </svg>
+      </div>
+      <h2 class="products-empty-state__title">Sin resultados</h2>
+      <p class="products-empty-state__text">
+        No se encontraron productos para "<strong>{{ searchQuery() }}</strong>".
+      </p>
+    </div>
+  }
+
+  <!-- ── Product grid ───────────────────────────────────────── -->
+  @if (hasSearched() && filteredProducts().length > 0) {
+    <section class="products-results" aria-label="Resultados de búsqueda" aria-live="polite">
+      <p class="products-results__count">
+        {{ filteredProducts().length }} producto{{ filteredProducts().length !== 1 ? 's' : '' }} encontrado{{ filteredProducts().length !== 1 ? 's' : '' }}
+      </p>
+
+      <ul class="products-grid" role="list">
+        @for (product of filteredProducts(); track product.id) {
+          <li class="product-card" role="listitem">
+
+            <!-- Product image -->
+            <div class="product-card__image-wrap" aria-hidden="true">
+              @if (product.imageUrl) {
+                <img
+                  class="product-card__image"
+                  [src]="product.imageUrl"
+                  [alt]="product.name"
+                  loading="lazy"
+                  width="120"
+                  height="120"
+                />
+              } @else {
+                <div
+                  class="product-card__placeholder product-card__placeholder--{{ product.category }}"
+                  aria-hidden="true"
+                >
+                  <span class="product-card__initials">{{ productInitials(product.name) }}</span>
+                  <span class="product-card__category-icon">{{ categoryIcon(product.category) }}</span>
+                </div>
+              }
+
+              <!-- Stock badge -->
+              <span
+                class="product-card__stock-badge product-card__stock-badge--{{ stockStatus(product.stock) }}"
+                [attr.aria-label]="stockLabel(product.stock)"
+              >
+                @if (product.stock === 0) {
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+                  </svg>
+                } @else if (product.stock <= 5) {
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" x2="12" y1="9" y2="13"/>
+                    <line x1="12" x2="12.01" y1="17" y2="17"/>
+                  </svg>
+                } @else {
+                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                }
+                {{ stockLabel(product.stock) }}
+              </span>
+            </div>
+
+            <!-- Product info -->
+            <div class="product-card__body">
+              <h3 class="product-card__name">{{ product.name }}</h3>
+              <p class="product-card__unit">por {{ product.unit }}</p>
+              <p class="product-card__price">{{ formatPrice(product.price) }}</p>
+            </div>
+
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+
+</div>

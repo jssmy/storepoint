@@ -17,6 +17,11 @@ export const routes: Routes = [
                     import('./features/notices/notices.component').then(m => m.NoticesComponent),
             },
             {
+                path: 'products',
+                loadComponent: () =>
+                    import('./features/products/products.component').then(m => m.ProductsComponent),
+            },
+            {
                 path: '',
                 redirectTo: 'notices',
                 pathMatch: 'full',
