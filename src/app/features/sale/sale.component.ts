@@ -11,7 +11,9 @@ import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { SaleProductCardComponent } from '../../shared/components/sale-product-card/sale-product-card.component';
+import { CartDrawerComponent } from '../../shared/components/cart-drawer/cart-drawer.component';
 import {
+  CartItem,
   CATEGORY_ICONS,
   CATEGORY_LABELS,
   MOCK_PRODUCTS,
@@ -19,14 +21,9 @@ import {
   ProductCategory,
 } from '../products/products.data';
 
-export interface CartItem {
-  product: Product;
-  quantity: number;
-}
-
 @Component({
   selector: 'stp-sale',
-  imports: [DecimalPipe, FormsModule, ButtonComponent, SaleProductCardComponent],
+  imports: [DecimalPipe, FormsModule, ButtonComponent, SaleProductCardComponent, CartDrawerComponent],
   templateUrl: './sale.component.html',
   styleUrl: './sale.component.scss',
 })

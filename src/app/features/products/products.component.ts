@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, computed, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../shared/components/button/button.component';
+import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
 
 export type ProductCategory =
   | 'todos'
@@ -77,7 +78,7 @@ export interface NewProductForm {
 
 @Component({
   selector: 'stp-products',
-  imports: [FormsModule, ButtonComponent],
+  imports: [FormsModule, ButtonComponent, ProductCardComponent],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })

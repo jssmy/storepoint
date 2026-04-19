@@ -1,0 +1,83 @@
+@use '../../styles/product-card';
+
+/* =========================================================
+   Product Card — Products feature styles
+   ========================================================= */
+
+:host {
+    display: contents; // <li> inside becomes a direct grid child
+}
+
+/* ── Placeholder image per category ──────────────────────── */
+
+.product-card {
+
+    &__placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+    }
+
+    &__initials {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--color-text-secondary);
+        letter-spacing: 0.05em;
+    }
+
+    &__category-icon {
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    &__placeholder--abarrotes  { background-color: #fef9c3; }
+    &__placeholder--bebidas    { background-color: #dbeafe; }
+    &__placeholder--lacteos    { background-color: #f0fdf4; }
+    &__placeholder--snacks     { background-color: #fef3c7; }
+    &__placeholder--limpieza   { background-color: #ecfdf5; }
+    &__placeholder--higiene    { background-color: #fdf4ff; }
+    &__placeholder--panaderia  { background-color: #fff7ed; }
+    &__placeholder--carnes     { background-color: #fef2f2; }
+
+    /* ── Stock badge ─────────────────────────────────────── */
+
+    &__stock-badge {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+        padding: 0.2rem 0.45rem;
+        border-radius: 9999px;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        line-height: 1.4;
+        white-space: nowrap;
+
+        &--ok  { background-color: var(--color-success-light); color: var(--color-success); }
+        &--low { background-color: var(--color-warning-light); color: var(--color-warning); }
+        &--out { background-color: var(--color-error-light);   color: var(--color-error);   }
+    }
+
+    /* ── Unit label ─────────────────────────────────────── */
+
+    &__unit {
+        margin: 0;
+        font-size: 0.75rem;
+        color: var(--color-text-disabled);
+    }
+
+    /* ── Price override (slightly bigger than base) ─────── */
+
+    &__price {
+        margin-top: 0.25rem;
+        font-size: 1rem;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+    }
+}

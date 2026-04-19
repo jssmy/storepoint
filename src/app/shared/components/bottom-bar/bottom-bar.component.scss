@@ -6,7 +6,7 @@
    ========================================================= */
 
 :host {
-  display: none; // hidden by default (desktop)
+  
 
   @media (max-width: 640px) {
     display: block;
@@ -76,12 +76,12 @@
     }
 
     &:hover .bottom-bar__icon {
-      transform: translateY(-1rem);
+    //   transform: translateY(-1rem);
       box-shadow: 0 6px 18px color-mix(in srgb, var(--color-primary) 60%, transparent);
     }
 
     &:active .bottom-bar__icon {
-      transform: translateY(-0.75rem);
+    //   transform: translateY(-0.75rem);
     }
 
     &--active .bottom-bar__icon {
