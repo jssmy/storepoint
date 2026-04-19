@@ -118,6 +118,19 @@
    ========================================================= */
 
 :root {
+  /* Radius tokens */
+  --radius-sm:   0.5rem;    /*  8px */
+  --radius-md:   0.875rem;  /* 14px */
+  --radius-lg:   1.25rem;   /* 20px */
+  --radius-xl:   1.75rem;   /* 28px */
+  --radius-full: 9999px;
+
+  /* Size tokens — based on button scale */
+  --size-sm-height: 2rem;      --size-sm-font: 0.8125rem;
+  --size-md-height: 2.75rem;   --size-md-font: 0.9375rem;
+  --size-lg-height: 3.5rem;    --size-lg-font: 1.0625rem;
+
+  /* Gap tokens */
   --gap-1: 0.5rem;   /*  8px */
   --gap-2: 1rem;     /* 16px */
   --gap-3: 1.5rem;   /* 24px */
@@ -137,6 +150,13 @@
 .gap-6 { gap: var(--gap-6); }
 .gap-7 { gap: var(--gap-7); }
 .gap-8 { gap: var(--gap-8); }
+
+/* Radius utility classes */
+.radius-sm   { border-radius: var(--radius-sm); }
+.radius-md   { border-radius: var(--radius-md); }
+.radius-lg   { border-radius: var(--radius-lg); }
+.radius-xl   { border-radius: var(--radius-xl); }
+.radius-full { border-radius: var(--radius-full); }
 
 /* =========================================================
    Global base styles

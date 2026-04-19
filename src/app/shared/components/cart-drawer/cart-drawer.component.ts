@@ -1,6 +1,7 @@
 import { Component, input, output } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
+import { InputNumericComponent } from '../input-numeric/input-numeric.component';
 import {
   CartItem,
   CATEGORY_ICONS,
@@ -9,7 +10,7 @@ import {
 
 @Component({
   selector: 'stp-cart-drawer',
-  imports: [DecimalPipe, ButtonComponent],
+  imports: [DecimalPipe, ButtonComponent, InputNumericComponent],
   templateUrl: './cart-drawer.component.html',
   styleUrl: './cart-drawer.component.scss',
 })

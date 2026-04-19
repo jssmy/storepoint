@@ -13,7 +13,7 @@ export type ButtonVariant =
 
 export type ButtonStyle = 'solid' | 'outlined' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
-export type ButtonRadius = 'sm' | 'md' | 'lg' | 'full';
+export type ButtonRadius = 'sm' | 'md' | 'xl' | 'full';
 
 @Component({
     selector: 'stp-button',

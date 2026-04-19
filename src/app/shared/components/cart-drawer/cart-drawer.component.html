@@ -10,7 +10,8 @@
             <button class="cart-drawer__close" type="button" aria-label="Cerrar carrito" (click)="closed.emit()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+                    <path d="M18 6 6 18" />
+                    <path d="m6 6 12 12" />
                 </svg>
             </button>
         </div>
@@ -19,32 +20,38 @@
         <ul class="cart-drawer__list">
             @for (item of items(); track item.product.id) {
             <li class="cart-item">
-                <span class="cart-item__icon" aria-hidden="true">{{ categoryIcon(item.product.category) }}</span>
-                <div class="cart-item__info">
-                    <p class="cart-item__name">{{ item.product.name }}</p>
-                    <p class="cart-item__unit-price">S/ {{ item.product.price | number:'1.2-2' }} c/u</p>
+                <div class="cart-item__header">
+                    @if (item.product.imageUrl) {
+                        <img class="cart-item__img" [src]="item.product.imageUrl" [alt]="item.product.name" />
+                    } @else {
+                        <span class="cart-item__icon" aria-hidden="true">{{ categoryIcon(item.product.category) }}</span>
+                    }
+                    <div class="cart-item__info">
+                        <p class="cart-item__name">{{ item.product.name }}</p>
+                        <p class="cart-item__unit-price">S/ {{ item.product.price | number:'1.2-2' }} c/u</p>
+                        <p class="cart-item__subtotal-value">Subtotal S/ {{ item.product.price * item.quantity | number:'1.2-2' }}</p>
+                        <stp-input-numeric class="cart-item__qt" [value]="item.quantity" [min]="0" size="sm" radius="md"
+                    (valueChange)="updateQty(item.product.id, $event)" />
+                    </div>
+                    
                 </div>
-                <div class="cart-item__qty-control" role="group" [attr.aria-label]="'Cantidad de ' + item.product.name">
-                    <button class="cart-item__qty-btn" type="button" aria-label="Disminuir"
-                        [disabled]="item.quantity <= 1"
-                        (click)="updateQty(item.product.id, item.quantity - 1)">−</button>
-                    <span class="cart-item__qty-val">{{ item.quantity }}</span>
-                    <button class="cart-item__qty-btn" type="button" aria-label="Aumentar"
-                        (click)="updateQty(item.product.id, item.quantity + 1)">+</button>
-                </div>
-                <div class="cart-item__subtotal">
-                    <p class="cart-item__subtotal-value">S/ {{ item.product.price * item.quantity | number:'1.2-2' }}</p>
-                    <button class="cart-item__remove" type="button" [attr.aria-label]="'Quitar ' + item.product.name"
+                
+                <!-- <div class="cart-item__subtotal">
+                    
+                    
+                    <stp-button radius="full" size="sm" [btnStyle]="'outlined'" variant="surface-alt" class="cart-item__remove"
+                        type="button" [attr.aria-label]="'Quitar ' + item.product.name"
                         (click)="itemRemoved.emit(item.product.id)">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="3 6 5 6 21 6" />
                             <path d="M19 6l-1 14H6L5 6" />
-                            <path d="M10 11v6" /><path d="M14 11v6" />
+                            <path d="M10 11v6" />
+                            <path d="M14 11v6" />
                             <path d="M9 6V4h6v2" />
                         </svg>
-                    </button>
-                </div>
+                    </stp-button>
+                </div> -->
             </li>
             }
         </ul>

@@ -72,14 +72,14 @@ $variants: (
   }
 
   // ---- Radius overrides (override size default) ----
-  // sm  → 8px  — subtle rounding, inline/chip feel
-  // md  → 14px — standard iOS/Android rounded button
-  // lg  → 20px — prominent card-button look
+  // sm   →  8px  — subtle rounding, inline/chip feel
+  // md   → 14px — standard iOS/Android rounded button
+  // xl   → 20px — prominent card-button look
   // full → 9999px — pill shape
-  &.stp-btn--radius-sm   { border-radius: 0.5rem; }
-  &.stp-btn--radius-md   { border-radius: 0.875rem; }
-  &.stp-btn--radius-lg   { border-radius: 1.25rem; }
-  &.stp-btn--radius-full { border-radius: 9999px; }
+  &.stp-btn--radius-sm   { border-radius: var(--radius-sm); }
+  &.stp-btn--radius-md   { border-radius: var(--radius-md); }
+  &.stp-btn--radius-xl   { border-radius: var(--radius-xl); }
+  &.stp-btn--radius-full { border-radius: var(--radius-full); }
   white-space: nowrap;
   transition:
     background-color 150ms ease,

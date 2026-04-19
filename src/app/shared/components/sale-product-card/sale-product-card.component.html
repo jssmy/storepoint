@@ -34,29 +34,13 @@
 
     <!-- Quantity + Add -->
     <div class="product-card__actions">
-        <div class="sale-qty" role="group" aria-label="Cantidad">
-            <button class="sale-qty__btn" type="button" aria-label="Disminuir cantidad"
-                [disabled]="quantity() <= 1"
-                (click)="decrement()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 12h14" />
-                </svg>
-            </button>
-            <input class="sale-qty__input" type="number" min="1"
-                [value]="quantity()"
-                (change)="onQtyInput($any($event.target).value)"
-                aria-label="Cantidad" />
-            <button class="sale-qty__btn" type="button" aria-label="Aumentar cantidad"
-                [disabled]="product().stock > 0 && quantity() >= product().stock"
-                (click)="increment()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 5v14" />
-                    <path d="M5 12h14" />
-                </svg>
-            </button>
-        </div>
+        <stp-input-numeric
+            [value]="quantity()"
+            [min]="1"
+            [max]="product().stock > 0 ? product().stock : null"
+            size="sm"
+            radius="md"
+            (valueChange)="quantityChange.emit($event)" />
 
         <stp-button class="product-card__add-btn" size="sm" variant="primary" btnStyle="solid" radius="md"
             [disabled]="product().stock === 0"
