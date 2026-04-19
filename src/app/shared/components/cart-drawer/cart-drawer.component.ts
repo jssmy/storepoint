@@ -1,16 +1,14 @@
 import { Component, input, output } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ButtonComponent } from '../button/button.component';
-import { InputNumericComponent } from '../input-numeric/input-numeric.component';
+import { CartItemComponent } from '../cart-item/cart-item.component';
 import {
   CartItem,
-  CATEGORY_ICONS,
-  ProductCategory,
 } from '../../../features/products/products.data';
 
 @Component({
   selector: 'stp-cart-drawer',
-  imports: [DecimalPipe, ButtonComponent, InputNumericComponent],
+  imports: [DecimalPipe, ButtonComponent, CartItemComponent],
   templateUrl: './cart-drawer.component.html',
   styleUrl: './cart-drawer.component.scss',
 })
@@ -24,10 +22,6 @@ export class CartDrawerComponent {
   readonly itemRemoved = output<number>();
   readonly cleared = output<void>();
   readonly confirmed = output<void>();
-
-  protected categoryIcon(cat: ProductCategory): string {
-    return CATEGORY_ICONS[cat];
-  }
 
   protected updateQty(productId: number, quantity: number): void {
     this.quantityUpdated.emit({ productId, quantity });

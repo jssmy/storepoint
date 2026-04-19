@@ -1,0 +1,51 @@
+<div class="cart-item__header cart-item__header--mobile">
+    @if (item().product.imageUrl) {
+    <img class="cart-item__img" [src]="item().product.imageUrl" [alt]="item().product.name" />
+    } @else {
+    <span class="cart-item__icon" aria-hidden="true">{{ categoryIcon(item().product.category) }}</span>
+    }
+</div>
+<div class="cart-item__info cart-item__info--mobile">
+    <p class="cart-item__name">{{ item().product.name }}</p>
+    <p class="cart-item__unit-price">S/ {{ item().product.price | number:'1.2-2' }} c/u</p>
+    <p class="cart-item__subtotal-value">Subtotal S/ {{ subtotal() | number:'1.2-2' }}</p>
+    <stp-input-numeric class="cart-item__qt" [value]="item().quantity" [min]="0" size="sm" radius="md"
+        (valueChange)="quantityChange.emit($event)" />
+    <stp-button variant="danger" btnStyle="ghost" size="sm" radius="md" aria-label="Eliminar" (click)="remove.emit()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+            <path d="M10 11v6" />
+            <path d="M14 11v6" />
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+        </svg>
+    </stp-button>
+</div>
+
+<div class="cart-item__header cart-item__header--desktop">
+    @if (item().product.imageUrl) {
+    <img class="cart-item__img" [src]="item().product.imageUrl" [alt]="item().product.name" />
+    } @else {
+    <span class="cart-item__icon" aria-hidden="true">{{ categoryIcon(item().product.category) }}</span>
+    }
+    <div class="cart-item__info cart-item__info--desktop">
+        <p class="cart-item__name">{{ item().product.name }}</p>
+        <p class="cart-item__unit-price">S/ {{ item().product.price | number:'1.2-2' }} c/u</p>
+    </div>
+</div>
+<stp-input-numeric class="cart-item__quantity cart-item__quantity--desktop" [value]="item().quantity" [min]="0" size="sm" radius="md"
+    (valueChange)="quantityChange.emit($event)" />
+<div class="cart-item__subtotal cart-item__subtotal--desktop">
+    <p class="cart-item__subtotal-value">S/ {{ subtotal() | number:'1.2-2' }}</p>
+    <stp-button variant="danger" btnStyle="ghost" size="sm" radius="md" aria-label="Eliminar" (click)="remove.emit()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="3 6 5 6 21 6" />
+            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+            <path d="M10 11v6" />
+            <path d="M14 11v6" />
+            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+        </svg>
+    </stp-button>
+</div>

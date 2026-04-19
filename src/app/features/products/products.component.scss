@@ -1,5 +1,6 @@
 @use '../../shared/styles/z-index' as z;
 @use '../../shared/styles/spacing' as sp;
+@use '../../shared/styles/breakpoints' as bp;
 
 /* =========================================================
    Products — StorePoint
@@ -187,11 +188,11 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 0.875rem;
 
-  @media (min-width: 480px) {
+  @include bp.xs-up {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media (min-width: 768px) {
+  @include bp.md-up {
     grid-template-columns: repeat(4, 1fr);
   }
 }
@@ -214,7 +215,7 @@
   align-items: flex-end;
   animation: overlay-in 200ms ease;
 
-  @media (min-width: 640px) {
+  @include bp.sm-up {
     align-items: center;
     justify-content: center;
   }
@@ -235,7 +236,7 @@
   animation: drawer-in 280ms cubic-bezier(0.34, 1.30, 0.64, 1);
   box-shadow: var(--shadow-lg);
 
-  @media (min-width: 640px) {
+  @include bp.sm-up {
     border-radius: 1.25rem;
     max-width: 28rem;
     max-height: 85dvh;
@@ -249,7 +250,7 @@
     background-color: var(--color-border);
     margin: 0.75rem auto 0;
 
-    @media (min-width: 640px) {
+    @include bp.sm-up {
       display: none;
     }
   }

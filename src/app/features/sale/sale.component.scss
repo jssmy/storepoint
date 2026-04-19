@@ -1,5 +1,6 @@
 @use '../../shared/styles/z-index' as z;
 @use '../../shared/styles/spacing' as sp;
+@use '../../shared/styles/breakpoints' as bp;
 
 /* =========================================================
    Sale — StorePoint
@@ -163,11 +164,11 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 0.875rem;
 
-    @media (min-width: 480px) {
+    @include bp.xs-up {
         grid-template-columns: repeat(3, 1fr);
     }
 
-    @media (min-width: 768px) {
+    @include bp.md-up {
         grid-template-columns: repeat(4, 1fr);
     }
 }

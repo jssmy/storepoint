@@ -1,3 +1,5 @@
+@use '../../styles/breakpoints' as bp;
+
 /* =========================================================
    stp-main-layout — Shell with header + footer
    ========================================================= */
@@ -20,7 +22,7 @@
     flex-direction: column;
 
     // Offset for fixed bottom bar on mobile
-    @media (max-width: 640px) {
+    @include bp.mobile-only {
       padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
     }
   }

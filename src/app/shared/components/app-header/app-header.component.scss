@@ -1,4 +1,5 @@
 @use '../../styles/z-index' as z;
+@use '../../styles/breakpoints' as bp;
 
 /* =========================================================
    stp-app-header — Sticky top navigation bar
@@ -89,7 +90,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@include bp.xs-down {
   .stp-header__user-name {
     display: none;
   }

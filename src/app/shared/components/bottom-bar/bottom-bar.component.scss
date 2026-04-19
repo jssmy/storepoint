@@ -1,5 +1,6 @@
 @use '../../styles/z-index' as z;
 @use '../../styles/spacing' as sp;
+@use '../../styles/breakpoints' as bp;
 
 /* =========================================================
    Bottom Bar — StorePoint
@@ -9,7 +10,7 @@
 :host {
   
 
-  @media (max-width: 640px) {
+  @include bp.mobile-only {
     display: block;
   }
 }

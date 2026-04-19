@@ -1,3 +1,5 @@
+@use '../../shared/styles/breakpoints' as bp;
+
 /* =========================================================
    Dashboard — StorePoint
    ========================================================= */
@@ -229,7 +231,7 @@
 
 /* ── Responsive ──────────────────────────────────────────── */
 
-@media (max-width: 480px) {
+@include bp.xs-down {
   .dash-greeting__title {
     font-size: 1.375rem;
   }

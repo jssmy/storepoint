@@ -158,9 +158,10 @@ export class SaleComponent implements AfterViewInit, OnDestroy {
   }
 
   protected updateCartQty(productId: number, qty: number): void {
-    const clamped = Math.max(1, qty);
+    const clamped = qty;
     this.cartItems.update(items =>
-      items.map(i => i.product.id === productId ? { ...i, quantity: clamped } : i),
+      items.map(i => i.product.id === productId ? { ...i, quantity: clamped } : i)
+        .filter(i => i.quantity > 0),
     );
   }
 
