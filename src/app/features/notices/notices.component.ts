@@ -94,12 +94,12 @@ const MOCK_ACTIVITIES: ActivityItem[] = [
 ];
 
 @Component({
-  selector: 'stp-dashboard',
+  selector: 'stp-notices',
   imports: [LowerCasePipe, ButtonComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss',
+  templateUrl: './notices.component.html',
+  styleUrl: './notices.component.scss',
 })
-export class DashboardComponent {
+export class NoticesComponent {
   // TODO: replace with real auth user from AuthService
   protected readonly currentUserName = 'Joset';
   protected readonly currentYear = new Date().getFullYear();

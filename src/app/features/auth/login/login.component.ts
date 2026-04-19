@@ -37,7 +37,7 @@ export class LoginComponent {
     try {
       // TODO: connect to auth service
       await new Promise(r => setTimeout(r, 1000)); // placeholder
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/notices']);
     } finally {
       this.loadingService.finish();
     }

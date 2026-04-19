@@ -7,6 +7,8 @@
 }
 
 .layout {
+  --header-height: 3.75rem;
+
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -16,5 +18,10 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+
+    // Offset for fixed bottom bar on mobile
+    @media (max-width: 640px) {
+      padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
+    }
   }
 }
