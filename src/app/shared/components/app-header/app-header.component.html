@@ -1,0 +1,51 @@
+<header class="stp-header">
+
+  <!-- Brand -->
+  <div class="stp-header__brand">
+    <div class="stp-header__brand-icon" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+        <line x1="3" x2="21" y1="6" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+    </div>
+    <span class="stp-header__brand-name">{{ config.appName }}</span>
+  </div>
+
+  <!-- Actions -->
+  <div class="stp-header__actions">
+
+    <!-- User badge -->
+    @if (userName()) {
+      <div class="stp-header__user-badge" [attr.aria-label]="'Usuario: ' + userName()">
+        <span class="stp-header__user-initial" aria-hidden="true">{{ userInitial(userName()) }}</span>
+        <span class="stp-header__user-name">{{ userName() }}</span>
+      </div>
+    }
+
+    <!-- Theme toggle -->
+    <stp-button
+      variant="surface"
+      btnStyle="ghost"
+      size="sm"
+      type="button"
+      (click)="themeService.toggle()"
+      [attr.aria-label]="themeService.theme() === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
+    >
+      @if (themeService.theme() === 'dark') {
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+      } @else {
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+        </svg>
+      }
+    </stp-button>
+
+  </div>
+</header>

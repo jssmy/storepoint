@@ -43,6 +43,8 @@ export class InputComponent implements ControlValueAccessor {
 
   /** Tracks whether password is currently visible */
   protected readonly showPassword = signal(false);
+  protected readonly toggleRippleActive = signal(false);
+  private toggleRippleTimer = 0;
 
   /** Actual input type: toggles between 'password' and 'text' */
   protected readonly resolvedType = computed(() => {
@@ -62,6 +64,12 @@ export class InputComponent implements ControlValueAccessor {
 
   protected togglePassword(): void {
     this.showPassword.update(v => !v);
+    clearTimeout(this.toggleRippleTimer);
+    this.toggleRippleActive.set(false);
+    requestAnimationFrame(() => {
+      this.toggleRippleActive.set(true);
+      this.toggleRippleTimer = window.setTimeout(() => this.toggleRippleActive.set(false), 600);
+    });
   }
 
   protected onFocus(): void {

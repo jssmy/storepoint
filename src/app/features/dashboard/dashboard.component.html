@@ -1,0 +1,116 @@
+<div class="dash-page">
+
+
+    <!-- ── Main content ─────────────────────────────────────── -->
+    <main class="dash-main" role="main">
+
+        <!-- Greeting -->
+        <section class="dash-greeting" aria-label="Saludo">
+            <div class="dash-greeting__text">
+                <h1 class="dash-greeting__title">¡Hola, {{ currentUserName }}!</h1>
+                <p class="dash-greeting__subtitle">Estas son las últimas noticias de tu negocio</p>
+            </div>
+            <div class="dash-greeting__date" aria-live="polite">
+                {{ currentYear }}
+            </div>
+        </section>
+
+        <!-- Activity feed -->
+        <section class="dash-feed" aria-label="Actividad reciente">
+
+            <!-- Filter bar -->
+            <div class="dash-filter-bar" role="tablist" aria-label="Filtrar actividad">
+                @for (filter of filters; track filter) {
+                <stp-button size="sm" radius="md" [variant]="activeFilter() === filter ? 'primary' : 'surface'"
+                    [btnStyle]="activeFilter() === filter ? 'solid' : 'ghost'" role="tab"
+                    [attr.aria-selected]="activeFilter() === filter" (click)="setFilter(filter)">
+                    @switch (filter) {
+                    @case ('ventas') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                        <line x1="3" x2="21" y1="6" y2="6" />
+                        <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                    }
+                    @case ('productos') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path
+                            d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                        <path d="m3.3 7 8.7 5 8.7-5" />
+                        <line x1="12" x2="12" y1="22" y2="12" />
+                    </svg>
+                    }
+                    @case ('caja') {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <rect width="20" height="14" x="2" y="5" rx="2" />
+                        <line x1="2" x2="22" y1="10" y2="10" />
+                    </svg>
+                    }
+                    }
+                    {{ filterLabels[filter] }}
+                </stp-button>
+                }
+            </div>
+
+            <!-- Activity list -->
+            <ul class="dash-activity-list" role="list">
+                @for (item of filteredActivities(); track item.id) {
+                <li class="dash-activity-item dash-activity-item--{{ item.category }}" role="listitem">
+
+                    <!-- User avatar -->
+                    <div class="dash-activity-avatar dash-avatar--{{ item.user | lowercase }}" aria-hidden="true">
+                        {{ userInitial(item.user) }}
+                    </div>
+
+                    <!-- Content -->
+                    <div class="dash-activity-content">
+                        <p class="dash-activity-text">
+                            <strong class="dash-activity-user">{{ item.user }}</strong>
+                            {{ item.action }}
+                            <span class="dash-activity-detail">{{ item.detail }}</span>
+                        </p>
+                        @if (item.amount) {
+                        <span class="dash-activity-amount"
+                            [class.dash-activity-amount--negative]="item.amount.startsWith('-')">
+                            {{ item.amount }}
+                        </span>
+                        }
+                    </div>
+
+                    <!-- Category badge + time -->
+                    <div class="dash-activity-meta">
+                        <span class="dash-category-badge dash-category-badge--{{ item.category }}">
+                            {{ item.category }}
+                        </span>
+                        <time class="dash-activity-time" [attr.datetime]="item.time.toISOString()">
+                            {{ relativeTime(item.time) }}
+                        </time>
+                    </div>
+
+                </li>
+                } @empty {
+                <li class="dash-activity-empty" role="listitem">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+                        <path d="M14 2v6h6" />
+                        <line x1="16" x2="8" y1="13" y2="13" />
+                        <line x1="16" x2="8" y1="17" y2="17" />
+                        <line x1="10" x2="8" y1="9" y2="9" />
+                    </svg>
+                    <p>Sin actividad en esta categoría</p>
+                </li>
+                }
+            </ul>
+
+        </section>
+    </main>
+
+</div>

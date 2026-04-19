@@ -23,7 +23,8 @@
   @if (isPassword()) {
     <button
       type="button"
-      class="stp-password-toggle"
+      class="stp-btn stp-password-toggle"
+      [class.stp-password-toggle--ripple]="toggleRippleActive()"
       (click)="togglePassword()"
       [attr.aria-label]="showPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
       [attr.aria-pressed]="showPassword()"
