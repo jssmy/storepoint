@@ -1,4 +1,5 @@
 @use '../../shared/styles/z-index' as z;
+@use '../../shared/styles/spacing' as sp;
 
 /* =========================================================
    Products — StorePoint
@@ -43,31 +44,7 @@
 }
 
 /* ── Sticky bar (search + categories) ────────────────────── */
-
-.products-sticky-bar {
-  position: sticky;
-  top: var(--header-height, 3.75rem);
-  z-index: z.$sticky;
-
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-
-  // Extend background edge-to-edge within the page container
-  margin-inline: -1.25rem;
-  padding-inline: 1.25rem;
-  padding-block: 0.75rem 0.5rem;
-
-//   background-color: var(--color-bg);
-  transition: box-shadow 200ms ease, border-color 200ms ease;
-
-  &--stuck {
-        backdrop-filter: var(--glass-backdrop);
-    -webkit-backdrop-filter: var(--glass-backdrop);
-    background: var(--glass-surface-bg);
-    border: 1px solid var(--glass-surface-border)
-  }
-}
+// Base styles live in the global .sticky-bar class (styles.scss).
 
 /* ── Search bar ───────────────────────────────────────────── */
 
@@ -138,7 +115,7 @@
 .products-categories {
   &__scroll {
     display: flex;
-    gap: 0.5rem;
+    gap: sp.$gap-1;
     overflow-x: auto;
     padding-bottom: 0.25rem;
     scrollbar-width: none;
@@ -190,7 +167,7 @@
 .products-results {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: sp.$gap-2;
 
   &__count {
     margin: 0;
@@ -296,7 +273,7 @@
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: sp.$gap-2;
   }
 
   &__submit {

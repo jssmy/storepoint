@@ -1,4 +1,5 @@
 @use '../../shared/styles/z-index' as z;
+@use '../../shared/styles/spacing' as sp;
 
 /* =========================================================
    Sale — StorePoint
@@ -39,32 +40,6 @@
         margin: 0;
         font-size: 0.9rem;
         color: color-mix(in srgb, var(--color-primary-fg) 72%, transparent);
-    }
-}
-
-/* ── Sticky bar ───────────────────────────────────────────── */
-
-.sale-sticky-bar {
-    position: sticky;
-    top: var(--header-height, 3.75rem);
-    z-index: z.$sticky;
-
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-
-    margin-inline: -1.25rem;
-    padding-inline: 1.25rem;
-    padding-block: 0.75rem 0.5rem;
-
-    transition: box-shadow 200ms ease, border-color 200ms ease;
-
-    &--stuck {
-        backdrop-filter: var(--glass-backdrop);
-        -webkit-backdrop-filter: var(--glass-backdrop);
-        background: var(--glass-surface-bg);
-        border: 1px solid var(--glass-surface-border);
-        box-shadow: 0 6px 12px -4px rgba(0, 0, 0, 0.12);
     }
 }
 
@@ -137,7 +112,7 @@
 .sale-categories {
     &__scroll {
         display: flex;
-        gap: 0.5rem;
+        gap: sp.$gap-1;
         overflow-x: auto;
         padding-bottom: 0.25rem;
         scrollbar-width: none;
@@ -230,7 +205,7 @@
         cursor: pointer;
         font-size: 0.9375rem;
         font-weight: 600;
-        gap: 0.5rem;
+        gap: sp.$gap-1;
     }
 
     &__count {

@@ -1,4 +1,5 @@
 @use '../../styles/z-index' as z;
+@use '../../styles/spacing' as sp;
 
 /* =========================================================
    Bottom Bar — StorePoint
@@ -25,7 +26,7 @@
 
     // background-color: var(--color-surface);
 //   border-top: 1px solid var(--color-border);
-  box-shadow: 0 -2px 12px rgb(0 0 0 / 0.06);
+  box-shadow: var(--glass-surface-shadow);
 
   // Safe area for phones with home indicator (notch)
   padding-bottom: env(safe-area-inset-bottom);
@@ -36,7 +37,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.25rem;
+    gap: sp.$gap-1;
     padding: 0.625rem 0.25rem;
     min-height: 3.5rem;
 
@@ -73,15 +74,6 @@
       box-shadow: 0 4px 14px color-mix(in srgb, var(--color-primary) 50%, transparent);
       
       transition: transform 150ms ease, box-shadow 150ms ease;
-    }
-
-    &:hover .bottom-bar__icon {
-    //   transform: translateY(-1rem);
-      box-shadow: 0 6px 18px color-mix(in srgb, var(--color-primary) 60%, transparent);
-    }
-
-    &:active .bottom-bar__icon {
-    //   transform: translateY(-0.75rem);
     }
 
     &--active .bottom-bar__icon {
