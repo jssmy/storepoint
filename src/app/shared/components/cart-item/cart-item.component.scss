@@ -54,7 +54,7 @@
         }
 
         &--mobile {
-            width: unset;
+            width: 100%;
             @include bp.sm-up {
                 display: none;
             }
@@ -115,6 +115,12 @@
         align-items: center;
         flex-shrink: 0;
         gap: sp.$gap-2;
+        &--desktop {
+            display: none;
+            @include bp.sm-up {
+                display: flex;
+            }
+        }
     }
 
     &__subtotal-value {
