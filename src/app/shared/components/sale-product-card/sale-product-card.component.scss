@@ -1,0 +1,109 @@
+@use '../../styles/product-card';
+
+/* Sale-specific extensions are inherited via the shared product-card partial.
+   Modifier classes (--in-cart, --out-of-stock, etc.) and child elements
+   specific to the sale context are defined here. */
+
+:host {
+    display: contents; // <li> renders as a direct grid child
+}
+
+.product-card {
+    touch-action: pan-y;
+
+    &--in-cart {
+        border-color: var(--color-primary);
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 25%, transparent);
+    }
+
+    &--out-of-stock {
+        opacity: 0.55;
+        pointer-events: none;
+    }
+
+    &__cart-badge {
+        position: absolute;
+        top: 0.4rem;
+        right: 0.4rem;
+        width: 1.375rem;
+        height: 1.375rem;
+        border-radius: 50%;
+        background-color: var(--color-primary);
+        color: var(--color-primary-fg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__stock {
+        margin: 0;
+        font-size: 0.7rem;
+        color: var(--color-text-secondary);
+
+        &--low { color: var(--color-warning, #d97706); }
+        &--out { color: var(--color-error, #dc2626); font-weight: 600; }
+    }
+
+    &__actions {
+        padding: 0.5rem 0.625rem 0.625rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__add-btn {
+        width: 100%;
+    }
+}
+
+/* ── Quantity control ─────────────────────────────────────── */
+
+.sale-qty {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid var(--color-border);
+    border-radius: 0.625rem;
+    overflow: hidden;
+    height: 2rem;
+
+    &__btn {
+        flex: 0 0 2rem;
+        height: 100%;
+        border: none;
+        background: var(--color-surface-alt, #f4f4f5);
+        color: var(--color-text-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 120ms ease;
+
+        &:hover:not(:disabled) {
+            background: var(--color-border);
+        }
+
+        &:disabled {
+            opacity: 0.35;
+            cursor: default;
+        }
+    }
+
+    &__input {
+        flex: 1;
+        min-width: 0;
+        border: none;
+        text-align: center;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+        background: transparent;
+        outline: none;
+        -moz-appearance: textfield;
+        appearance: textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            display: none;
+        }
+    }
+}

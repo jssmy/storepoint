@@ -1,3 +1,5 @@
+@use '../../styles/z-index' as z;
+
 /* =========================================================
    Bottom Bar — StorePoint
    Only visible on mobile (≤ 640px)
@@ -16,7 +18,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: z.$bottom-bar;
 
   display: flex;
   align-items: stretch;

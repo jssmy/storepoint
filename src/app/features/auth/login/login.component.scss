@@ -1,3 +1,5 @@
+@use '../../../shared/styles/z-index' as z;
+
 /* =========================================================
    Login Page — Fullscreen mobile-first
    ========================================================= */
@@ -18,7 +20,7 @@
   position: fixed;
   top: 1rem;
   right: 1rem;
-  z-index: 100;
+  z-index: z.$fixed-action;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,7 +279,7 @@
   position: fixed;
   top: 1rem;
   right: 1rem;
-  z-index: 100;
+  z-index: z.$fixed-action;
   display: flex;
   align-items: center;
   justify-content: center;

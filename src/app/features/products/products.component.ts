@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, computed, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 
@@ -81,7 +81,11 @@ export interface NewProductForm {
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
-export class ProductsComponent {
+export class ProductsComponent implements AfterViewInit, OnDestroy {
+  private readonly productHeader = viewChild<ElementRef>('productHeader');
+  protected readonly isStuck = signal(false);
+  private stickyObserver?: IntersectionObserver;
+
   protected readonly categories: ProductCategory[] = [
     'todos', 'abarrotes', 'bebidas', 'lacteos',
     'snacks', 'limpieza', 'higiene', 'panaderia', 'carnes',
@@ -181,6 +185,20 @@ export class ProductsComponent {
     if (!this.hasSearched()) {
       this.hasSearched.set(true);
     }
+  }
+
+  ngAfterViewInit(): void {
+    const el = this.productHeader()?.nativeElement;
+    if (!el) return;
+    this.stickyObserver = new IntersectionObserver(
+      ([entry]) => this.isStuck.set(!entry.isIntersecting),
+      { threshold: 0 },
+    );
+    this.stickyObserver.observe(el);
+  }
+
+  ngOnDestroy(): void {
+    this.stickyObserver?.disconnect();
   }
 
   protected stockStatus(stock: number): 'ok' | 'low' | 'out' {

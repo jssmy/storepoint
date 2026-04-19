@@ -1,0 +1,68 @@
+<li class="product-card"
+    [class.product-card--in-cart]="inCart()"
+    [class.product-card--out-of-stock]="product().stock === 0">
+
+    <!-- Image / placeholder -->
+    <div class="product-card__image">
+        @if (product().imageUrl) {
+        <img [src]="product().imageUrl" [alt]="product().name" loading="lazy" />
+        } @else {
+        <span class="product-card__image-icon" aria-hidden="true">{{ categoryIcon() }}</span>
+        }
+
+        <!-- In-cart badge -->
+        @if (inCart()) {
+        <span class="product-card__cart-badge" aria-label="En el carrito">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+            </svg>
+        </span>
+        }
+    </div>
+
+    <!-- Info -->
+    <div class="product-card__body">
+        <p class="product-card__name">{{ product().name }}</p>
+        <p class="product-card__price">S/ {{ product().price | number:'1.2-2' }}</p>
+        <p class="product-card__stock"
+            [class.product-card__stock--low]="product().stock > 0 && product().stock <= 5"
+            [class.product-card__stock--out]="product().stock === 0">
+            @if (product().stock === 0) { Sin stock } @else { {{ product().stock }} {{ product().unit }}(s) }
+        </p>
+    </div>
+
+    <!-- Quantity + Add -->
+    <div class="product-card__actions">
+        <div class="sale-qty" role="group" aria-label="Cantidad">
+            <button class="sale-qty__btn" type="button" aria-label="Disminuir cantidad"
+                [disabled]="quantity() <= 1"
+                (click)="decrement()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14" />
+                </svg>
+            </button>
+            <input class="sale-qty__input" type="number" min="1"
+                [value]="quantity()"
+                (change)="onQtyInput($any($event.target).value)"
+                aria-label="Cantidad" />
+            <button class="sale-qty__btn" type="button" aria-label="Aumentar cantidad"
+                [disabled]="product().stock > 0 && quantity() >= product().stock"
+                (click)="increment()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14" />
+                    <path d="M5 12h14" />
+                </svg>
+            </button>
+        </div>
+
+        <stp-button class="product-card__add-btn" size="sm" variant="primary" btnStyle="solid" radius="md"
+            [disabled]="product().stock === 0"
+            (click)="addToCart.emit()">
+            Agregar
+        </stp-button>
+    </div>
+
+</li>

@@ -1,3 +1,5 @@
+@use '../../styles/z-index' as z;
+
 /* =========================================================
    stp-app-header — Sticky top navigation bar
    ========================================================= */
@@ -12,7 +14,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: z.$header;
   display: flex;
   align-items: center;
   justify-content: space-between;

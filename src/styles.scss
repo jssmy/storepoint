@@ -166,3 +166,10 @@ body {
   background: var(--glass-overlay-bg);
 }
 
+
+.liquid-glass-overlay--light {
+  
+  -webkit-backdrop-filter: var(--glass-backdrop);
+  backdrop-filter: blur(10px) saturate(200%) brightness(1.06);
+}
+

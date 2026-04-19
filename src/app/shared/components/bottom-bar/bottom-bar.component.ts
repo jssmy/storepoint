@@ -18,7 +18,7 @@ export class BottomBarComponent {
   protected readonly navItems: NavItem[] = [
     { label: 'Noticias',   route: '/notices',   icon: 'notices'   },
     { label: 'Productos',  route: '/products',  icon: 'products'  },
-    { label: 'Cámara',     route: '/camera',    icon: 'camera', fab: true },
+    { label: 'Vender',     route: '/sale',      icon: 'camera', fab: true },
     { label: 'Caja',       route: '/caja',      icon: 'caja'      },
     { label: 'Dashboard',  route: '/dashboard', icon: 'dashboard' },
   ];
