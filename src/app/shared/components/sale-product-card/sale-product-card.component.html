@@ -38,11 +38,11 @@
             [value]="quantity()"
             [min]="1"
             [max]="product().stock > 0 ? product().stock : null"
-            size="sm"
-            radius="md"
+            size="md"
+            radius="full"
             (valueChange)="quantityChange.emit($event)" />
 
-        <stp-button class="product-card__add-btn" size="sm" variant="primary" btnStyle="solid" radius="md"
+        <stp-button class="product-card__add-btn" size="md" variant="primary" btnStyle="solid" radius="md"
             [disabled]="product().stock === 0"
             (click)="addToCart.emit()">
             Agregar

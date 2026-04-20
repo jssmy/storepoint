@@ -2,7 +2,7 @@ import { NgClass } from '@angular/common';
 import { Component, computed, forwardRef, input, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export type InputNumericRadius = 'sm' | 'md' | 'lg';
+export type InputNumericRadius = 'sm' | 'md' | 'lg' | 'full';
 export type InputNumericSize = 'sm' | 'md' | 'lg';
 
 @Component({

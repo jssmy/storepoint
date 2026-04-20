@@ -9,7 +9,7 @@
     <p class="cart-item__name">{{ item().product.name }}</p>
     <p class="cart-item__unit-price">S/ {{ item().product.price | number:'1.2-2' }} c/u</p>
     <p class="cart-item__subtotal-value">Subtotal S/ {{ subtotal() | number:'1.2-2' }}</p>
-    <stp-input-numeric class="cart-item__qt" [value]="item().quantity" [min]="0" size="sm" radius="md"
+    <stp-input-numeric class="cart-item__qt" [value]="item().quantity" [min]="0" size="md" radius="full"
         (valueChange)="quantityChange.emit($event)" />
 </div>
 

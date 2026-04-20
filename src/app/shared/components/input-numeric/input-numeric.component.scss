@@ -19,30 +19,35 @@
     border: 1.5px solid var(--color-border);
     border-radius: var(--radius-md); // default radius
     overflow: hidden;
-    background: var(--color-surface);
+    background: var(--color-surface-alt);
 
     // ── Size modifiers ────────────────────────────────────
     &--sm { --_height: var(--size-sm-height); --_font-size: var(--size-sm-font); }
     &--md { --_height: var(--size-md-height); --_font-size: var(--size-md-font); }
     &--lg { --_height: var(--size-lg-height); --_font-size: var(--size-lg-font); }
 
+
     // ── Radius modifiers ──────────────────────────────────
     &--radius-sm { border-radius: var(--radius-sm); }
     &--radius-md { border-radius: var(--radius-md); }
     &--radius-lg { border-radius: var(--radius-lg); }
+    &--radius-full { border-radius: var(--radius-full); }
 
     // ── Decrement / Increment buttons ─────────────────────
     &__btn {
         flex: 0 0 var(--_height); // square — width == height
         height: 100%;
         border: none;
-        background: var(--color-surface-alt);
+        background: var(--color-surface);
         color: var(--color-text-primary);
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         transition: background 120ms ease;
+        border-radius: var(--radius-full);
+        box-shadow: var(--shadow-md);
+
 
         &:hover:not(:disabled) {
             background: var(--color-border);
