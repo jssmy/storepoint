@@ -228,7 +228,7 @@ body {
 
 .sticky-bar {
   position: sticky;
-  top: var(--header-height, 3.75rem);
+  top: calc(var(--header-height, 3.75rem) + env(safe-area-inset-top));
   z-index: z.$sticky;
 
   display: flex;

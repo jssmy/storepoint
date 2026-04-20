@@ -188,9 +188,20 @@ export class SaleComponent implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     const el = this.saleHeader()?.nativeElement;
     if (!el) return;
+
+    // Read the actual rendered height of the fixed app-header (includes safe-area-inset-top)
+    const appHeader = document.querySelector('stp-app-header') as HTMLElement | null;
+    const headerHeight = appHeader?.offsetHeight ?? 60;
+
     this.stickyObserver = new IntersectionObserver(
-      ([entry]) => this.isStuck.set(!entry.isIntersecting),
-      { threshold: 0 },
+      ([entry]) => {
+        console.log(JSON.stringify({
+          isIntersecting: entry.isIntersecting,
+          intersectionRatio: entry.intersectionRatio,
+        }));
+        this.isStuck.set(!entry.isIntersecting);
+      },
+      { threshold: 0, rootMargin: `-${headerHeight}px 0px 0px 0px` },
     );
     this.stickyObserver.observe(el);
   }

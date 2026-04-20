@@ -177,7 +177,7 @@
 
 .sale-cart-bar {
     position: fixed;
-    bottom: calc(var(--bottom-bar-height, 5rem) + 0.75rem);
+    bottom: calc(var(--bottom-bar-height, 5rem) + 0.75rem + env(safe-area-inset-bottom));
     left: 50%;
     transform: translateX(-50%);
     z-index: z.$cart-bar;
