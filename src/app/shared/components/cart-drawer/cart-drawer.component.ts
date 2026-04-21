@@ -5,10 +5,11 @@ import { CartItemComponent } from '../cart-item/cart-item.component';
 import {
   CartItem,
 } from '../../../features/products/products.data';
+import { SwipeItemComponent } from '../swipe-item/swipe-item.component';
 
 @Component({
   selector: 'stp-cart-drawer',
-  imports: [DecimalPipe, ButtonComponent, CartItemComponent],
+  imports: [DecimalPipe, ButtonComponent, CartItemComponent, SwipeItemComponent],
   templateUrl: './cart-drawer.component.html',
   styleUrl: './cart-drawer.component.scss',
 })

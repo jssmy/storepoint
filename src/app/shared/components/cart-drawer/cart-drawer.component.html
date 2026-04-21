@@ -19,7 +19,9 @@
         <!-- Items list -->
         <ul class="cart-drawer__list">
             @for (item of items(); track item.product.id) {
-                <stp-cart-item [item]="item" (quantityChange)="updateQty(item.product.id, $event)" (remove)="itemRemoved.emit(item.product.id)" />
+                <stp-swipe-item>
+                    <stp-cart-item [item]="item" (quantityChange)="updateQty(item.product.id, $event)" (remove)="itemRemoved.emit(item.product.id)" />
+                </stp-swipe-item>
             }
         </ul>
 

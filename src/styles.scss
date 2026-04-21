@@ -282,6 +282,11 @@ body {
   backdrop-filter: blur(10px) saturate(200%) brightness(1.06);
 }
 
+.error-bg {
+  background: var(--color-error);
+  color: var(--color-error-fg);
+}
+
 /* =========================================================
    Sticky bar — shared utility
    Used in search/filter bars that stick to the top.
