@@ -19,7 +19,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: var(--gap-2);
   padding: calc(0.75rem + env(safe-area-inset-top)) 1.25rem 0.75rem;
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
@@ -62,7 +62,7 @@
   &__user-badge {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--gap-1);
     padding: 0.3125rem 0.75rem 0.3125rem 0.375rem;
     border-radius: 9999px;
     background-color: var(--color-surface-alt);

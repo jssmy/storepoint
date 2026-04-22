@@ -16,10 +16,10 @@ interface NavItem {
 })
 export class BottomBarComponent {
   protected readonly navItems: NavItem[] = [
-    { label: 'Noticias',   route: '/notices',   icon: 'notices'   },
+    { label: 'Dashboard',  route: '/dashboard', icon: 'dashboard' },
     { label: 'Productos',  route: '/products',  icon: 'products'  },
     { label: 'Vender',     route: '/sale',      icon: 'camera', fab: true },
     { label: 'Caja',       route: '/caja',      icon: 'caja'      },
-    { label: 'Dashboard',  route: '/dashboard', icon: 'dashboard' },
+    { label: 'Noticias',   route: '/notices',   icon: 'notices'   },
   ];
 }

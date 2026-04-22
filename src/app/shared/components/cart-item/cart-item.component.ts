@@ -18,8 +18,8 @@ import { InputNumericComponent } from '../input-numeric/input-numeric.component'
 export class CartItemComponent {
     readonly item = input.required<CartItem>();
 
-    readonly quantityChange = output<number>();
-    readonly remove = output<void>();
+    readonly quantityChange = output<number | undefined>();
+    readonly remove = output<number>();
 
     protected readonly subtotal = computed(
         () => this.item().product.price * this.item().quantity,

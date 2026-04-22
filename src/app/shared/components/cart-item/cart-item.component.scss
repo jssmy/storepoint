@@ -1,10 +1,9 @@
-@use '../../styles/spacing' as sp;
 @use '../../styles/breakpoints' as bp;
 
 :host {
     display: flex;
     align-items: center;
-    gap: sp.$gap-2;
+    gap: var(--gap-2);
     padding: 0.625rem 0;
     border-bottom: 1px solid var(--color-border);
     background: var(--color-surface);
@@ -44,7 +43,7 @@
     &__info {
         min-width: 0;
         display: grid;
-        gap: calc(sp.$gap-1 / 4);
+        gap: calc(var(--gap-1) / 4);
         width: 100%;
 
         &--desktop {
@@ -66,7 +65,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        gap: sp.$gap-2;
+        gap: var(--gap-2);
         width: 100%;
 
         &--desktop {
@@ -103,7 +102,7 @@
     &__quantity {
         display: flex;
         align-items: center;
-        gap: sp.$gap-1;
+        gap: var(--gap-1);
 
         @include bp.mobile-only {
             display: none;
@@ -115,7 +114,7 @@
         flex-direction: row;
         align-items: center;
         flex-shrink: 0;
-        gap: sp.$gap-2;
+        gap: var(--gap-2);
         &--desktop {
             display: none;
             @include bp.sm-up {
@@ -137,7 +136,7 @@
         color: var(--color-text-disabled);
         cursor: pointer;
         display: flex;
-        padding: 0.25rem;
+        padding: var(--p-1);
         border-radius: 0.25rem;
         transition: color 120ms ease;
 

@@ -1,5 +1,4 @@
 @use '../../shared/styles/z-index' as z;
-@use '../../shared/styles/spacing' as sp;
 @use '../../shared/styles/breakpoints' as bp;
 
 /* =========================================================
@@ -23,7 +22,7 @@
 /* ── Header ───────────────────────────────────────────────── */
 
 .products-header {
-  padding: 1.25rem 1.25rem 1rem;
+  padding: var(--p-5) var(--p-5) var(--p-4);
   background-color: var(--color-primary);
   border-radius: 1.25rem;
   box-shadow: var(--shadow-md);
@@ -116,9 +115,9 @@
 .products-categories {
   &__scroll {
     display: flex;
-    gap: sp.$gap-1;
+    gap: var(--gap-1);
     overflow-x: auto;
-    padding-bottom: 0.25rem;
+    padding-bottom: var(--p-1);
     scrollbar-width: none;
 
     &::-webkit-scrollbar {
@@ -168,7 +167,7 @@
 .products-results {
   display: flex;
   flex-direction: column;
-  gap: sp.$gap-2;
+  gap: var(--gap-2);
 
   &__count {
     margin: 0;
@@ -259,7 +258,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.25rem 0 0.75rem;
+    padding: var(--p-5) var(--p-0) var(--p-3);
     border-bottom: 1px solid var(--color-border);
     margin-bottom: 1.25rem;
   }
@@ -274,7 +273,7 @@
   &__form {
     display: flex;
     flex-direction: column;
-    gap: sp.$gap-2;
+    gap: var(--gap-2);
   }
 
   &__submit {
@@ -289,7 +288,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-    padding: 2.5rem 1rem;
+    padding: var(--p-8) var(--p-4);
     text-align: center;
   }
 

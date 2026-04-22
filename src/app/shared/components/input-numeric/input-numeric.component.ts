@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, computed, forwardRef, input, output, signal } from '@angular/core';
+import { Component, computed, forwardRef, input, model, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputNumericRadius = 'sm' | 'md' | 'lg' | 'full';
@@ -19,13 +19,13 @@ export type InputNumericSize = 'sm' | 'md' | 'lg';
     ],
 })
 export class InputNumericComponent implements ControlValueAccessor {
-    readonly value  = input<number | undefined>(undefined);
+    readonly value  = model<number | undefined>(undefined);
     readonly min    = input<number>(1);
     readonly max    = input<number | null>(null);
     readonly radius = input<InputNumericRadius>('md');
     readonly size   = input<InputNumericSize>('md');
 
-    readonly valueChange = output<number>();
+    
 
     private readonly _internalValue = signal<number>(0);
     private _onChange: (value: number) => void = () => {};
@@ -71,7 +71,7 @@ export class InputNumericComponent implements ControlValueAccessor {
 
     private emit(newValue: number): void {
         this._internalValue.set(newValue);
-        this.valueChange.emit(newValue);
+        this.value.set(newValue);
         this._onChange(newValue);
         this._onTouched();
     }

@@ -63,7 +63,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: calc(100% - 2rem);
-  padding-inline: 0.25rem;
+  padding-inline: var(--p-1);
   background-color: transparent;
 
   transition:

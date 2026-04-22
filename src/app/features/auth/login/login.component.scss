@@ -1,5 +1,4 @@
 @use '../../../shared/styles/z-index' as z;
-@use '../../../shared/styles/spacing' as sp;
 
 /* =========================================================
    Login Page — Fullscreen mobile-first
@@ -74,7 +73,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: sp.$gap-1;
+  gap: var(--gap-1);
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -113,21 +112,21 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: sp.$gap-2;
+  gap: var(--gap-2);
 }
 
 /* Field group */
 .field-group {
   display: flex;
   flex-direction: column;
-  gap: calc(sp.$gap-1 / 2);
+  gap: calc(var(--gap-1) / 2);
 }
 
 .field-label-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: sp.$gap-1;
+  gap: var(--gap-1);
 }
 
 .field-label {
@@ -143,7 +142,7 @@
   color: var(--color-error);
   display: flex;
   align-items: center;
-  gap: calc(sp.$gap-1 / 2);
+  gap: calc(var(--gap-1) / 2);
 }
 
 /* Forgot password */
@@ -178,7 +177,7 @@
 .checkbox-label {
   display: flex;
   align-items: center;
-  gap: sp.$gap-1;
+  gap: var(--gap-1);
   cursor: pointer;
   user-select: none;
 }
@@ -238,9 +237,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: sp.$gap-2;
+  gap: var(--gap-2);
   text-align: center;
-  padding-bottom: 0.5rem;
+  padding-bottom: var(--p-2);
 }
 
 .footer-tagline {
@@ -252,7 +251,7 @@
 .footer-links {
   display: flex;
   align-items: center;
-  gap: sp.$gap-1;
+  gap: var(--gap-1);
 }
 
 

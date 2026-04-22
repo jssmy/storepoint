@@ -4,14 +4,16 @@ import {
   ElementRef,
   OnDestroy,
   computed,
+  inject,
   signal,
   viewChild,
 } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { SaleProductCardComponent } from '../../shared/components/sale-product-card/sale-product-card.component';
-import { CartDrawerComponent } from '../../shared/components/cart-drawer/cart-drawer.component';
+import { CartDrawerComponent, CartBottomSheetData, CartDismissResult } from '../../shared/components/cart-drawer/cart-drawer.component';
 import {
   CartItem,
   CATEGORY_ICONS,
@@ -23,11 +25,12 @@ import {
 
 @Component({
   selector: 'stp-sale',
-  imports: [DecimalPipe, FormsModule, ButtonComponent, SaleProductCardComponent, CartDrawerComponent],
+  imports: [DecimalPipe, FormsModule, ButtonComponent, SaleProductCardComponent],
   templateUrl: './sale.component.html',
   styleUrl: './sale.component.scss',
 })
 export class SaleComponent implements AfterViewInit, OnDestroy {
+  private readonly bottomSheet = inject(MatBottomSheet);
   private readonly saleHeader = viewChild<ElementRef>('saleHeader');
   protected readonly isStuck = signal(false);
   private stickyObserver?: IntersectionObserver;
@@ -49,7 +52,6 @@ export class SaleComponent implements AfterViewInit, OnDestroy {
 
   // ── Cart ─────────────────────────────────────────────────
   protected readonly cartItems = signal<CartItem[]>([]);
-  protected readonly showCartDrawer = signal(false);
 
   // ── Swipe tracking ───────────────────────────────────────
   private touchStartX = 0;
@@ -100,8 +102,8 @@ export class SaleComponent implements AfterViewInit, OnDestroy {
     return this.quantities().get(productId) ?? 1;
   }
 
-  protected setQty(productId: number, value: number): void {
-    const clamped = Math.max(1, value);
+  protected setQty(productId: number, value: number | undefined): void {
+    const clamped = Math.max(1, value ?? 0);
     this.quantities.update(map => {
       const next = new Map(map);
       next.set(productId, clamped);
@@ -153,35 +155,25 @@ export class SaleComponent implements AfterViewInit, OnDestroy {
     this.setQty(product.id, 1);
   }
 
-  protected removeFromCart(productId: number): void {
-    this.cartItems.update(items => items.filter(i => i.product.id !== productId));
-  }
 
-  protected updateCartQty(productId: number, qty: number): void {
-    const clamped = qty;
-    this.cartItems.update(items =>
-      items.map(i => i.product.id === productId ? { ...i, quantity: clamped } : i)
-        .filter(i => i.quantity > 0),
-    );
-  }
 
   protected openCart(): void {
-    this.showCartDrawer.set(true);
-  }
+    const data: CartBottomSheetData = { items: this.cartItems() };
 
-  protected closeCart(): void {
-    this.showCartDrawer.set(false);
-  }
-
-  protected clearCart(): void {
-    this.cartItems.set([]);
-    this.showCartDrawer.set(false);
-  }
-
-  protected confirmSale(): void {
-    // TODO: connect to backend
-    this.cartItems.set([]);
-    this.showCartDrawer.set(false);
+    this.bottomSheet
+      .open<CartDrawerComponent, CartBottomSheetData, CartDismissResult | null>(CartDrawerComponent, {
+        data,
+        panelClass: 'stp-cart-panel',
+      })
+      .afterDismissed()
+      .subscribe(result => {
+        if (result) {
+          this.cartItems.set(result.items);
+          if (result.confirmed) {
+            // TODO: connect to backend
+          }
+        }
+      });
   }
 
   // ── Sticky observer ───────────────────────────────────────

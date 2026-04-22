@@ -1,5 +1,4 @@
 @use '../../styles/product-card';
-@use '../../styles/spacing' as sp;
 
 /* Sale-specific extensions are inherited via the shared product-card partial.
    Modifier classes (--in-cart, --out-of-stock, etc.) and child elements
@@ -49,7 +48,7 @@
         padding: 0.5rem 0.625rem 0.625rem;
         display: flex;
         flex-direction: column;
-        gap: sp.$gap-1;
+        gap: var(--gap-1);
     }
 
     &__add-btn {

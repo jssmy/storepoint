@@ -24,11 +24,12 @@
         <p class="cart-item__unit-price">S/ {{ item().product.price | number:'1.2-2' }} c/u</p>
     </div>
 </div>
-<stp-input-numeric class="cart-item__quantity cart-item__quantity--desktop" [value]="item().quantity" [min]="0" size="sm" radius="md"
-    (valueChange)="quantityChange.emit($event)" />
+<stp-input-numeric class="cart-item__quantity cart-item__quantity--desktop" [value]="item().quantity" [min]="0"
+    size="sm" radius="md" (valueChange)="quantityChange.emit($event)" />
 <div class="cart-item__subtotal cart-item__subtotal--desktop">
     <p class="cart-item__subtotal-value">S/ {{ subtotal() | number:'1.2-2' }}</p>
-    <stp-button variant="danger" btnStyle="ghost" size="sm" radius="md" aria-label="Eliminar" (click)="remove.emit()">
+    <stp-button variant="danger" btnStyle="ghost" size="sm" radius="md" aria-label="Eliminar"
+        (click)="remove.emit(item().product.id)">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <polyline points="3 6 5 6 21 6" />

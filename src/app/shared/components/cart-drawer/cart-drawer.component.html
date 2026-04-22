@@ -1,51 +1,49 @@
-<div class="cart-overlay" (click)="closed.emit()" aria-modal="true" role="dialog" aria-label="Carrito de venta">
-    <div class="cart-drawer" (click)="$event.stopPropagation()">
+<div class="cart-drawer">
 
-        <!-- Handle -->
-        <div class="cart-drawer__handle" aria-hidden="true"></div>
+    <!-- Handle -->
+    <div class="cart-drawer__handle" aria-hidden="true"></div>
 
-        <!-- Header -->
-        <div class="cart-drawer__header">
-            <h2 class="cart-drawer__title">Carrito</h2>
-            <button class="close" type="button" aria-label="Cerrar carrito" (click)="closed.emit()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 6 6 18" />
-                    <path d="m6 6 12 12" />
-                </svg>
-            </button>
-        </div>
-
-        <!-- Items list -->
-        <ul class="cart-drawer__list">
-            @for (item of items(); track item.product.id) {
-                <stp-swipe-item>
-                    <stp-cart-item [item]="item" (quantityChange)="updateQty(item.product.id, $event)" (remove)="itemRemoved.emit(item.product.id)" />
-                </stp-swipe-item>
-            }
-        </ul>
-
-        <!-- Summary -->
-        <div class="cart-drawer__summary">
-            <div class="cart-drawer__summary-row">
-                <span>Subtotal ({{ count() }} {{ count() === 1 ? 'producto' : 'productos' }})</span>
-                <span>S/ {{ total() | number:'1.2-2' }}</span>
-            </div>
-            <div class="cart-drawer__summary-row cart-drawer__summary-row--total">
-                <strong>Total</strong>
-                <strong>S/ {{ total() | number:'1.2-2' }}</strong>
-            </div>
-        </div>
-
-        <!-- Actions -->
-        <div class="cart-drawer__actions">
-            <stp-button variant="surface" btnStyle="outlined" radius="md" size="md" (click)="cleared.emit()">
-                Limpiar carrito
-            </stp-button>
-            <stp-button [disabled]="items().length === 0"  variant="primary" btnStyle="solid" radius="md" size="md" (click)="confirmed.emit()">
-                Cobrar S/ {{ total() | number:'1.2-2' }}
-            </stp-button>
-        </div>
-
+    <!-- Header -->
+    <div class="cart-drawer__header">
+        <h2 class="cart-drawer__title">Carrito</h2>
+        <button class="close" type="button" aria-label="Cerrar carrito" (click)="close()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+            </svg>
+        </button>
     </div>
+
+    <!-- Items list -->
+    <ul class="cart-drawer__list">
+        @for (item of items(); track item.product.id) {
+            <stp-swipe-item>
+                <stp-cart-item [item]="item" (quantityChange)="updateQty(item.product.id, $event)" (remove)="removeItem(item.product.id)" />
+            </stp-swipe-item>
+        }
+    </ul>
+
+    <!-- Summary -->
+    <div class="cart-drawer__summary">
+        <div class="cart-drawer__summary-row">
+            <span>Subtotal ({{ count() }} {{ count() === 1 ? 'producto' : 'productos' }})</span>
+            <span>S/ {{ total() | number:'1.2-2' }}</span>
+        </div>
+        <div class="cart-drawer__summary-row cart-drawer__summary-row--total">
+            <strong>Total</strong>
+            <strong>S/ {{ total() | number:'1.2-2' }}</strong>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="cart-drawer__actions">
+        <stp-button variant="surface" btnStyle="outlined" radius="md" size="md" (click)="clear()">
+            Limpiar carrito
+        </stp-button>
+        <stp-button [disabled]="items().length === 0" variant="primary" btnStyle="solid" radius="md" size="md" (click)="confirm()">
+            Cobrar S/ {{ total() | number:'1.2-2' }}
+        </stp-button>
+    </div>
+
 </div>

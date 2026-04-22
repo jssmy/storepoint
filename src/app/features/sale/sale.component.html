@@ -95,16 +95,3 @@
 </div>
 }
 
-<!-- ── Cart drawer ───────────────────────────────────────────── -->
-@if (showCartDrawer()) {
-<stp-cart-drawer
-    [items]="cartItems()"
-    [total]="cartTotal()"
-    [count]="cartCount()"
-    (closed)="closeCart()"
-    (quantityUpdated)="updateCartQty($event.productId, $event.quantity)"
-    (itemRemoved)="removeFromCart($event)"
-    (cleared)="clearCart()"
-    (confirmed)="confirmSale()">
-</stp-cart-drawer>
-}

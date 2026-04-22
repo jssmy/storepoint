@@ -15,7 +15,7 @@ export class SaleProductCardComponent {
   readonly quantity = input<number>(1);
   readonly inCart = input<boolean>(false);
 
-  readonly quantityChange = output<number>();
+  readonly quantityChange = output<number | undefined>();
   readonly addToCart = output<void>();
 
   protected categoryIcon(): string {

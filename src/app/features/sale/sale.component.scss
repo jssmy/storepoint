@@ -1,5 +1,4 @@
 @use '../../shared/styles/z-index' as z;
-@use '../../shared/styles/spacing' as sp;
 @use '../../shared/styles/breakpoints' as bp;
 
 /* =========================================================
@@ -23,7 +22,7 @@
 /* ── Header ───────────────────────────────────────────────── */
 
 .sale-header {
-    padding: 1.25rem 1.25rem 1rem;
+    padding: var(--p-5) var(--p-5) var(--p-4);
     background: linear-gradient(135deg, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 80%, #7c3aed) 100%);
     border-radius: 1.25rem;
     box-shadow: var(--shadow-md);
@@ -113,9 +112,9 @@
 .sale-categories {
     &__scroll {
         display: flex;
-        gap: sp.$gap-1;
+        gap: var(--gap-1);
         overflow-x: auto;
-        padding-bottom: 0.25rem;
+        padding-bottom: var(--p-1);
         scrollbar-width: none;
 
         &::-webkit-scrollbar {
@@ -206,7 +205,7 @@
         cursor: pointer;
         font-size: 0.9375rem;
         font-weight: 600;
-        gap: sp.$gap-1;
+        gap: var(--gap-1);
     }
 
     &__count {
