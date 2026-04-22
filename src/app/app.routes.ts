@@ -32,6 +32,11 @@ export const routes: Routes = [
                     import('./features/sale/sale.component').then(m => m.SaleComponent),
             },
             {
+                path: 'caja',
+                loadComponent: () =>
+                    import('./features/caja/caja.component').then(m => m.CajaComponent),
+            },
+            {
                 path: '',
                 redirectTo: 'dashboard',
                 pathMatch: 'full',
