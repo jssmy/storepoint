@@ -1,9 +1,12 @@
 <div class="layout">
   <stp-app-header [userName]="currentUserName" />
 
-  <main class="layout__content" role="main">
-    <router-outlet />
-  </main>
+  <div class="layout__body">
+    <stp-sidebar />
+    <main class="layout__content" role="main">
+      <router-outlet />
+    </main>
+  </div>
 
   <stp-app-footer />
   <stp-bottom-bar />

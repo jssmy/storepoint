@@ -1,7 +1,7 @@
 @use '../../styles/breakpoints' as bp;
 
 /* =========================================================
-   stp-main-layout — Shell with header + footer
+   stp-main-layout — Shell with header + sidebar + footer
    ========================================================= */
 
 :host {
@@ -16,8 +16,26 @@
   flex-direction: column;
   background-color: var(--color-bg);
 
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+
+    // Center sidebar + content together so sidebar sits flush
+    // with the left edge of the page content (not at viewport edge)
+    max-width: 68rem; // ~13rem sidebar + ~52rem content + padding
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+
+    @include bp.mobile-only {
+      padding-inline: 0;
+    }
+  }
+
   &__content {
     flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
 

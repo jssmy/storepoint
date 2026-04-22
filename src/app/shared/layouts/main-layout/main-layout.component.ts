@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { AppHeaderComponent } from '../../components/app-header/app-header.component';
 import { AppFooterComponent } from '../../components/app-footer/app-footer.component';
 import { BottomBarComponent } from '../../components/bottom-bar/bottom-bar.component';
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'stp-main-layout',
-  imports: [RouterOutlet, AppHeaderComponent, AppFooterComponent, BottomBarComponent],
+  imports: [RouterOutlet, AppHeaderComponent, AppFooterComponent, BottomBarComponent, SidebarComponent],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
 })
