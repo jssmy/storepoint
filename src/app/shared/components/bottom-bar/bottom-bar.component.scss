@@ -8,7 +8,7 @@
 
 :host {
   
-
+  display: none;
   @include bp.mobile-only {
     display: block;
   }
