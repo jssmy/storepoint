@@ -90,6 +90,27 @@
   }
 }
 
+.stp-header__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: var(--radius-md, 0.5rem);
+  color: var(--color-text);
+  transition: background-color 150ms ease;
+
+  &:hover {
+    background-color: var(--color-surface-alt);
+  }
+
+  @include bp.sm-up {
+    display: none;
+  }
+}
+
 @include bp.xs-down {
   .stp-header__user-name {
     display: none;

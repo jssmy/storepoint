@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 interface NavItem {
@@ -14,6 +14,9 @@ interface NavItem {
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
+  readonly isOpen = input(false);
+  readonly closeRequest = output<void>();
+
   protected readonly navItems: NavItem[] = [
     { label: 'Dashboard', route: '/dashboard', icon: 'dashboard' },
     { label: 'Productos', route: '/products',  icon: 'products'  },

@@ -1,8 +1,13 @@
 <div class="layout">
-  <stp-app-header [userName]="currentUserName" />
+  <stp-app-header [userName]="currentUserName" (menuToggle)="toggleSidebar()" />
 
   <div class="layout__body">
-    <stp-sidebar />
+    @if (sidebarOpen()) {
+      <div class="layout__backdrop" (click)="sidebarOpen.set(false)" aria-hidden="true"></div>
+    }
+
+    <stp-sidebar [isOpen]="sidebarOpen()" (closeRequest)="sidebarOpen.set(false)" />
+
     <main class="layout__content" role="main">
       <router-outlet />
     </main>

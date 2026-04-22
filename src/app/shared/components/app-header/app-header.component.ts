@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { AppConfigService } from '../../../core/services/app-config.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { ButtonComponent } from '../button/button.component';
@@ -10,8 +10,8 @@ import { ButtonComponent } from '../button/button.component';
   styleUrl: './app-header.component.scss',
 })
 export class AppHeaderComponent {
-  /** Display name of the logged-in user */
   readonly userName = input<string>('');
+  readonly menuToggle = output<void>();
 
   protected readonly config = inject(AppConfigService);
   protected readonly themeService = inject(ThemeService);
