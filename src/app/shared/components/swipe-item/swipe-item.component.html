@@ -1,7 +1,10 @@
 <div class="swipe-container">
     <div class="actions">
         @for (item of options(); track $index) {
-        <button (click)="optionSelected.emit(item)" [class]="item.stpClass">{{item.label}}</button>
+        <button (click)="optionSelected.emit(item)" [class]="item.stpClass">
+              <i class="material-icons">{{item.icon}}</i>
+            {{item.label}}
+        </button>
         }
     </div>
 

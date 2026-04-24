@@ -23,7 +23,7 @@ export class SwipeItemComponent {
 
     readonly options = input<SwipeOption[]>([ { label: 'default', icon: 'trash', key: 'delete', stpClass: 'error-bg' } ]);
 
-    readonly maxSwipe = computed(() => -80 * this.options().length);
+    readonly maxSwipe = computed(() =>  -10 + (-80 * this.options().length));
 
     readonly optionSelected = output<SwipeOption>();
 
