@@ -21,25 +21,11 @@
     <span class="product-card__stock-badge product-card__stock-badge--{{ stockStatus(product().stock) }}"
         [attr.aria-label]="stockLabel(product().stock)">
         @if (product().stock === 0) {
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-            aria-hidden="true">
-            <path d="M18 6 6 18" /><path d="m6 6 12 12" />
-        </svg>
+        <i class="ph ph-x" style="font-size: 0.6875rem" aria-hidden="true"></i>
         } @else if (product().stock <= 5) {
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-            aria-hidden="true">
-            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
-            <line x1="12" x2="12" y1="9" y2="13" />
-            <line x1="12" x2="12.01" y1="17" y2="17" />
-        </svg>
+        <i class="ph ph-warning" style="font-size: 0.6875rem" aria-hidden="true"></i>
         } @else {
-        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-            aria-hidden="true">
-            <polyline points="20 6 9 17 4 12" />
-        </svg>
+        <i class="ph ph-check" style="font-size: 0.6875rem" aria-hidden="true"></i>
         }
         {{ stockLabel(product().stock) }}
     </span>

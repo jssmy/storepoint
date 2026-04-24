@@ -13,12 +13,7 @@
         <section class="products-search " aria-label="Buscar productos">
             <div class="products-search__field">
                 <span class="products-search__icon" aria-hidden="true">
-                    <!-- Search icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                    </svg>
+                    <i class="ph ph-magnifying-glass" style="font-size: 1.125rem"></i>
                 </span>
                 <input class="products-search__input" type="search" placeholder="Buscar producto..." autocomplete="off"
                     aria-label="Buscar productos" [value]="searchQuery()"
@@ -26,11 +21,7 @@
                 @if (searchQuery()) {
                 <button class="products-search__clear" type="button" aria-label="Limpiar búsqueda"
                     (click)="clearSearch()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 6 6 18" />
-                        <path d="m6 6 12 12" />
-                    </svg>
+                    <i class="ph ph-x" style="font-size: 1rem"></i>
                 </button>
                 }
             </div>
@@ -59,11 +50,7 @@
     @if (!hasSearched()) {
     <div class="products-empty-state" aria-live="polite">
         <div class="products-empty-state__icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-            </svg>
+            <i class="ph ph-magnifying-glass" style="font-size: 4rem"></i>
         </div>
         <h2 class="products-empty-state__title">Busca un producto</h2>
         <p class="products-empty-state__text">
@@ -76,13 +63,7 @@
     @if (hasSearched() && filteredProducts().length === 0) {
     <div class="products-empty-state" aria-live="polite">
         <div class="products-empty-state__icon" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
-                <path
-                    d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                <path d="m3.3 7 8.7 5 8.7-5" />
-                <line x1="12" x2="12" y1="22" y2="12" />
-            </svg>
+            <i class="ph ph-package" style="font-size: 4rem"></i>
         </div>
         <h2 class="products-empty-state__title">Sin resultados</h2>
         <p class="products-empty-state__text">

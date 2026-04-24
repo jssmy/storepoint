@@ -25,7 +25,7 @@ export interface CartDismissResult {
 })
 export class CartDrawerComponent {
   readonly swipeOptions = [
-    { label: 'Eliminar', icon: 'delete', key: 'delete', stpClass: 'error-bg' },
+    { label: 'Eliminar', icon: 'trash', key: 'delete', stpClass: 'error-bg' },
   ];
 
   private readonly sheetRef = inject<MatBottomSheetRef<CartDrawerComponent, CartDismissResult | null>>(MatBottomSheetRef);

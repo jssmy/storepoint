@@ -30,9 +30,7 @@
   <div class="caja__metrics">
     <div class="caja__metric-card caja__metric-card--ingreso">
       <div class="caja__metric-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <i class="ph ph-arrow-up" style="font-size: 1rem" aria-hidden="true"></i>
       </div>
       <div>
         <span class="caja__metric-label">Ingresos</span>
@@ -42,9 +40,7 @@
 
     <div class="caja__metric-card caja__metric-card--egreso">
       <div class="caja__metric-icon">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 5v14M19 12l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <i class="ph ph-arrow-down" style="font-size: 1rem" aria-hidden="true"></i>
       </div>
       <div>
         <span class="caja__metric-label">Egresos</span>
@@ -65,13 +61,9 @@
         <li class="caja__mov-item">
           <span class="caja__mov-icon" [class.caja__mov-icon--ingreso]="mov.tipo === 'ingreso'" [class.caja__mov-icon--egreso]="mov.tipo === 'egreso'">
             @if (mov.tipo === 'ingreso') {
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <i class="ph ph-arrow-up" style="font-size: 0.875rem" aria-hidden="true"></i>
             } @else {
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 5v14M19 12l-7 7-7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <i class="ph ph-arrow-down" style="font-size: 0.875rem" aria-hidden="true"></i>
             }
           </span>
           <div class="caja__mov-info">
@@ -89,16 +81,10 @@
   <!-- Acción cierre -->
   <button class="caja__action-btn" [class.caja__action-btn--cerrar]="estado() === 'abierta'" (click)="toggleEstado()">
     @if (estado() === 'abierta') {
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-      </svg>
+      <i class="ph ph-lock" style="font-size: 1.125rem" aria-hidden="true"></i>
       Cerrar Caja
     } @else {
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/>
-        <path d="M7 11V7a5 5 0 0 1 9.9-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-      </svg>
+      <i class="ph ph-lock-open" style="font-size: 1.125rem" aria-hidden="true"></i>
       Abrir Caja
     }
   </button>
