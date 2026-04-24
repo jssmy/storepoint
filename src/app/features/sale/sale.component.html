@@ -12,7 +12,7 @@
         <section class="sale-search" aria-label="Buscar productos">
             <div class="sale-search__field">
                 <span class="sale-search__icon" aria-hidden="true">
-                    <stp-icon name="magnifying-glass" style="font-size: 1.125rem" />
+                    <i stp-icon name="magnifying-glass" style="font-size: 1.125rem"></i>
                 </span>
                 <input class="sale-search__input" type="search" placeholder="Buscar producto..." autocomplete="off"
                     aria-label="Buscar productos" [value]="searchQuery()"
@@ -20,7 +20,7 @@
                 @if (searchQuery()) {
                 <button class="sale-search__clear" type="button" aria-label="Limpiar búsqueda"
                     (click)="clearSearch()">
-                    <stp-icon name="x" style="font-size: 1rem" />
+                    <i stp-icon name="x" style="font-size: 1rem"></i>
                 </button>
                 }
             </div>

@@ -28,6 +28,6 @@
     <p class="cart-item__subtotal-value">S/ {{ subtotal() | number:'1.2-2' }}</p>
     <stp-button variant="danger" btnStyle="ghost" size="sm" radius="md" aria-label="Eliminar"
         (click)="remove.emit(item().product.id)">
-        <stp-icon name="trash" style="font-size: 1rem" />
+        <i stp-icon name="trash" style="font-size: 1rem"></i>
     </stp-button>
 </div>

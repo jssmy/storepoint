@@ -26,13 +26,13 @@
                     [attr.aria-selected]="activeFilter() === filter" (click)="setFilter(filter)">
                     @switch (filter) {
                     @case ('ventas') {
-                    <stp-icon name="shopping-bag" style="font-size: 0.875rem" />
+                    <i stp-icon name="shopping-bag" style="font-size: 0.875rem"></i>
                     }
                     @case ('productos') {
-                    <stp-icon name="package" style="font-size: 0.875rem" />
+                    <i stp-icon name="package" style="font-size: 0.875rem"></i>
                     }
                     @case ('caja') {
-                    <stp-icon name="credit-card" style="font-size: 0.875rem" />
+                    <i stp-icon name="credit-card" style="font-size: 0.875rem"></i>
                     }
                     }
                     {{ filterLabels[filter] }}
@@ -78,7 +78,7 @@
                 </li>
                 } @empty {
                 <li class="dash-activity-empty" role="listitem">
-                    <stp-icon name="file-text" style="font-size: 2.5rem" />
+                    <i stp-icon name="file-text" style="font-size: 2.5rem"></i>
                     <p>Sin actividad en esta categoría</p>
                 </li>
                 }

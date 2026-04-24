@@ -33,13 +33,30 @@
     border-radius: var(--radius-md);
     border: 2px solid var(--color-border);
     background: var(--color-surface);
+    color: var(--color-text-disabled);
     cursor: pointer;
     transition: border-color 0.15s ease, background 0.15s ease;
+
+    &__label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+    }
 
     &--active {
         border-color: var(--color-primary);
         background: var(--color-primary-light);
+        color: var(--color-text-primary);
     }
+
+    &--active:has(.step__method-label) {
+        .step__method-label {
+            color: var(--color-text-primary);
+            font-weight: 700;
+        }
+
+    }
+
 
     &:hover:not(&--active) {
         border-color: var(--color-text-secondary);
@@ -52,11 +69,6 @@
     line-height: 1;
 }
 
-.step__method-label {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--color-text-primary);
-}
 
 .step__form {
     display: flex;

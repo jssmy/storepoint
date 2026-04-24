@@ -1,6 +1,6 @@
 <div class="step__header">
     <button class="close" type="button" aria-label="Volver al carrito" (click)="back.emit()">
-        <stp-icon name="arrow-left" style="font-size: 1.25rem" />
+        <i stp-icon name="arrow-left" [autofill]="false" style="font-size: 1.25rem"></i>
     </button>
     <h2 class="step__title">Forma de pago</h2>
     <div class="step__header-spacer" aria-hidden="true"></div>
@@ -12,13 +12,13 @@
         <button type="button" class="step__method-card"
             [class.step__method-card--active]="paymentMethod() === 'cash'"
             (click)="selectPaymentMethod('cash')">
-            <span class="step__method-icon">💵</span>
+            <i stp-icon name="money" style="font-size: 1.5rem" class="step__method-icon"></i>
             <span class="step__method-label">Al contado</span>
         </button>
         <button type="button" class="step__method-card"
             [class.step__method-card--active]="paymentMethod() === 'credit'"
             (click)="selectPaymentMethod('credit')">
-            <span class="step__method-icon">📋</span>
+            <i stp-icon name="hand-coins" style="font-size: 1.5rem" class="step__method-icon"></i>
             <span class="step__method-label">A crédito</span>
         </button>
     </div>
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="step__field">
-            <label class="step__field-label">Moneda digital</label>
+            <label class="step__field-label">Yape</label>
             <div class="step__field-input">
                 <span class="step__field-prefix">S/</span>
                 <input class="step__field-control" type="number" min="0" step="0.10"

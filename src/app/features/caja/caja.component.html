@@ -30,7 +30,7 @@
   <div class="caja__metrics">
     <div class="caja__metric-card caja__metric-card--ingreso">
       <div class="caja__metric-icon">
-        <stp-icon name="arrow-up" style="font-size: 1rem" />
+        <i stp-icon name="arrow-up" style="font-size: 1rem"></i>
       </div>
       <div>
         <span class="caja__metric-label">Ingresos</span>
@@ -40,7 +40,7 @@
 
     <div class="caja__metric-card caja__metric-card--egreso">
       <div class="caja__metric-icon">
-        <stp-icon name="arrow-down" style="font-size: 1rem" />
+        <i stp-icon name="arrow-down" style="font-size: 1rem"></i>
       </div>
       <div>
         <span class="caja__metric-label">Egresos</span>
@@ -61,9 +61,9 @@
         <li class="caja__mov-item">
           <span class="caja__mov-icon" [class.caja__mov-icon--ingreso]="mov.tipo === 'ingreso'" [class.caja__mov-icon--egreso]="mov.tipo === 'egreso'">
             @if (mov.tipo === 'ingreso') {
-              <stp-icon name="arrow-up" style="font-size: 0.875rem" />
+              <i stp-icon name="arrow-up" style="font-size: 0.875rem"></i>
             } @else {
-              <stp-icon name="arrow-down" style="font-size: 0.875rem" />
+              <i stp-icon name="arrow-down" style="font-size: 0.875rem"></i>
             }
           </span>
           <div class="caja__mov-info">
@@ -81,10 +81,10 @@
   <!-- Acción cierre -->
   <button class="caja__action-btn" [class.caja__action-btn--cerrar]="estado() === 'abierta'" (click)="toggleEstado()">
     @if (estado() === 'abierta') {
-      <stp-icon name="lock" style="font-size: 1.125rem" />
+      <i stp-icon name="lock" style="font-size: 1.125rem"></i>
       Cerrar Caja
     } @else {
-      <stp-icon name="lock-open" style="font-size: 1.125rem" />
+      <i stp-icon name="lock-open" style="font-size: 1.125rem"></i>
       Abrir Caja
     }
   </button>

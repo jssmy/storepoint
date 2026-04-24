@@ -21,11 +21,11 @@
     <span class="product-card__stock-badge product-card__stock-badge--{{ stockStatus(product().stock) }}"
         [attr.aria-label]="stockLabel(product().stock)">
         @if (product().stock === 0) {
-        <stp-icon name="x" style="font-size: 0.6875rem" />
+        <i stp-icon name="x" style="font-size: 0.6875rem"></i>
         } @else if (product().stock <= 5) {
-        <stp-icon name="warning" style="font-size: 0.6875rem" />
+        <i stp-icon name="warning" style="font-size: 0.6875rem"></i>
         } @else {
-        <stp-icon name="check" style="font-size: 0.6875rem" />
+        <i stp-icon name="check" style="font-size: 0.6875rem"></i>
         }
         {{ stockLabel(product().stock) }}
     </span>

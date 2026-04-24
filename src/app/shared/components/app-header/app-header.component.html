@@ -4,11 +4,11 @@
   <div class="stp-header__brand">
     <!-- Hamburger — mobile only -->
     <button class="stp-header__menu-btn" type="button" (click)="menuToggle.emit()" aria-label="Abrir menú">
-      <stp-icon name="list" style="font-size: 1.375rem" />
+      <i stp-icon name="list" style="font-size: 1.375rem"></i>
     </button>
 
     <div class="stp-header__brand-icon" aria-hidden="true">
-      <stp-icon name="shopping-bag" style="font-size: 1.375rem" />
+      <i stp-icon name="shopping-bag" style="font-size: 1.375rem"></i>
     </div>
     <span class="stp-header__brand-name">{{ config.appName }}</span>
   </div>
@@ -34,9 +34,9 @@
       [attr.aria-label]="themeService.theme() === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
     >
       @if (themeService.theme() === 'dark') {
-        <stp-icon name="sun" style="font-size: 1.125rem" />
+        <i stp-icon name="sun" style="font-size: 1.125rem"></i>
       } @else {
-        <stp-icon name="moon" style="font-size: 1.125rem" />
+        <i stp-icon name="moon" style="font-size: 1.125rem"></i>
       }
     </stp-button>
 

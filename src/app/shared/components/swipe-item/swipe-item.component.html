@@ -2,7 +2,7 @@
     <div class="actions">
         @for (item of options(); track $index) {
         <button (click)="optionSelected.emit(item)" [class]="item.stpClass">
-              <stp-icon [name]="item.icon" />
+              <i stp-icon [name]="item.icon"></i>
             {{item.label}}
         </button>
         }

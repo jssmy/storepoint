@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input } from '@an
 import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
-  selector: 'stp-icon',
+  selector: '[stp-icon]',
   standalone: true,
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,12 +22,12 @@ import { ThemeService } from '../../../core/services/theme.service';
 })
 export class IconComponent {
   readonly name = input.required<string>();
+  readonly autofill = input<boolean>(true);
 
   private readonly themeService = inject(ThemeService);
 
-  protected readonly iconClass = computed(() =>
-    this.themeService.theme() === 'dark'
-      ? `ph-fill ph-${this.name()}`
-      : `ph ph-${this.name()}`
-  );
+  protected readonly iconClass = computed(() => {
+    const fill = this.autofill() && this.themeService.theme() === 'dark';
+    return fill ? `ph-fill ph-${this.name()}` : `ph ph-${this.name()}`;
+  });
 }
