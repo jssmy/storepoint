@@ -6,10 +6,11 @@ import {
 } from '../../../features/products/products.data';
 
 @Component({
-  selector: 'stp-product-card',
+  selector: 'li[stp-product-card]',
   imports: [],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
+  host: { 'class': 'product-card' },
 })
 export class ProductCardComponent {
   readonly product = input.required<Product>();

@@ -80,6 +80,12 @@ $variants: (
   &.stp-btn--radius-md   { border-radius: var(--radius-md); }
   &.stp-btn--radius-xl   { border-radius: var(--radius-xl); }
   &.stp-btn--radius-full { border-radius: var(--radius-full); }
+
+  // ---- Shadow modifiers ----
+  &.stp-btn--shadow-sm { box-shadow: var(--shadow-sm); }
+  &.stp-btn--shadow-md { box-shadow: var(--shadow-md); }
+  &.stp-btn--shadow-lg { box-shadow: var(--shadow-lg); }
+  &.stp-btn--shadow-xl { box-shadow: var(--shadow-xl); }
   white-space: nowrap;
   transition:
     background-color 150ms ease,
@@ -182,7 +188,7 @@ $variants: (
 
 // Outlined style
 @mixin btn-outlined($bg, $bg-hover, $fg, $light) {
-  --stp-btn-bg:       transparent;
+  --stp-btn-bg:       var(--color-surface-alt);
   --stp-btn-fg:       var(--color-#{$bg});
   --stp-btn-border:   var(--color-#{$bg});
   --stp-btn-ring:     var(--color-#{$bg});

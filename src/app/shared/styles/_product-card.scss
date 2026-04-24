@@ -1,9 +1,10 @@
 /* =========================================================
    Product Card — shared BEM block
-   Used by: products.component, sale.component
+   Used by: product-card.component, sale-product-card.component
    ========================================================= */
 
-.product-card {
+// Include in :host to style the host <li> element directly.
+@mixin base {
   background-color: var(--color-surface);
   border: 1.5px solid var(--color-border);
   border-radius: 1rem;
@@ -16,8 +17,12 @@
     box-shadow: var(--shadow-md);
     transform: translateY(-2px);
   }
+}
 
-  // ── Image area ────────────────────────────────────────────
+// ── Child element shared styles ───────────────────────────
+
+.product-card {
+  // ── Image area ──────────────────────────────────────────
   // __image-wrap  → products (has positioned stock badge)
   // __image       → sale (simpler, flex-centered)
   // Both share the same layout rules.

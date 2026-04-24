@@ -5,6 +5,7 @@
 // custom components at https://material.angular.dev/guide/theming
 @use '@angular/material' as mat;
 @use './app/shared/styles/z-index' as z;
+@use './app/shared/styles/icons';
 
 
 body {
@@ -71,6 +72,7 @@ body {
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.16);
 
   /* Liquid Glass */
   --glass-backdrop: blur(48px) saturate(200%) brightness(1.06);
@@ -125,6 +127,7 @@ body {
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.65);
 
   /* Liquid Glass */
   --glass-backdrop: blur(48px) saturate(200%) brightness(0.94);

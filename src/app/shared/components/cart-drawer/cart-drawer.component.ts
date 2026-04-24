@@ -22,6 +22,9 @@ export interface CartDismissResult {
   styleUrl: './cart-drawer.component.scss',
 })
 export class CartDrawerComponent {
+  readonly swipeOptions = [
+    { label: 'Eliminar', icon: 'delete', key: 'delete', stpClass: 'error-bg' },
+  ];
   private readonly sheetRef = inject<MatBottomSheetRef<CartDrawerComponent, CartDismissResult | null>>(MatBottomSheetRef);
   protected readonly items = signal<CartItem[]>(inject<CartBottomSheetData>(MAT_BOTTOM_SHEET_DATA).items);
   protected readonly total = computed(() =>
@@ -32,7 +35,7 @@ export class CartDrawerComponent {
   );
 
   protected close(): void {
-    this.sheetRef.dismiss(null);
+    this.sheetRef.dismiss({ items: this.items(), confirmed: false });
   }
 
   protected updateQty(productId: number, quantity: number | undefined): void {

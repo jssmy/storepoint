@@ -1,6 +1,6 @@
-import { Component, computed, Injectable } from "@angular/core";
+import { Component, computed, input, output } from "@angular/core";
 
-interface Option {
+export interface SwipeOption {
     label: string;
     icon: string;
     key: string;
@@ -21,18 +21,17 @@ export class SwipeItemComponent {
     protected dragging = false;
     protected animate = false;
 
-    // protected maxSwipe = -160; // ancho total de botones
+    readonly options = input<SwipeOption[]>([ { label: 'default', icon: 'trash', key: 'delete', stpClass: 'error-bg' } ]);
 
-    readonly options: Option[] = [
-        { label: 'default', icon: 'trash', key: 'delete', stpClass: 'error-bg' },
-    ];
+    readonly maxSwipe = computed(() => -80 * this.options().length);
 
-    readonly maxSwipe = computed(() => -80 * this.options.length);
+    readonly optionSelected = output<SwipeOption>();
 
     onStart(event: PointerEvent) {
         this.dragging = true;
         this.animate = false;
         this.startX = event.clientX;
+        (event.target as HTMLElement).setPointerCapture(event.pointerId);
     }
     onMove(event: PointerEvent) {
         if (!this.dragging) return;

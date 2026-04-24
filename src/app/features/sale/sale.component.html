@@ -65,18 +65,23 @@
         <p class="sale-empty-state__text">Sin resultados para "<strong>{{ searchQuery() }}</strong>"</p>
     </div>
     } @else {
+
     <!-- ── Product grid ───────────────────────────────────── -->
     <ul class="sale-grid" aria-label="Productos">
+        
         @for (product of filteredProducts(); track product.id) {
-        <stp-sale-product-card
-            [product]="product"
-            [quantity]="getQty(product.id)"
-            [inCart]="isInCart(product.id)"
-            (quantityChange)="setQty(product.id, $event)"
-            (addToCart)="addToCart(product)"
-            (touchstart)="onTouchStart($event)"
-            (touchend)="onTouchEnd($event, product.id)">
-        </stp-sale-product-card>
+            
+            @defer(on viewport) {
+                <li stp-sale-product-card
+                    [product]="product"
+                    [inCart]="isInCart(product.id)"
+                    (addToCart)="addToCart(product, $event)"
+                    (touchstart)="onTouchStart($event)"
+                    (touchend)="onTouchEnd($event, product.id)">
+                </li>
+            } @placeholder {
+                <li class="sale-grid__placeholder"><stp-shimmer radius="md"></stp-shimmer></li>
+            }
         }
     </ul>
     }
@@ -86,7 +91,7 @@
 <!-- ── Cart sticky bar ──────────────────────────────────────── -->
 @if (cartItems().length > 0) {
 <div class="sale-cart-bar" role="status" aria-live="polite">
-    <stp-button class="sale-cart-bar__btn" variant="primary" btnStyle="solid" radius="sm" size="md"
+    <stp-button variant="info" btnStyle="solid"  radius="md" size="md"
         (click)="openCart()" aria-label="Ver carrito">
         <span class="sale-cart-bar__count">{{ cartCount() }}</span>
         <span class="sale-cart-bar__label">Ver carrito</span>

@@ -101,7 +101,7 @@
 
         <ul class="products-grid" role="list">
             @for (product of filteredProducts(); track product.id) {
-            <stp-product-card [product]="product" />
+            <li stp-product-card [product]="product"></li>
             }
         </ul>
     </section>

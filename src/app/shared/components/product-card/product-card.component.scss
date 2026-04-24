@@ -1,11 +1,11 @@
-@use '../../styles/product-card';
+@use '../../styles/product-card' as pc;
 
 /* =========================================================
    Product Card — Products feature styles
    ========================================================= */
 
 :host {
-    display: contents; // <li> inside becomes a direct grid child
+    @include pc.base();
 }
 
 /* ── Placeholder image per category ──────────────────────── */

@@ -22,10 +22,11 @@ import {
   Product,
   ProductCategory,
 } from '../products/products.data';
+import { ShimmerComponent } from '../../shared/components/shimmer/shimmer.component';
 
 @Component({
   selector: 'stp-sale',
-  imports: [DecimalPipe, FormsModule, ButtonComponent, SaleProductCardComponent],
+  imports: [DecimalPipe, FormsModule, ButtonComponent, SaleProductCardComponent, ShimmerComponent],
   templateUrl: './sale.component.html',
   styleUrl: './sale.component.scss',
 })
@@ -138,8 +139,8 @@ export class SaleComponent implements AfterViewInit, OnDestroy {
     return this.cartItems().some(i => i.product.id === productId);
   }
 
-  protected addToCart(product: Product): void {
-    const qty = this.getQty(product.id);
+  protected addToCart(product: Product, qty: number): void {
+    
     this.cartItems.update(items => {
       const existing = items.find(i => i.product.id === product.id);
       if (existing) {
@@ -168,6 +169,7 @@ export class SaleComponent implements AfterViewInit, OnDestroy {
       .afterDismissed()
       .subscribe(result => {
         if (result) {
+          
           this.cartItems.set(result.items);
           if (result.confirmed) {
             // TODO: connect to backend

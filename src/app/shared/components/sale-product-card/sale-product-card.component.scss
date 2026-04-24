@@ -1,26 +1,21 @@
-@use '../../styles/product-card';
-
-/* Sale-specific extensions are inherited via the shared product-card partial.
-   Modifier classes (--in-cart, --out-of-stock, etc.) and child elements
-   specific to the sale context are defined here. */
+@use '../../styles/product-card' as pc;
 
 :host {
-    display: contents; // <li> renders as a direct grid child
+    @include pc.base();
+    touch-action: pan-y;
+}
+
+:host(.product-card--in-cart) {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 25%, transparent);
+}
+
+:host(.product-card--out-of-stock) {
+    opacity: 0.55;
+    pointer-events: none;
 }
 
 .product-card {
-    touch-action: pan-y;
-
-    &--in-cart {
-        border-color: var(--color-primary);
-        box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary) 25%, transparent);
-    }
-
-    &--out-of-stock {
-        opacity: 0.55;
-        pointer-events: none;
-    }
-
     &__cart-badge {
         position: absolute;
         top: 0.4rem;

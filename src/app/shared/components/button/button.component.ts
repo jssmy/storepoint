@@ -14,6 +14,7 @@ export type ButtonVariant =
 export type ButtonStyle = 'solid' | 'outlined' | 'ghost';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonRadius = 'sm' | 'md' | 'xl' | 'full';
+export type ButtonShadow = 'sm' | 'md' | 'lg' | 'xl';
 
 @Component({
     selector: 'stp-button',
@@ -26,6 +27,7 @@ export class ButtonComponent {
     readonly btnStyle = input<ButtonStyle>('solid');
     readonly size = input<ButtonSize>('md');
     readonly radius = input<ButtonRadius | null>(null);
+    readonly shadow = input<ButtonShadow | null>(null);
     readonly type = input<'button' | 'submit' | 'reset'>('button');
     readonly disabled = input<boolean>(false);
     readonly loading = input<boolean>(false);
@@ -44,6 +46,7 @@ export class ButtonComponent {
         [`stp-btn--${this.btnStyle()}`]: true,
         [`stp-btn--${this.size()}`]: true,
         ...(this.radius() ? { [`stp-btn--radius-${this.radius()}`]: true } : {}),
+        ...(this.shadow() ? { [`stp-btn--shadow-${this.shadow()}`]: true } : {}),
         'stp-btn--loading': this.loading(),
         'stp-btn--disabled': this.disabled() || this.loading(),
     }));
