@@ -1,7 +1,12 @@
 @use '../_step-shared';
 
 :host {
-    display: contents;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    animation: step-enter 0.22s ease;
 }
 
 .step__list {

@@ -1,7 +1,19 @@
-<div class="cart-overlay" (click)="close()" aria-modal="true" role="dialog" aria-label="Carrito de venta">
-    <div class="cart-drawer" (click)="$event.stopPropagation()">
+<div class="cart-overlay" (click)="close()">
+    <div class="cart-drawer"
+         role="dialog"
+         aria-modal="true"
+         aria-label="Carrito de venta"
+         (click)="$event.stopPropagation()">
 
         <div class="cart-drawer__handle" aria-hidden="true"></div>
+
+        <div class="cart-drawer__stepper" aria-hidden="true">
+            <span class="cart-drawer__dot cart-drawer__dot--active"></span>
+            <span class="cart-drawer__track">
+                <span class="cart-drawer__track-fill" [class.cart-drawer__track-fill--done]="step() === 2"></span>
+            </span>
+            <span class="cart-drawer__dot" [class.cart-drawer__dot--active]="step() === 2"></span>
+        </div>
 
         @if (step() === 1) {
         <stp-cart-step
