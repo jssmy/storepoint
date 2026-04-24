@@ -1,0 +1,16 @@
+@use '../_step-shared';
+
+:host {
+    display: contents;
+}
+
+.step__list {
+    list-style: none;
+    margin: 0;
+    padding: 0 var(--p-5);
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}

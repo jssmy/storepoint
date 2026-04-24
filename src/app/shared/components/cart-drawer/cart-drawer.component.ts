@@ -1,10 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
-import { ButtonComponent } from '../button/button.component';
-import { CartItemComponent } from '../cart-item/cart-item.component';
 import { CartItem } from '../../../features/products/products.data';
-import { SwipeItemComponent } from '../swipe-item/swipe-item.component';
+import { CartStepComponent } from './cart-step/cart-step.component';
+import { PaymentStepComponent } from './payment-step/payment-step.component';
+import type { PaymentData } from './payment-step/payment-step.component';
+
+export type { PaymentData, PaymentMethod, PaymentFrequency, CashPaymentData, CreditPaymentData } from './payment-step/payment-step.component';
 
 export interface CartBottomSheetData {
   items: CartItem[];
@@ -13,11 +14,12 @@ export interface CartBottomSheetData {
 export interface CartDismissResult {
   items: CartItem[];
   confirmed: boolean;
+  payment?: PaymentData;
 }
 
 @Component({
   selector: 'stp-cart-drawer',
-  imports: [DecimalPipe, ButtonComponent, CartItemComponent, SwipeItemComponent],
+  imports: [CartStepComponent, PaymentStepComponent],
   templateUrl: './cart-drawer.component.html',
   styleUrl: './cart-drawer.component.scss',
 })
@@ -25,14 +27,13 @@ export class CartDrawerComponent {
   readonly swipeOptions = [
     { label: 'Eliminar', icon: 'delete', key: 'delete', stpClass: 'error-bg' },
   ];
+
   private readonly sheetRef = inject<MatBottomSheetRef<CartDrawerComponent, CartDismissResult | null>>(MatBottomSheetRef);
   protected readonly items = signal<CartItem[]>(inject<CartBottomSheetData>(MAT_BOTTOM_SHEET_DATA).items);
   protected readonly total = computed(() =>
     this.items().reduce((sum, item) => sum + item.product.price * item.quantity, 0),
   );
-  protected readonly count = computed(() =>
-    this.items().reduce((sum, item) => sum + item.quantity, 0),
-  );
+  protected readonly step = signal<1 | 2>(1);
 
   protected close(): void {
     this.sheetRef.dismiss({ items: this.items(), confirmed: false });
@@ -56,7 +57,15 @@ export class CartDrawerComponent {
     this.sheetRef.dismiss({ items: [], confirmed: false });
   }
 
-  protected confirm(): void {
-    this.sheetRef.dismiss({ items: this.items(), confirmed: true });
+  protected goToPayment(): void {
+    this.step.set(2);
+  }
+
+  protected goBack(): void {
+    this.step.set(1);
+  }
+
+  protected confirmPayment(payment: PaymentData): void {
+    this.sheetRef.dismiss({ items: this.items(), confirmed: true, payment });
   }
 }
