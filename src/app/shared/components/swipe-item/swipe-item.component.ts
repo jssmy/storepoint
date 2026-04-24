@@ -1,4 +1,5 @@
 import { Component, computed, input, output } from "@angular/core";
+import { IconComponent } from "../icon/icon.component";
 
 export interface SwipeOption {
     label: string;
@@ -9,6 +10,7 @@ export interface SwipeOption {
 
 @Component({
     selector: 'stp-swipe-item',
+    imports: [IconComponent],
     templateUrl: './swipe-item.component.html',
     styleUrls: ['./swipe-item.component.scss'],
 

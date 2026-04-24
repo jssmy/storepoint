@@ -4,12 +4,13 @@ import { Router, RouterLink } from '@angular/router';
 import { AppConfigService } from '../../../core/services/app-config.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { LoadingService } from '../../../core/services/loading.service';
+import { IconComponent } from '../../../shared/components/icon/icon.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { InputComponent } from '../../../shared/components/input/input.component';
 
 @Component({
   selector: 'stp-login',
-  imports: [ReactiveFormsModule, RouterLink, InputComponent, ButtonComponent],
+  imports: [ReactiveFormsModule, RouterLink, InputComponent, ButtonComponent, IconComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })

@@ -1,4 +1,5 @@
 import { Component, input, output } from '@angular/core';
+import { IconComponent } from '../icon/icon.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 interface NavItem {
@@ -9,7 +10,7 @@ interface NavItem {
 
 @Component({
   selector: 'stp-sidebar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, IconComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })

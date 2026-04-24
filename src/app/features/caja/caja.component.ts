@@ -1,4 +1,5 @@
 import { Component, signal, computed } from '@angular/core';
+import { IconComponent } from '../../shared/components/icon/icon.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 
 type MovimientoTipo = 'ingreso' | 'egreso';
@@ -14,7 +15,7 @@ interface Movimiento {
 
 @Component({
   selector: 'stp-caja',
-  imports: [CurrencyPipe, DatePipe],
+  imports: [CurrencyPipe, DatePipe, IconComponent],
   templateUrl: './caja.component.html',
   styleUrl: './caja.component.scss',
 })

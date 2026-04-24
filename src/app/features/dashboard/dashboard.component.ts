@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IconComponent } from '../../shared/components/icon/icon.component';
 
 interface Transaction {
   name: string;
@@ -26,7 +27,7 @@ interface SalesItem {
 
 @Component({
   selector: 'stp-dashboard',
-  imports: [],
+  imports: [IconComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
 })

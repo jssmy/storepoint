@@ -1,6 +1,7 @@
 import { Component, computed, signal } from '@angular/core';
 import { LowerCasePipe } from '@angular/common';
 import { ButtonComponent } from '../../shared/components/button/button.component';
+import { IconComponent } from '../../shared/components/icon/icon.component';
 
 export type ActivityFilter = 'todos' | 'ventas' | 'productos' | 'caja';
 
@@ -95,7 +96,7 @@ const MOCK_ACTIVITIES: ActivityItem[] = [
 
 @Component({
   selector: 'stp-notices',
-  imports: [LowerCasePipe, ButtonComponent],
+  imports: [LowerCasePipe, ButtonComponent, IconComponent],
   templateUrl: './notices.component.html',
   styleUrl: './notices.component.scss',
 })

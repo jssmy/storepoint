@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { IconComponent } from '../icon/icon.component';
 import {
   CATEGORY_ICONS,
   Product,
@@ -7,7 +8,7 @@ import {
 
 @Component({
   selector: 'li[stp-product-card]',
-  imports: [],
+  imports: [IconComponent],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
   host: { 'class': 'product-card' },

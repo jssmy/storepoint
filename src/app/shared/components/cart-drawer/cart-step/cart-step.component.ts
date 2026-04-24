@@ -1,4 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
+import { IconComponent } from '../../icon/icon.component';
 import { DecimalPipe } from '@angular/common';
 import { CartItem } from '../../../../features/products/products.data';
 import { ButtonComponent } from '../../button/button.component';
@@ -7,7 +8,7 @@ import { SwipeItemComponent, SwipeOption } from '../../swipe-item/swipe-item.com
 
 @Component({
   selector: 'stp-cart-step',
-  imports: [DecimalPipe, ButtonComponent, CartItemComponent, SwipeItemComponent],
+  imports: [DecimalPipe, ButtonComponent, CartItemComponent, SwipeItemComponent, IconComponent],
   templateUrl: './cart-step.component.html',
   styleUrl: './cart-step.component.scss',
 })

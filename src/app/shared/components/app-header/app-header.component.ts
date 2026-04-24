@@ -2,10 +2,11 @@ import { Component, inject, input, output } from '@angular/core';
 import { AppConfigService } from '../../../core/services/app-config.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { ButtonComponent } from '../button/button.component';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'stp-app-header',
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, IconComponent],
   templateUrl: './app-header.component.html',
   styleUrl: './app-header.component.scss',
 })

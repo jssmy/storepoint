@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IconComponent } from '../icon/icon.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 interface NavItem {
@@ -10,7 +11,7 @@ interface NavItem {
 
 @Component({
   selector: 'stp-bottom-bar',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, IconComponent],
   templateUrl: './bottom-bar.component.html',
   styleUrl: './bottom-bar.component.scss',
 })

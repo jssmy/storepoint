@@ -23,10 +23,11 @@ import {
   ProductCategory,
 } from '../products/products.data';
 import { ShimmerComponent } from '../../shared/components/shimmer/shimmer.component';
+import { IconComponent } from '../../shared/components/icon/icon.component';
 
 @Component({
   selector: 'stp-sale',
-  imports: [DecimalPipe, FormsModule, ButtonComponent, SaleProductCardComponent, ShimmerComponent],
+  imports: [DecimalPipe, FormsModule, ButtonComponent, SaleProductCardComponent, ShimmerComponent, IconComponent],
   templateUrl: './sale.component.html',
   styleUrl: './sale.component.scss',
 })

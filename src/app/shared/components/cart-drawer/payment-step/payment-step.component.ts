@@ -1,4 +1,5 @@
 import { Component, computed, input, output, signal } from '@angular/core';
+import { IconComponent } from '../../icon/icon.component';
 import { DecimalPipe } from '@angular/common';
 import { ButtonComponent } from '../../button/button.component';
 
@@ -22,7 +23,7 @@ export type PaymentData = CashPaymentData | CreditPaymentData;
 
 @Component({
   selector: 'stp-payment-step',
-  imports: [DecimalPipe, ButtonComponent],
+  imports: [DecimalPipe, ButtonComponent, IconComponent],
   templateUrl: './payment-step.component.html',
   styleUrl: './payment-step.component.scss',
 })

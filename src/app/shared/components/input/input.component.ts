@@ -11,10 +11,11 @@ import {
   FormsModule,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'stp-input',
-  imports: [FormsModule],
+  imports: [FormsModule, IconComponent],
   templateUrl: './input.component.html',
   styleUrl: './input.component.scss',
   providers: [

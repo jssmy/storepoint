@@ -1,4 +1,5 @@
 import { NgClass } from '@angular/common';
+import { IconComponent } from '../icon/icon.component';
 import { Component, computed, forwardRef, input, model, output, signal } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -7,7 +8,7 @@ export type InputNumericSize = 'sm' | 'md' | 'lg';
 
 @Component({
     selector: 'stp-input-numeric',
-    imports: [NgClass],
+    imports: [NgClass, IconComponent],
     templateUrl: './input-numeric.component.html',
     styleUrl: './input-numeric.component.scss',
     providers: [
