@@ -22,7 +22,7 @@
         <p class="cart-item__unit-price">S/ {{ item().product.price | number:'1.2-2' }} c/u</p>
     </div>
 </div>
-<stp-input-numeric class="cart-item__quantity cart-item__quantity--desktop" [value]="item().quantity" [min]="1"
+<stp-input-numeric class="cart-item__quantity cart-item__quantity--desktop" [value]="item().quantity" [min]="1" [max]="item().product.stock"
     size="sm" radius="full" (valueChange)="quantityChange.emit($event)" />
 <div class="cart-item__subtotal cart-item__subtotal--desktop">
     <p class="cart-item__subtotal-value">S/ {{ subtotal() | number:'1.2-2' }}</p>

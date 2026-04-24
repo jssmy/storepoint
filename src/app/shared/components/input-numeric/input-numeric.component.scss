@@ -9,6 +9,7 @@
 }
 
 .stp-input-numeric {
+    width: 100%;
     // Internal CSS vars resolved by size modifiers
     --_height:    var(--size-md-height);
     --_font-size: var(--size-md-font);

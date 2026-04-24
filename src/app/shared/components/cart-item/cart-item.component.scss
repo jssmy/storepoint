@@ -103,6 +103,7 @@
         display: flex;
         align-items: center;
         gap: var(--gap-1);
+        width: 30%;
 
         @include bp.mobile-only {
             display: none;
@@ -117,6 +118,8 @@
         gap: var(--gap-2);
         &--desktop {
             display: none;
+            width: 20%;
+            justify-content: flex-end;
             @include bp.sm-up {
                 display: flex;
             }

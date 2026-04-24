@@ -45,7 +45,7 @@
                 Limpiar carrito
             </stp-button>
             <stp-button [disabled]="items().length === 0" variant="primary" btnStyle="solid" radius="md" size="md"
-                (click)="confirm()"> >
+                (click)="confirm()">
                 Cobrar S/ {{ total() | number:'1.2-2' }}
             </stp-button>
         </div>
