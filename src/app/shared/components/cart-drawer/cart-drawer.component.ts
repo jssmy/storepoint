@@ -3,9 +3,14 @@ import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bott
 import { CartItem } from '../../../features/products/products.data';
 import { CartStepComponent } from './cart-step/cart-step.component';
 import { PaymentStepComponent } from './payment-step/payment-step.component';
+import { CustomerStepComponent } from './customer-step/customer-step.component';
+import { ButtonComponent } from '../button/button.component';
+import { IconComponent } from '../icon/icon.component';
 import type { PaymentData } from './payment-step/payment-step.component';
+import type { Customer } from '../../../core/services/customer.service';
 
 export type { PaymentData, PaymentMethod, PaymentFrequency, CashPaymentData, CreditPaymentData } from './payment-step/payment-step.component';
+export type { Customer } from '../../../core/services/customer.service';
 
 export interface CartBottomSheetData {
   items: CartItem[];
@@ -15,11 +20,12 @@ export interface CartDismissResult {
   items: CartItem[];
   confirmed: boolean;
   payment?: PaymentData;
+  customer?: Customer;
 }
 
 @Component({
   selector: 'stp-cart-drawer',
-  imports: [CartStepComponent, PaymentStepComponent],
+  imports: [CartStepComponent, PaymentStepComponent, CustomerStepComponent, ButtonComponent, IconComponent],
   templateUrl: './cart-drawer.component.html',
   styleUrl: './cart-drawer.component.scss',
 })
@@ -33,7 +39,9 @@ export class CartDrawerComponent {
   protected readonly total = computed(() =>
     this.items().reduce((sum, item) => sum + item.product.price * item.quantity, 0),
   );
-  protected readonly step = signal<1 | 2>(1);
+  protected readonly step = signal<1 | 2 | 3 | 4>(1);
+  protected readonly pendingPayment = signal<PaymentData | null>(null);
+  private pendingResult: CartDismissResult | null = null;
 
   protected close(): void {
     this.sheetRef.dismiss({ items: this.items(), confirmed: false });
@@ -65,7 +73,26 @@ export class CartDrawerComponent {
     this.step.set(1);
   }
 
-  protected confirmPayment(payment: PaymentData): void {
-    this.sheetRef.dismiss({ items: this.items(), confirmed: true, payment });
+  protected goBackFromCustomer(): void {
+    this.step.set(2);
+  }
+
+  protected onPaymentConfirmed(payment: PaymentData): void {
+    this.pendingPayment.set(payment);
+    this.step.set(3);
+  }
+
+  protected onCustomerConfirmed(customer: Customer): void {
+    this.pendingResult = {
+      items: this.items(),
+      confirmed: true,
+      payment: this.pendingPayment() ?? undefined,
+      customer,
+    };
+    this.step.set(4);
+  }
+
+  protected done(): void {
+    this.sheetRef.dismiss(this.pendingResult);
   }
 }

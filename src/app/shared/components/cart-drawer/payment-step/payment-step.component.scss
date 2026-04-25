@@ -1,5 +1,6 @@
 @use '../_step-shared';
 
+
 :host {
     display: flex;
     flex-direction: column;
@@ -10,7 +11,7 @@
 }
 
 .step__payment {
-    flex: 1;
+    max-height: 490px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -126,6 +127,7 @@
         -webkit-appearance: none;
         margin: 0;
     }
+
 }
 
 .step__chips {

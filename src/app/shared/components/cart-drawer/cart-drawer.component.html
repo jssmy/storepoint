@@ -1,5 +1,4 @@
-<div class="cart-overlay" (click)="close()">
-    <div class="cart-drawer"
+<div class="cart-drawer"
          role="dialog"
          aria-modal="true"
          aria-label="Carrito de venta"
@@ -7,13 +6,19 @@
 
         <div class="cart-drawer__handle" aria-hidden="true"></div>
 
+        @if (step() !== 4) {
         <div class="cart-drawer__stepper" aria-hidden="true">
             <span class="cart-drawer__dot cart-drawer__dot--active"></span>
             <span class="cart-drawer__track">
-                <span class="cart-drawer__track-fill" [class.cart-drawer__track-fill--done]="step() === 2"></span>
+                <span class="cart-drawer__track-fill" [class.cart-drawer__track-fill--done]="step() >= 2"></span>
             </span>
-            <span class="cart-drawer__dot" [class.cart-drawer__dot--active]="step() === 2"></span>
+            <span class="cart-drawer__dot" [class.cart-drawer__dot--active]="step() >= 2"></span>
+            <span class="cart-drawer__track">
+                <span class="cart-drawer__track-fill" [class.cart-drawer__track-fill--done]="step() >= 3"></span>
+            </span>
+            <span class="cart-drawer__dot" [class.cart-drawer__dot--active]="step() >= 3"></span>
         </div>
+        }
 
         @if (step() === 1) {
         <stp-cart-step
@@ -24,12 +29,30 @@
             (close)="close()"
             (clear)="clear()"
             (checkout)="goToPayment()" />
-        } @else {
+        } @else if (step() === 2) {
         <stp-payment-step
             [total]="total()"
             (back)="goBack()"
-            (confirm)="confirmPayment($event)" />
+            (confirm)="onPaymentConfirmed($event)" />
+        } @else if (step() === 3) {
+        <stp-customer-step
+            [items]="items()"
+            [payment]="pendingPayment()!"
+            [total]="total()"
+            (back)="goBackFromCustomer()"
+            (confirm)="onCustomerConfirmed($event)" />
+        } @else {
+        <div class="cart-drawer__success">
+            <div class="cart-drawer__success-icon">
+                <i stp-icon name="check-circle" [autofill]="false" style="font-size: 4rem"></i>
+            </div>
+            <h2 class="cart-drawer__success-title">¡Operación registrada!</h2>
+            <p class="cart-drawer__success-sub">La venta fue registrada con éxito.</p>
+            <stp-button variant="primary" btnStyle="solid" radius="md" size="md"
+                (click)="done()">
+                Listo
+            </stp-button>
+        </div>
         }
 
     </div>
-</div>
