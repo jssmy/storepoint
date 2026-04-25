@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, input, output, signal } from '@angular/core';
 import { AppConfigService } from '../../../core/services/app-config.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { ButtonComponent } from '../button/button.component';
@@ -13,11 +13,43 @@ import { IconComponent } from '../icon/icon.component';
 export class AppHeaderComponent {
   readonly userName = input<string>('');
   readonly menuToggle = output<void>();
+  readonly profileSettings = output<void>();
+  readonly accountSettings = output<void>();
+  readonly logout = output<void>();
 
   protected readonly config = inject(AppConfigService);
   protected readonly themeService = inject(ThemeService);
+  private readonly el = inject(ElementRef);
+
+  protected readonly dropdownOpen = signal(false);
 
   protected userInitial(name: string): string {
     return name.charAt(0).toUpperCase();
+  }
+
+  protected toggleDropdown(): void {
+    this.dropdownOpen.update(v => !v);
+  }
+
+  protected onProfileSettings(): void {
+    this.profileSettings.emit();
+    this.dropdownOpen.set(false);
+  }
+
+  protected onAccountSettings(): void {
+    this.accountSettings.emit();
+    this.dropdownOpen.set(false);
+  }
+
+  protected onLogout(): void {
+    this.logout.emit();
+    this.dropdownOpen.set(false);
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (!this.el.nativeElement.contains(event.target)) {
+      this.dropdownOpen.set(false);
+    }
   }
 }

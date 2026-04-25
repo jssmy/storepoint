@@ -4,7 +4,7 @@
   <div class="stp-header__brand">
     <!-- Hamburger — mobile only -->
     <button class="stp-header__menu-btn" type="button" (click)="menuToggle.emit()" aria-label="Abrir menú">
-      <i stp-icon name="list" style="font-size: 1.375rem"></i>
+      <i stp-icon [autofill]="false" name="list" style="font-size: 1.375rem"></i>
     </button>
 
     <div class="stp-header__brand-icon" aria-hidden="true">
@@ -16,29 +16,56 @@
   <!-- Actions -->
   <div class="stp-header__actions">
 
-    <!-- User badge -->
+    <!-- User badge + dropdown / mobile panel -->
     @if (userName()) {
-      <div class="stp-header__user-badge" [attr.aria-label]="'Usuario: ' + userName()">
-        <span class="stp-header__user-initial" aria-hidden="true">{{ userInitial(userName()) }}</span>
-        <span class="stp-header__user-name">{{ userName() }}</span>
+      <div class="stp-header__user-wrapper">
+        <button
+          class="stp-header__user-badge"
+          type="button"
+          [attr.aria-label]="'Usuario: ' + userName()"
+          [attr.aria-expanded]="dropdownOpen()"
+          aria-haspopup="true"
+          (click)="toggleDropdown()"
+        >
+          <span class="stp-header__user-initial" aria-hidden="true">{{ userInitial(userName()) }}</span>
+          <span class="stp-header__user-name">{{ userName() }}</span>
+          <i stp-icon name="caret-down" class="stp-header__user-caret" aria-hidden="true"></i>
+        </button>
+
+        @if (dropdownOpen()) {
+          <div class="stp-header__backdrop" (click)="toggleDropdown()" aria-hidden="true"></div>
+          <div class="stp-header__dropdown" role="menu">
+            <!-- User info row — mobile only -->
+            <div class="stp-header__dropdown-header" role="presentation">
+              <span class="stp-header__dropdown-avatar" aria-hidden="true">{{ userInitial(userName()) }}</span>
+              <span class="stp-header__dropdown-username">{{ userName() }}</span>
+            </div>
+            <!-- Menu items -->
+            <button class="stp-header__dropdown-item" type="button" role="menuitem" (click)="onProfileSettings()">
+              <i stp-icon name="user-circle" aria-hidden="true"></i>
+              <span>Configuración de perfil</span>
+            </button>
+            <button class="stp-header__dropdown-item" type="button" role="menuitem" (click)="onAccountSettings()">
+              <i stp-icon name="gear" aria-hidden="true"></i>
+              <span>Configuración de cuentas</span>
+            </button>
+            <button class="stp-header__dropdown-item" type="button" role="menuitem" (click)="themeService.toggle()">
+              @if (themeService.theme() === 'dark') {
+                <i stp-icon name="sun" aria-hidden="true"></i>
+                <span>Cambiar a modo claro</span>
+              } @else {
+                <i stp-icon name="moon" aria-hidden="true"></i>
+                <span>Cambiar a modo oscuro</span>
+              }
+            </button>
+            <div class="stp-header__dropdown-divider" role="separator"></div>
+            <button class="stp-header__dropdown-item stp-header__dropdown-item--danger" type="button" role="menuitem" (click)="onLogout()">
+              <i stp-icon name="sign-out" aria-hidden="true"></i>
+              <span>Cerrar sesión</span>
+            </button>
+          </div>
+        }
       </div>
     }
-
-    <!-- Theme toggle -->
-    <stp-button
-      variant="surface"
-      btnStyle="ghost"
-      size="sm"
-      type="button"
-      (click)="themeService.toggle()"
-      [attr.aria-label]="themeService.theme() === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
-    >
-      @if (themeService.theme() === 'dark') {
-        <i stp-icon name="sun" style="font-size: 1.125rem"></i>
-      } @else {
-        <i stp-icon name="moon" style="font-size: 1.125rem"></i>
-      }
-    </stp-button>
-
   </div>
 </header>
