@@ -15,7 +15,7 @@
     gap: 1.25rem;
     width: 100%;
     max-width: 52rem;
-    margin-inline: auto;
+    
     padding: 1.5rem 1.25rem 7rem; // bottom: space for cart bar + bottom-bar
 }
 
@@ -181,7 +181,7 @@
 .sale-cart-bar {
     position: fixed;
     bottom: calc(var(--bottom-bar-height, 5rem) + 0.75rem + env(safe-area-inset-bottom));
-    left: 56%;
+    left: 50%;
     transform: translateX(-50%);
     z-index: z.$cart-bar;
     width: calc(100% - 2.5rem);

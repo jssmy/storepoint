@@ -7,7 +7,7 @@
         <div class="cart-drawer__handle" aria-hidden="true"></div>
 
 
-        @if (step() === 1) {
+        @if (step() === 'listItems') {
         <stp-cart-step
             [items]="items()"
             [swipeOptions]="swipeOptions"
@@ -16,12 +16,12 @@
             (close)="close()"
             (clear)="clear()"
             (checkout)="goToPayment()" />
-        } @else if (step() === 2) {
+        } @else if (step() === 'paymentMethod') {
         <stp-payment-step
             [total]="total()"
             (back)="goBack()"
             (confirm)="onPaymentConfirmed($event)" />
-        } @else if (step() === 3) {
+        } @else if (step() === 'customerInformation') {
         <stp-customer-step
             [items]="items()"
             [payment]="pendingPayment()!"

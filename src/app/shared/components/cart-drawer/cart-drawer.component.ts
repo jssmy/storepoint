@@ -39,7 +39,7 @@ export class CartDrawerComponent {
   protected readonly total = computed(() =>
     this.items().reduce((sum, item) => sum + item.product.price * item.quantity, 0),
   );
-  protected readonly step = signal<1 | 2 | 3 | 4>(1);
+  protected readonly step = signal<'listItems' | 'paymentMethod' | 'customerInformation' | 'confirmation'>('listItems');
   protected readonly pendingPayment = signal<PaymentData | null>(null);
   private pendingResult: CartDismissResult | null = null;
 
@@ -66,30 +66,30 @@ export class CartDrawerComponent {
   }
 
   protected goToPayment(): void {
-    this.step.set(2);
+    this.step.set('paymentMethod');
   }
 
   protected goBack(): void {
-    this.step.set(1);
+    this.step.set('listItems');
   }
 
   protected goBackFromCustomer(): void {
-    this.step.set(2);
+    this.step.set('paymentMethod');
   }
 
   protected onPaymentConfirmed(payment: PaymentData): void {
     this.pendingPayment.set(payment);
-    this.step.set(3);
+    this.step.set('customerInformation');
   }
 
   protected onCustomerConfirmed(customer: Customer | undefined): void {
     this.pendingResult = {
-      items: this.items(),
+      items: [],
       confirmed: true,
       payment: this.pendingPayment() ?? undefined,
       customer,
     };
-    this.step.set(4);
+    this.step.set('confirmation');
   }
 
   protected done(): void {
