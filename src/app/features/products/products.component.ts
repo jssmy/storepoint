@@ -1,6 +1,12 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, computed, signal, viewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, computed, inject, signal, viewChild } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { IconComponent } from '../../shared/components/icon/icon.component';
+import {
+  InventoryDrawerComponent,
+  InventoryDrawerData,
+  InventoryDrawerResult,
+} from '../../shared/components/inventory-drawer/inventory-drawer.component';
 import {
   CATEGORY_ICONS,
   CATEGORY_LABELS,
@@ -8,13 +14,6 @@ import {
   Product,
   ProductCategory,
 } from './products.data';
-
-interface InvNewProductForm {
-  name: string;
-  category: Exclude<ProductCategory, 'todos'>;
-  price: number | null;
-  unit: string;
-}
 
 @Component({
   selector: 'stp-products',
@@ -24,6 +23,7 @@ interface InvNewProductForm {
 })
 export class ProductsComponent implements AfterViewInit, OnDestroy {
   private readonly productHeader = viewChild<ElementRef>('productHeader');
+  private readonly bottomSheet = inject(MatBottomSheet);
   protected readonly isStuck = signal(false);
   private stickyObserver?: IntersectionObserver;
 
@@ -31,31 +31,12 @@ export class ProductsComponent implements AfterViewInit, OnDestroy {
     'todos', 'abarrotes', 'bebidas', 'lacteos',
     'snacks', 'limpieza', 'higiene', 'panaderia', 'carnes',
   ];
-  protected readonly categoryOptions: Exclude<ProductCategory, 'todos'>[] = [
-    'abarrotes', 'bebidas', 'lacteos', 'snacks', 'limpieza', 'higiene', 'panaderia', 'carnes',
-  ];
-  protected readonly UNITS = [
-    'unidad', 'kg', 'bolsa', 'botella', 'caja', 'paquete', 'tarro', 'barra', 'vaso', 'saco', 'cartón',
-  ];
   protected readonly categoryLabels = CATEGORY_LABELS;
 
   // ── Main list state ──────────────────────────────────────────
   protected readonly products = signal<Product[]>([...MOCK_PRODUCTS]);
   protected readonly searchQuery = signal('');
   protected readonly activeCategory = signal<ProductCategory>('todos');
-
-  // ── Inventory drawer state ───────────────────────────────────
-  protected readonly showInventoryDrawer = signal(false);
-  protected readonly invProductSearch = signal('');
-  protected readonly invSelectedProduct = signal<Product | null>(null);
-  protected readonly invAddingNew = signal(false);
-  protected readonly invStockAdd = signal<number | null>(null);
-  protected readonly invSupplier = signal('');
-  protected readonly invSubmitting = signal(false);
-  protected readonly invSuccess = signal(false);
-  protected readonly invNewProduct = signal<InvNewProductForm>({
-    name: '', category: 'abarrotes', price: null, unit: '',
-  });
 
   // ── Computed ─────────────────────────────────────────────────
   protected readonly filteredProducts = computed(() => {
@@ -72,111 +53,36 @@ export class ProductsComponent implements AfterViewInit, OnDestroy {
     this.searchQuery().trim().length > 0 || this.activeCategory() !== 'todos',
   );
 
-  protected readonly invFilteredProducts = computed(() => {
-    const q = this.invProductSearch().trim().toLowerCase();
-    if (!q || this.invSelectedProduct()) return [];
-    return this.products().filter(p => p.name.toLowerCase().includes(q)).slice(0, 8);
-  });
-
-  protected readonly canSubmitInventory = computed(() => {
-    if (!this.invStockAdd() || this.invStockAdd()! <= 0) return false;
-    if (!this.invSupplier().trim()) return false;
-    if (this.invSelectedProduct()) return true;
-    if (this.invAddingNew()) {
-      const np = this.invNewProduct();
-      return !!(np.name.trim() && np.price && np.price > 0 && np.unit);
-    }
-    return false;
-  });
-
-  // ── Inventory drawer actions ─────────────────────────────────
+  // ── Inventory drawer ─────────────────────────────────────────
   protected openInventoryDrawer(prefilledName = ''): void {
-    this.invProductSearch.set(prefilledName);
-    this.invSelectedProduct.set(null);
-    this.invStockAdd.set(null);
-    this.invSupplier.set('');
-    this.invSuccess.set(false);
-    this.invNewProduct.set({ name: '', category: 'abarrotes', price: null, unit: '' });
+    const data: InventoryDrawerData = { products: this.products(), prefilledName };
+    const ref = this.bottomSheet.open(InventoryDrawerComponent, { data });
 
-    const hasMatch = prefilledName.trim()
-      ? this.products().some(p => p.name.toLowerCase().includes(prefilledName.toLowerCase()))
-      : false;
+    ref.afterDismissed().subscribe((result: InventoryDrawerResult | null | undefined) => {
+      if (!result) return;
 
-    this.invAddingNew.set(prefilledName.trim().length > 0 && !hasMatch);
-    if (this.invAddingNew()) {
-      this.invNewProduct.update(prev => ({ ...prev, name: prefilledName }));
-    }
-    this.showInventoryDrawer.set(true);
-  }
-
-  protected closeInventoryDrawer(): void {
-    this.showInventoryDrawer.set(false);
-  }
-
-  protected onInvProductSearchInput(value: string): void {
-    this.invProductSearch.set(value);
-    this.invSelectedProduct.set(null);
-    this.invAddingNew.set(false);
-  }
-
-  protected clearInvProductSearch(): void {
-    this.invProductSearch.set('');
-    this.invSelectedProduct.set(null);
-    this.invAddingNew.set(false);
-  }
-
-  protected selectInvProduct(product: Product): void {
-    this.invSelectedProduct.set(product);
-    this.invProductSearch.set(product.name);
-    this.invAddingNew.set(false);
-  }
-
-  protected switchToNewProduct(): void {
-    this.invAddingNew.set(true);
-    this.invNewProduct.update(prev => ({ ...prev, name: this.invProductSearch() }));
-    this.invSelectedProduct.set(null);
-  }
-
-  protected patchInvNewProduct(patch: Partial<InvNewProductForm>): void {
-    this.invNewProduct.update(prev => ({ ...prev, ...patch }));
-  }
-
-  protected submitInventory(): void {
-    if (!this.canSubmitInventory()) return;
-    this.invSubmitting.set(true);
-
-    setTimeout(() => {
-      const stockToAdd = this.invStockAdd()!;
-      const supplier = this.invSupplier().trim();
-      const selected = this.invSelectedProduct();
-
-      if (selected) {
+      if (result.type === 'update') {
         this.products.update(prev =>
-          prev.map(p => p.id === selected.id
-            ? { ...p, stock: p.stock + stockToAdd, supplier }
+          prev.map(p => p.id === result.productId
+            ? { ...p, stock: p.stock + result.stockAdd, supplier: result.supplier }
             : p,
           ),
         );
-      } else if (this.invAddingNew()) {
-        const np = this.invNewProduct();
+      } else {
         this.products.update(prev => [
           ...prev,
           {
             id: prev.length + 1,
-            name: np.name.trim(),
-            category: np.category,
-            price: np.price!,
-            stock: stockToAdd,
-            unit: np.unit,
-            supplier,
+            name: result.name,
+            category: result.category,
+            price: result.price,
+            stock: result.stockAdd,
+            unit: result.unit,
+            supplier: result.supplier,
           },
         ]);
       }
-
-      this.invSubmitting.set(false);
-      this.invSuccess.set(true);
-      setTimeout(() => this.closeInventoryDrawer(), 1200);
-    }, 600);
+    });
   }
 
   // ── Main search ──────────────────────────────────────────────
