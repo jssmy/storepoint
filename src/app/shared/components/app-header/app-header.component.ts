@@ -3,6 +3,7 @@ import { AppConfigService } from '../../../core/services/app-config.service';
 import { ThemeService } from '../../../core/services/theme.service';
 import { ButtonComponent } from '../button/button.component';
 import { IconComponent } from '../icon/icon.component';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'stp-app-header',
@@ -20,6 +21,8 @@ export class AppHeaderComponent {
   protected readonly config = inject(AppConfigService);
   protected readonly themeService = inject(ThemeService);
   private readonly el = inject(ElementRef);
+  readonly router = inject(Router
+  );
 
   protected readonly dropdownOpen = signal(false);
 
@@ -42,6 +45,7 @@ export class AppHeaderComponent {
   }
 
   protected onLogout(): void {
+    this.router.navigate(['/login']);
     this.logout.emit();
     this.dropdownOpen.set(false);
   }

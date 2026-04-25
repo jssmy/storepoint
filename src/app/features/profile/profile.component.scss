@@ -1,22 +1,24 @@
 @use '../../shared/styles/breakpoints' as bp;
 
+// ── Layout ───────────────────────────────────────────────────
+
 .profile {
-  max-width: 36rem;
+  max-width: 52rem;
   margin: 0 auto;
-  padding: var(--p-5);
+  padding: var(--p-4);
   display: flex;
   flex-direction: column;
   gap: var(--gap-2);
 
   @include bp.sm-up {
-    padding: var(--p-7);
+    padding: var(--p-6);
   }
 }
 
 // ── Page header ──────────────────────────────────────────────
 
 .profile__page-header {
-  margin-bottom: var(--gap-1);
+  padding: var(--p-2) 0 var(--p-1);
 }
 
 .profile__title {
@@ -24,41 +26,65 @@
   font-weight: 700;
   color: var(--color-text-primary);
   margin: 0;
+  letter-spacing: -0.02em;
 }
 
-// ── Card ─────────────────────────────────────────────────────
+// ── Card base ────────────────────────────────────────────────
 
 .profile__card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
+  
   border-radius: var(--radius-lg);
-  padding: var(--p-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-2);
+  overflow: hidden;
+
+  &:not(.profile__card--avatar) {
+    padding: var(--p-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-2);
+  }
 }
 
-// ── Avatar ───────────────────────────────────────────────────
+// ── Avatar card ──────────────────────────────────────────────
 
-.profile__avatar-wrap {
+.profile__card--avatar {
+  // no padding — banner spans edge to edge
+}
+
+.profile__banner {
+  height: 4.5rem;
+  background-color: var(--color-primary-light);
+}
+
+.profile__avatar-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--gap-1);
-  padding: var(--p-3) 0;
+  gap: var(--p-2);
+  padding: 0 var(--p-5) var(--p-5);
+  margin-top: -2.5rem; // overlap with banner
+}
+
+.profile__avatar-ring {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
 }
 
 .profile__avatar-btn {
-  position: relative;
   width: 5rem;
   height: 5rem;
   border-radius: var(--radius-full);
-  border: none;
+  border: 3px solid var(--color-surface);
   padding: 0;
   cursor: pointer;
   overflow: hidden;
-  flex-shrink: 0;
   background-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 150ms ease;
+
+  &:hover {
+    box-shadow: var(--shadow-lg);
+  }
 
   &:focus-visible {
     outline: 2px solid var(--color-primary);
@@ -70,7 +96,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: var(--radius-full);
   display: block;
 }
 
@@ -85,36 +110,89 @@
   color: var(--color-primary-fg);
 }
 
-.profile__avatar-overlay {
+.profile__avatar-camera {
   position: absolute;
-  inset: 0;
+  bottom: 0;
+  right: 0;
+  width: 1.625rem;
+  height: 1.625rem;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  color: var(--color-primary-fg);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.45);
-  color: #ffffff;
-  opacity: 0;
-  transition: opacity 150ms ease;
-  border-radius: var(--radius-full);
-
-  .profile__avatar-btn:hover & {
-    opacity: 1;
-  }
+  border: 2px solid var(--color-surface);
+  pointer-events: none;
 }
 
 .profile__avatar-name {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.0625rem;
+  font-weight: 700;
   color: var(--color-text-primary);
+  margin: var(--p-1) 0 0;
+  letter-spacing: -0.01em;
 }
 
-// ── Section title ────────────────────────────────────────────
+.profile__avatar-hint {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+// ── Card header ──────────────────────────────────────────────
+
+.profile__card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-2);
+}
+
+.profile__card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+
+  &--primary {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  &--warning {
+    background-color: var(--color-warning-light);
+    color: var(--color-warning);
+  }
+}
+
+.profile__card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
 
 .profile__section-title {
   font-size: 1rem;
   font-weight: 600;
   color: var(--color-text-primary);
   margin: 0;
+}
+
+.profile__section-desc {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+// ── Divider ──────────────────────────────────────────────────
+
+.profile__divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: 0 calc(var(--p-5) * -1);
 }
 
 // ── Fields ───────────────────────────────────────────────────
@@ -125,9 +203,81 @@
   gap: var(--gap-2);
 }
 
+// ── Edit button ──────────────────────────────────────────────
+
+.profile__edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-left: auto;
+  flex-shrink: 0;
+  border: none;
+  background: none;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background-color 120ms ease, color 120ms ease;
+
+  &:hover {
+    background-color: var(--color-surface-alt);
+    color: var(--color-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+// ── Readonly field list ───────────────────────────────────────
+
+.profile__field-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2);
+}
+
+.profile__field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.profile__field-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.profile__field-value {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+
+  &--masked {
+    letter-spacing: 0.2em;
+    color: var(--color-text-secondary);
+  }
+}
+
 // ── Actions ──────────────────────────────────────────────────
 
 .profile__actions {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: var(--gap-1);
+  padding-top: var(--p-1);
+
+  @include bp.mobile-only {
+    justify-content: stretch;
+
+    stp-button {
+      flex: 1;
+    }
+  }
 }

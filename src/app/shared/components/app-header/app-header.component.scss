@@ -8,6 +8,10 @@
 :host {
   display: block;
   height: calc(var(--header-height, 3.75rem) + env(safe-area-inset-top)); // reserve space including status bar / Dynamic Island
+
+  stp-button ::ng-deep a {
+    padding: 0px !important;
+  }
 }
 
 .stp-header {
@@ -27,7 +31,7 @@
   &__brand {
     display: flex;
     align-items: center;
-    gap: 0.625rem;
+    gap: var(--gap-2);
   }
 
   &__brand-icon {
@@ -52,7 +56,7 @@
   &__actions {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: var(--gap-1);
 
     stp-button {
       width: auto;
@@ -146,10 +150,10 @@
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg, 0.75rem);
     box-shadow: var(--shadow-md);
-    padding: 0.375rem;
+    padding: var(--p-2);
     display: flex;
     flex-direction: column;
-    gap: 0.125rem;
+    gap: calc(var(--gap-1) / 2);
     animation: stp-dropdown-in 150ms ease;
 
     @include bp.mobile-only {
@@ -225,18 +229,24 @@
     &:hover {
       background-color: var(--color-surface-alt);
 
-      i { color: var(--color-text-primary); }
+      i {
+        color: var(--color-text-primary);
+      }
     }
 
     &--danger {
       color: var(--color-danger, #e53e3e);
 
-      i { color: var(--color-danger, #e53e3e); }
+      i {
+        color: var(--color-danger, #e53e3e);
+      }
 
       &:hover {
         background-color: var(--color-danger-subtle, rgba(229, 62, 62, 0.08));
 
-        i { color: var(--color-danger, #e53e3e); }
+        i {
+          color: var(--color-danger, #e53e3e);
+        }
       }
     }
 
@@ -279,16 +289,35 @@
 // ── Animations ───────────────────────────────────────────────
 
 @keyframes stp-dropdown-in {
-  from { opacity: 0; transform: translateY(-0.375rem); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-0.375rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes stp-panel-in {
-  from { opacity: 0; transform: translateY(-0.75rem); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-0.75rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes stp-fade-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

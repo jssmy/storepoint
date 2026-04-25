@@ -20,9 +20,14 @@ export class ProfileComponent {
   protected readonly newPassword = signal('');
   protected readonly confirmPassword = signal('');
 
+  protected readonly editingInfo = signal(false);
+  protected readonly editingPassword = signal(false);
+
   protected readonly userInitial = computed(() =>
     this.name().charAt(0).toUpperCase()
   );
+
+  private infoBackup = { email: '', phone: '' };
 
   protected onAvatarChange(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -32,11 +37,31 @@ export class ProfileComponent {
     reader.readAsDataURL(file);
   }
 
+  protected startEditingInfo(): void {
+    this.infoBackup = { email: this.email(), phone: this.phone() };
+    this.editingInfo.set(true);
+  }
+
+  protected cancelProfile(): void {
+    this.email.set(this.infoBackup.email);
+    this.phone.set(this.infoBackup.phone);
+    this.editingInfo.set(false);
+  }
+
   protected saveProfile(): void {
     // TODO: call ProfileService when backend is ready
+    this.editingInfo.set(false);
+  }
+
+  protected cancelPassword(): void {
+    this.currentPassword.set('');
+    this.newPassword.set('');
+    this.confirmPassword.set('');
+    this.editingPassword.set(false);
   }
 
   protected savePassword(): void {
     // TODO: call ProfileService when backend is ready
+    this.cancelPassword();
   }
 }
