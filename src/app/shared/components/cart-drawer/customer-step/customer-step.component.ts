@@ -21,19 +21,19 @@ export class CustomerStepComponent {
   readonly total = input.required<number>();
 
   readonly back = output<void>();
-  readonly confirm = output<Customer>();
+  readonly confirm = output<Customer | undefined>();
 
   private readonly customerService = inject(CustomerService);
 
   protected readonly view = signal<CustomerStepView>('search');
   protected readonly searchQuery = signal('');
-  protected readonly selectedCustomer = signal<Customer | null>(null);
+  protected readonly selectedCustomer = signal<Customer | undefined>(undefined);
 
   protected readonly newNames = signal('');
   protected readonly newPhone = signal('');
   protected readonly newDni = signal('');
   protected readonly formErrors = signal<Record<string, string>>({});
-  protected readonly phoneCollision = signal<Customer | null>(null);
+  protected readonly phoneCollision = signal<Customer | undefined>(undefined);
 
   protected readonly searchResults = computed(() => {
     const q = this.searchQuery().trim();
@@ -61,7 +61,7 @@ export class CustomerStepComponent {
   }
 
   protected clearSelection(): void {
-    this.selectedCustomer.set(null);
+    this.selectedCustomer.set(undefined);
     this.searchQuery.set('');
   }
 
@@ -113,19 +113,17 @@ export class CustomerStepComponent {
     this.customerService.update(collision.id, { names, dni: dni || undefined });
     const updated = this.customerService.findById(collision.id)!;
     this.selectedCustomer.set(updated);
-    this.phoneCollision.set(null);
+    this.phoneCollision.set(undefined);
     this.view.set('search');
   }
 
   protected cancelUpdate(): void {
-    this.phoneCollision.set(null);
+    this.phoneCollision.set(undefined);
     this.view.set('new-form');
   }
 
   protected confirmSale(): void {
     const customer = this.selectedCustomer();
-    if (!customer) return;
-
     this.confirm.emit(customer);
   }
 

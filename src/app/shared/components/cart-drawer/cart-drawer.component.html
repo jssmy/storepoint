@@ -6,19 +6,6 @@
 
         <div class="cart-drawer__handle" aria-hidden="true"></div>
 
-        @if (step() !== 4) {
-        <div class="cart-drawer__stepper" aria-hidden="true">
-            <span class="cart-drawer__dot cart-drawer__dot--active"></span>
-            <span class="cart-drawer__track">
-                <span class="cart-drawer__track-fill" [class.cart-drawer__track-fill--done]="step() >= 2"></span>
-            </span>
-            <span class="cart-drawer__dot" [class.cart-drawer__dot--active]="step() >= 2"></span>
-            <span class="cart-drawer__track">
-                <span class="cart-drawer__track-fill" [class.cart-drawer__track-fill--done]="step() >= 3"></span>
-            </span>
-            <span class="cart-drawer__dot" [class.cart-drawer__dot--active]="step() >= 3"></span>
-        </div>
-        }
 
         @if (step() === 1) {
         <stp-cart-step

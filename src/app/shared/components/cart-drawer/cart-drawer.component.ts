@@ -82,7 +82,7 @@ export class CartDrawerComponent {
     this.step.set(3);
   }
 
-  protected onCustomerConfirmed(customer: Customer): void {
+  protected onCustomerConfirmed(customer: Customer | undefined): void {
     this.pendingResult = {
       items: this.items(),
       confirmed: true,
