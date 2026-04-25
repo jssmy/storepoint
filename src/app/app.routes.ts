@@ -48,6 +48,11 @@ export const routes: Routes = [
                     import('./features/suppliers/suppliers.component').then(m => m.SuppliersComponent),
             },
             {
+                path: AppRoutes.demo,
+                loadComponent: () =>
+                    import('./features/demo/demo.component').then(m => m.DemoComponent),
+            },
+            {
                 path: '',
                 redirectTo: AppRoutes.dashboard,
                 pathMatch: 'full',

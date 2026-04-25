@@ -7,6 +7,7 @@ export const AppRoutes = {
   caja:      'caja',
   profile:   'profile',
   suppliers: 'suppliers',
+  demo:      'demo',
 } as const;
 
 export type AppRoute = (typeof AppRoutes)[keyof typeof AppRoutes];
