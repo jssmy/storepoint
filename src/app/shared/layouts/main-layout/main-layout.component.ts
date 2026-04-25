@@ -5,6 +5,7 @@ import { AppHeaderComponent } from '../../components/app-header/app-header.compo
 import { AppFooterComponent } from '../../components/app-footer/app-footer.component';
 import { BottomBarComponent } from '../../components/bottom-bar/bottom-bar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { AppRoutes } from '../../../core/constants/app-routes';
 
 @Component({
   selector: 'stp-main-layout',
@@ -18,14 +19,20 @@ export class MainLayoutComponent {
 
   protected readonly sidebarOpen = signal(false);
 
+  private readonly router = inject(Router);
+
   constructor() {
     // Close drawer on every navigation
-    inject(Router).events.subscribe(e => {
+    this.router.events.subscribe(e => {
       if (e instanceof NavigationStart) this.sidebarOpen.set(false);
     });
   }
 
   protected toggleSidebar(): void {
     this.sidebarOpen.update(v => !v);
+  }
+
+  protected goToProfile(): void {
+    this.router.navigate([AppRoutes.profile]);
   }
 }

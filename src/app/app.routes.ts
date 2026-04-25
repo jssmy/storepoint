@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
+import { AppRoutes } from './core/constants/app-routes';
 
 export const routes: Routes = [
     {
-        path: 'login',
+        path: AppRoutes.login,
         loadComponent: () =>
             import('./features/auth/login/login.component').then(m => m.LoginComponent),
     },
@@ -12,39 +13,44 @@ export const routes: Routes = [
             import('./shared/layouts/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
         children: [
             {
-                path: 'dashboard',
+                path: AppRoutes.dashboard,
                 loadComponent: () =>
                     import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
             },
             {
-                path: 'notices',
+                path: AppRoutes.notices,
                 loadComponent: () =>
                     import('./features/notices/notices.component').then(m => m.NoticesComponent),
             },
             {
-                path: 'products',
+                path: AppRoutes.products,
                 loadComponent: () =>
                     import('./features/products/products.component').then(m => m.ProductsComponent),
             },
             {
-                path: 'sale',
+                path: AppRoutes.sale,
                 loadComponent: () =>
                     import('./features/sale/sale.component').then(m => m.SaleComponent),
             },
             {
-                path: 'caja',
+                path: AppRoutes.caja,
                 loadComponent: () =>
                     import('./features/caja/caja.component').then(m => m.CajaComponent),
             },
             {
+                path: AppRoutes.profile,
+                loadComponent: () =>
+                    import('./features/profile/profile.component').then(m => m.ProfileComponent),
+            },
+            {
                 path: '',
-                redirectTo: 'dashboard',
+                redirectTo: AppRoutes.dashboard,
                 pathMatch: 'full',
             },
         ],
     },
     {
         path: '**',
-        redirectTo: 'login',
+        redirectTo: AppRoutes.login,
     },
 ];
