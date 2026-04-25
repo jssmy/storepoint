@@ -2,21 +2,30 @@
 
     <!-- ── Header ────────────────────────────────────────────── -->
     <header #productHeader class="products-header">
-        <h1 class="products-header__title">Productos</h1>
-        <p class="products-header__subtitle">Busca productos de tu tienda</p>
+        <div class="products-header__row">
+            <div>
+                <h1 class="products-header__title">Inventario</h1>
+                <p class="products-header__subtitle">{{ products().length }} productos registrados</p>
+            </div>
+            <stp-button variant="primary" btnStyle="solid" size="md" radius="md"
+                (click)="openInventoryDrawer()">
+                <i stp-icon name="package" style="font-size: 1rem"></i>
+                Actualizar inventario
+            </stp-button>
+        </div>
     </header>
 
     <!-- ── Search + categories sticky bar ──────────────────── -->
-    <div class="products-sticky-bar sticky-bar" [class.products-sticky-bar--stuck]="isStuck()" [class.sticky-bar--stuck]="isStuck()">
+    <div class="products-sticky-bar sticky-bar" [class.products-sticky-bar--stuck]="isStuck()"
+        [class.sticky-bar--stuck]="isStuck()">
 
-        <!-- ── Search bar ─────────────────────────────────────────── -->
-        <section class="products-search " aria-label="Buscar productos">
+        <section class="products-search" aria-label="Buscar productos">
             <div class="products-search__field">
                 <span class="products-search__icon" aria-hidden="true">
                     <i stp-icon name="magnifying-glass" style="font-size: 1.125rem"></i>
                 </span>
-                <input class="products-search__input" type="search" placeholder="Buscar producto..." autocomplete="off"
-                    aria-label="Buscar productos" [value]="searchQuery()"
+                <input class="products-search__input" type="search" placeholder="Buscar producto..."
+                    autocomplete="off" aria-label="Buscar productos" [value]="searchQuery()"
                     (input)="onSearchInput($any($event.target).value)" />
                 @if (searchQuery()) {
                 <button class="products-search__clear" type="button" aria-label="Limpiar búsqueda"
@@ -27,15 +36,16 @@
             </div>
         </section>
 
-        <!-- ── Category chips ─────────────────────────────────────── -->
         <section class="products-categories" aria-label="Filtrar por categoría">
             <div class="products-categories__scroll" role="tablist">
                 @for (cat of categories; track cat) {
                 <stp-button class="products-category-chip"
-                    [class.products-category-chip--active]="activeCategory() === cat" role="tab" size="sm" radius="full"
+                    [class.products-category-chip--active]="activeCategory() === cat"
+                    role="tab" size="sm" radius="full"
                     [variant]="activeCategory() === cat ? 'primary' : 'surface'"
                     [btnStyle]="activeCategory() === cat ? 'solid' : 'outlined'"
-                    [attr.aria-selected]="activeCategory() === cat" [attr.aria-label]="categoryLabels[cat]"
+                    [attr.aria-selected]="activeCategory() === cat"
+                    [attr.aria-label]="categoryLabels[cat]"
                     (click)="setCategory(cat)">
                     <span aria-hidden="true">{{ categoryIcon(cat) }}</span>
                     {{ categoryLabels[cat] }}
@@ -46,47 +56,270 @@
 
     </div><!-- /products-sticky-bar -->
 
-    <!-- ── Empty state (before search) ───────────────────────── -->
-    @if (!hasSearched()) {
-    <div class="products-empty-state" aria-live="polite">
-        <div class="products-empty-state__icon" aria-hidden="true">
-            <i stp-icon name="magnifying-glass" style="font-size: 4rem"></i>
-        </div>
-        <h2 class="products-empty-state__title">Busca un producto</h2>
-        <p class="products-empty-state__text">
-            Escribe el nombre de un producto o selecciona una categoría para ver los resultados.
-        </p>
-    </div>
-    }
-
-    <!-- ── No results ─────────────────────────────────────────── -->
-    @if (hasSearched() && filteredProducts().length === 0) {
-    <div class="products-empty-state" aria-live="polite">
-        <div class="products-empty-state__icon" aria-hidden="true">
-            <i stp-icon name="package" style="font-size: 4rem"></i>
-        </div>
-        <h2 class="products-empty-state__title">Sin resultados</h2>
-        <p class="products-empty-state__text">
-            No se encontraron productos para "<strong>{{ searchQuery() }}</strong>".
-        </p>
-    </div>
-    }
-
-    <!-- ── Product grid ───────────────────────────────────────── -->
-    @if (hasSearched() && filteredProducts().length > 0) {
-    <section class="products-results" aria-label="Resultados de búsqueda" aria-live="polite">
+    <!-- ── Product list ──────────────────────────────────────── -->
+    @if (filteredProducts().length > 0) {
+    <section class="products-results" aria-label="Lista de productos" aria-live="polite">
         <p class="products-results__count">
-            {{ filteredProducts().length }} producto{{ filteredProducts().length !== 1 ? 's' : '' }} encontrado{{
-            filteredProducts().length !== 1 ? 's' : '' }}
+            @if (isFiltered()) {
+            {{ filteredProducts().length }} resultado{{ filteredProducts().length !== 1 ? 's' : '' }}
+            } @else {
+            Todos los productos
+            }
         </p>
 
-        <ul class="products-grid" role="list">
+        <ul class="products-list" role="list">
             @for (product of filteredProducts(); track product.id) {
-            <li stp-product-card [product]="product"></li>
+            <li class="product-row">
+
+                <!-- Avatar -->
+                <div class="product-row__avatar product-row__avatar--{{ product.category }}"
+                    aria-hidden="true">
+                    @if (product.imageUrl) {
+                    <img [src]="product.imageUrl" [alt]="product.name" loading="lazy" />
+                    } @else {
+                    <span>{{ productInitials(product.name) }}</span>
+                    }
+                </div>
+
+                <!-- Info -->
+                <div class="product-row__info">
+                    <span class="product-row__name">{{ product.name }}</span>
+                    <span class="product-row__meta">
+                        {{ categoryIcon(product.category) }} {{ categoryLabels[product.category] }}
+                        <span class="product-row__unit">· {{ product.unit }}</span>
+                    </span>
+                    @if (product.supplier) {
+                    <span class="product-row__supplier">
+                        <i stp-icon name="truck" style="font-size: 0.75rem"></i>
+                        {{ product.supplier }}
+                    </span>
+                    }
+                </div>
+
+                <!-- Price + Stock -->
+                <div class="product-row__aside">
+                    <span class="product-row__price">S/ {{ product.price.toFixed(2) }}</span>
+                    <span class="product-row__stock product-row__stock--{{ stockStatus(product.stock) }}">
+                        @if (product.stock === 0) {
+                        <i stp-icon name="x-circle" style="font-size: 0.75rem"></i>
+                        Agotado
+                        } @else if (product.stock <= 5) {
+                        <i stp-icon name="warning-circle" style="font-size: 0.75rem"></i>
+                        {{ product.stock }} bajo
+                        } @else {
+                        <i stp-icon name="check-circle" style="font-size: 0.75rem"></i>
+                        {{ product.stock }}
+                        }
+                    </span>
+                </div>
+
+            </li>
             }
         </ul>
     </section>
     }
 
+    <!-- ── No results + add CTA ──────────────────────────────── -->
+    @if (filteredProducts().length === 0 && isFiltered()) {
+    <div class="products-empty-state" aria-live="polite">
+        <div class="products-empty-state__icon" aria-hidden="true">
+            <i stp-icon name="package" style="font-size: 3.5rem"></i>
+        </div>
+        <h2 class="products-empty-state__title">Sin resultados</h2>
+        <p class="products-empty-state__text">
+            No se encontró "<strong>{{ searchQuery() }}</strong>" en tu inventario.
+        </p>
+        <stp-button variant="primary" btnStyle="solid" size="md" radius="md"
+            (click)="openInventoryDrawer(searchQuery())">
+            <i stp-icon name="plus" style="font-size: 1rem"></i>
+            Agregar "{{ searchQuery() }}"
+        </stp-button>
+    </div>
+    }
+
+    <!-- ── Inventory update drawer ───────────────────────────── -->
+    @if (showInventoryDrawer()) {
+    <div class="inv-overlay" (click)="closeInventoryDrawer()" aria-hidden="true"></div>
+
+    <aside class="inv-drawer" role="dialog" aria-modal="true" aria-label="Actualizar inventario">
+        <div class="inv-drawer__handle"></div>
+
+        <div class="inv-drawer__header">
+            <h2 class="inv-drawer__title">Actualizar inventario</h2>
+            <button class="inv-drawer__close" type="button" aria-label="Cerrar"
+                (click)="closeInventoryDrawer()">
+                <i stp-icon name="x" style="font-size: 1.25rem"></i>
+            </button>
+        </div>
+
+        @if (invSuccess()) {
+        <div class="inv-drawer__success">
+            <div class="inv-drawer__success-icon">
+                <i stp-icon name="check-circle" style="font-size: 3.5rem"></i>
+            </div>
+            <p class="inv-drawer__success-text">Inventario actualizado</p>
+        </div>
+        } @else {
+
+        <div class="inv-drawer__body">
+
+            <!-- Product search/select -->
+            <div class="inv-field">
+                <label class="inv-field__label" for="inv-product">Producto *</label>
+                <div class="inv-field__search-wrap">
+                    <i stp-icon name="magnifying-glass" class="inv-field__search-icon"
+                        style="font-size: 1rem"></i>
+                    <input id="inv-product" class="inv-field__input inv-field__input--search"
+                        type="text" placeholder="Buscar producto existente..."
+                        [value]="invProductSearch()"
+                        (input)="onInvProductSearchInput($any($event.target).value)"
+                        autocomplete="off" />
+                    @if (invProductSearch() && !invSelectedProduct()) {
+                    <button class="inv-field__clear" type="button" (click)="clearInvProductSearch()">
+                        <i stp-icon name="x" style="font-size: 0.875rem"></i>
+                    </button>
+                    }
+                </div>
+
+                <!-- Search dropdown -->
+                @if (invProductSearch().trim() && !invSelectedProduct() && !invAddingNew()) {
+                <ul class="inv-dropdown" role="listbox">
+                    @for (p of invFilteredProducts(); track p.id) {
+                    <li class="inv-dropdown__item" role="option" (click)="selectInvProduct(p)">
+                        <div class="inv-dropdown__avatar inv-dropdown__avatar--{{ p.category }}">
+                            {{ productInitials(p.name) }}
+                        </div>
+                        <div class="inv-dropdown__info">
+                            <span class="inv-dropdown__name">{{ p.name }}</span>
+                            <span class="inv-dropdown__stock">{{ p.stock }} en stock · {{ p.unit }}</span>
+                        </div>
+                    </li>
+                    } @empty {
+                    <li class="inv-dropdown__item inv-dropdown__item--empty">
+                        <span>No encontrado —</span>
+                        <button type="button" class="inv-dropdown__add-link"
+                            (click)="switchToNewProduct()">Agregar como nuevo</button>
+                    </li>
+                    }
+                </ul>
+                }
+
+                <!-- Selected product chip -->
+                @if (invSelectedProduct()) {
+                <div class="inv-selected">
+                    <div class="inv-selected__avatar inv-selected__avatar--{{ invSelectedProduct()!.category }}">
+                        {{ productInitials(invSelectedProduct()!.name) }}
+                    </div>
+                    <div class="inv-selected__info">
+                        <span class="inv-selected__name">{{ invSelectedProduct()!.name }}</span>
+                        <span class="inv-selected__stock">Stock actual: {{ invSelectedProduct()!.stock }}</span>
+                    </div>
+                    <button class="inv-selected__remove" type="button"
+                        (click)="clearInvProductSearch()">
+                        <i stp-icon name="x" style="font-size: 0.875rem"></i>
+                    </button>
+                </div>
+                }
+
+                <!-- New product indicator -->
+                @if (invAddingNew()) {
+                <div class="inv-new-badge">
+                    <i stp-icon name="plus-circle" style="font-size: 0.875rem"></i>
+                    Nuevo producto
+                    <button type="button" class="inv-new-badge__clear"
+                        (click)="clearInvProductSearch()">
+                        <i stp-icon name="x" style="font-size: 0.75rem"></i>
+                    </button>
+                </div>
+                }
+            </div>
+
+            <!-- New product fields -->
+            @if (invAddingNew()) {
+            <div class="inv-new-fields">
+                <div class="inv-field">
+                    <label class="inv-field__label" for="inv-new-name">Nombre del producto *</label>
+                    <input id="inv-new-name" class="inv-field__input" type="text"
+                        placeholder="Ej. Arroz Costeño 5kg"
+                        [value]="invNewProduct().name"
+                        (input)="patchInvNewProduct({ name: $any($event.target).value })" />
+                </div>
+                <div class="inv-field-row">
+                    <div class="inv-field">
+                        <label class="inv-field__label" for="inv-new-cat">Categoría *</label>
+                        <select id="inv-new-cat" class="inv-field__input inv-field__input--select"
+                            [value]="invNewProduct().category"
+                            (change)="patchInvNewProduct({ category: $any($event.target).value })">
+                            @for (cat of categoryOptions; track cat) {
+                            <option [value]="cat">{{ categoryLabels[cat] }}</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="inv-field">
+                        <label class="inv-field__label" for="inv-new-unit">Unidad *</label>
+                        <select id="inv-new-unit" class="inv-field__input inv-field__input--select"
+                            [value]="invNewProduct().unit"
+                            (change)="patchInvNewProduct({ unit: $any($event.target).value })">
+                            <option value="">Seleccionar...</option>
+                            @for (u of UNITS; track u) {
+                            <option [value]="u">{{ u }}</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="inv-field">
+                    <label class="inv-field__label" for="inv-new-price">Precio de venta *</label>
+                    <div class="inv-field__prefix-wrap">
+                        <span class="inv-field__prefix">S/</span>
+                        <input id="inv-new-price" class="inv-field__input inv-field__input--prefixed"
+                            type="number" min="0.01" step="0.10" placeholder="0.00"
+                            [value]="invNewProduct().price ?? ''"
+                            (input)="patchInvNewProduct({ price: +$any($event.target).value || null })" />
+                    </div>
+                </div>
+            </div>
+            }
+
+            <!-- Stock quantity -->
+            <div class="inv-field">
+                <label class="inv-field__label" for="inv-stock">
+                    Cantidad que ingresa *
+                    @if (invSelectedProduct()) {
+                    <span class="inv-field__hint">(actual: {{ invSelectedProduct()!.stock }})</span>
+                    }
+                </label>
+                <input id="inv-stock" class="inv-field__input" type="number" min="1"
+                    placeholder="Ej. 50"
+                    [value]="invStockAdd() ?? ''"
+                    (input)="invStockAdd.set(+$any($event.target).value || null)" />
+            </div>
+
+            <!-- Supplier -->
+            <div class="inv-field">
+                <label class="inv-field__label" for="inv-supplier">Proveedor *</label>
+                <input id="inv-supplier" class="inv-field__input" type="text"
+                    placeholder="Ej. Distribuidora Norte SAC"
+                    [value]="invSupplier()"
+                    (input)="invSupplier.set($any($event.target).value)" />
+            </div>
+
+        </div><!-- /body -->
+
+        <div class="inv-drawer__footer">
+            <stp-button variant="surface" btnStyle="outlined" size="md"
+                (click)="closeInventoryDrawer()">
+                Cancelar
+            </stp-button>
+            <stp-button variant="primary" btnStyle="solid" size="md"
+                [disabled]="!canSubmitInventory()"
+                [loading]="invSubmitting()"
+                (click)="submitInventory()">
+                Confirmar ingreso
+            </stp-button>
+        </div>
+
+        }<!-- /not success -->
+    </aside>
+    }
 
 </div>
