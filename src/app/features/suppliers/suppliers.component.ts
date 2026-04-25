@@ -14,10 +14,11 @@ import {
   Supplier,
   SupplierCategory,
 } from './suppliers.data';
+import { SwipeItemComponent, SwipeOption } from '../../shared/components/swipe-item/swipe-item.component';
 
 @Component({
   selector: 'stp-suppliers',
-  imports: [ButtonComponent, IconComponent],
+  imports: [ButtonComponent, IconComponent, SwipeItemComponent],
   templateUrl: './suppliers.component.html',
   styleUrl: './suppliers.component.scss',
 })
@@ -32,6 +33,19 @@ export class SuppliersComponent implements AfterViewInit, OnDestroy {
     'snacks', 'limpieza', 'higiene', 'panaderia', 'carnes', 'general',
   ];
   protected readonly categoryLabels = SUPPLIER_CATEGORY_LABELS;
+
+  protected readonly swipeOptions = (state: boolean): SwipeOption[] => {
+    if (state) {
+      return [
+        { label: 'Desactivar', icon: 'x', key: 'toggle', stpClass: 'bg-warning-light' },
+        { label: 'Editar', icon: 'pencil', key: 'edit', stpClass: 'bg-primary-light' },
+      ];
+    }
+    return [
+      { label: 'Activar', icon: 'check', key: 'toggle', stpClass: 'bg-success-light' },
+    ]
+
+  }
 
   // ── Main list state ──────────────────────────────────────────
   protected readonly suppliers = signal<Supplier[]>([...MOCK_SUPPLIERS]);
@@ -138,4 +152,17 @@ export class SuppliersComponent implements AfterViewInit, OnDestroy {
   protected supplierInitials(name: string): string {
     return name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
   }
+
+
+  swipeOptionSelected(supplier: Supplier, option: SwipeOption): void {
+    switch (option.key) {
+      case 'toggle':
+        this.toggleActive(supplier);
+        break;
+      case 'edit':
+        this.openEditDrawer(supplier);
+        break;
+    }
+  }
+
 }

@@ -157,9 +157,9 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--color-border);
-  border-radius: 1rem;
+  border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--color-surface);
+  
 }
 
 .supplier-row {
@@ -172,10 +172,19 @@
 
   &:last-child { border-bottom: none; }
 
-  &:hover { background: var(--color-surface-alt, #f9f9f9); }
-
   &--inactive {
-    opacity: 0.55;
+    .supplier-row__name,
+    .supplier-row__meta,
+    .supplier-row__contact,
+    .supplier-row__address,
+    .supplier-row__ruc {
+      color: var(--color-text-disabled);
+      
+    }
+
+    .supplier-row__avatar {
+      opacity: 0.5;
+    }
   }
 
   &__avatar {
@@ -237,7 +246,7 @@
   }
 
   &__ruc {
-    color: var(--color-text-disabled);
+    color: var(--color-text-secondary);
   }
 
   &__contact {
@@ -245,7 +254,7 @@
     align-items: center;
     gap: 0.25rem;
     font-size: 0.6875rem;
-    color: var(--color-text-disabled);
+    color: var(--color-text-secondary);
     flex-wrap: wrap;
   }
 
@@ -258,7 +267,7 @@
     align-items: center;
     gap: 0.25rem;
     font-size: 0.6875rem;
-    color: var(--color-text-disabled);
+    color: var(--color-text-secondary);
   }
 
   &__actions {
@@ -266,6 +275,11 @@
     align-items: center;
     gap: 0.25rem;
     flex-shrink: 0;
+
+    @include bp.mobile-only {
+      display: none;
+    }
+
   }
 
   &__btn {
