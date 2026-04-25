@@ -43,6 +43,10 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 
+# Claude Code
+.agents/
+.github/skills/
+
 # Capacitor native projects (generated — check in only if you want to version them)
 # /ios
 # /android
