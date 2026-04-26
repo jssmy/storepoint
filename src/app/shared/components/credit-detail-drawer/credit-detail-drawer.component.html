@@ -1,0 +1,125 @@
+<div class="det-drawer" role="dialog" aria-modal="true"
+    [attr.aria-label]="'Créditos de ' + customerName"
+    (click)="$event.stopPropagation()">
+
+    <div class="det-drawer__handle" aria-hidden="true"></div>
+
+    <!-- ── Header ──────────────────────────────────────────── -->
+    <div class="det-drawer__header">
+        @if (currentStep() === 'detail' && credits().length > 1) {
+        <button class="det-back-btn" type="button" aria-label="Volver" (click)="goBack()">
+            <i stp-icon name="arrow-left" style="font-size: 1.125rem"></i>
+        </button>
+        }
+        <div class="det-drawer__customer">
+            <div class="det-avatar det-avatar--{{ dominantStatus() }}" aria-hidden="true">
+                {{ customerInitials() }}
+            </div>
+            <div class="det-customer-info">
+                <strong class="det-customer-name">{{ customerName }}</strong>
+                <span class="det-customer-meta">
+                    <i stp-icon name="phone" style="font-size: 0.75rem"></i>
+                    {{ customerPhone }}
+                    @if (customerDni) { · DNI {{ customerDni }} }
+                </span>
+                <div class="det-customer-summary">
+                    <span class="det-summary-pill det-summary-pill--count">
+                        {{ credits().length }} crédito{{ credits().length !== 1 ? 's' : '' }}
+                    </span>
+                    @if (totalAlertCount() > 0) {
+                    <span class="det-summary-pill det-summary-pill--alert">
+                        <i stp-icon name="warning" style="font-size: 0.75rem"></i>
+                        {{ totalAlertCount() }} en riesgo
+                    </span>
+                    }
+                </div>
+            </div>
+        </div>
+        <button class="det-close" type="button" aria-label="Cerrar" (click)="close()">
+            <i stp-icon name="x" style="font-size: 1.25rem"></i>
+        </button>
+    </div>
+
+    <!-- ── Alert banner ────────────────────────────────────── -->
+    @if (totalAlertCount() > 0) {
+    <div class="det-alert-wrap">
+        <stp-alert variant="warning"
+            title="Crédito(s) en riesgo"
+            message="Última cuota pendiente con menos del 50% del total pagado."
+            [dismissible]="false">
+        </stp-alert>
+    </div>
+    }
+
+    <!-- ── Payment success toast ───────────────────────────── -->
+    @if (paymentSuccessId()) {
+    <div class="det-toast" role="status">
+        <i stp-icon name="check-circle" style="font-size: 1.125rem"></i>
+        Pago registrado correctamente
+    </div>
+    }
+
+    <!-- ── Body: step switch ───────────────────────────────── -->
+    <div class="det-drawer__body">
+        @switch (currentStep()) {
+            @case ('list') {
+                <stp-credit-list-step
+                    [credits]="credits()"
+                    (selected)="selectCredit($event)">
+                </stp-credit-list-step>
+            }
+            @case ('detail') {
+                @if (selectedCredit(); as sc) {
+                <stp-credit-detail-step
+                    [credit]="sc"
+                    [stats]="selectedStats()!"
+                    [installmentRows]="selectedInstallmentRows()"
+                    [paymentSuccessId]="paymentSuccessId()"
+                    (startPayment)="startPayment($event)">
+                </stp-credit-detail-step>
+                }
+            }
+        }
+    </div>
+
+    <!-- ── Confirm overlay ─────────────────────────────────── -->
+    @if (confirmingCredit(); as cc) {
+    @let cs = stats(cc);
+    <div class="det-confirm-overlay" role="dialog" aria-modal="true">
+        <div class="det-confirm-sheet">
+            <div class="det-confirm-sheet__icon">
+                <i stp-icon name="hand-coins" style="font-size: 2rem"></i>
+            </div>
+            <h3 class="det-confirm-sheet__title">
+                ¿Registrar cuota {{ cc.paidInstallments + 1 }} de {{ cc.installments }}?
+            </h3>
+            <p class="det-confirm-sheet__text">
+                Crédito #{{ creditId(cc) }} · <strong>S/ {{ cs.installmentAmount | number:'1.2-2' }}</strong>
+            </p>
+            @if (cs.nextPaymentDate) {
+            <p class="det-confirm-sheet__date">
+                <i stp-icon name="calendar" style="font-size: 0.875rem"></i>
+                {{ formatFullDate(cs.nextPaymentDate) }}
+            </p>
+            }
+            <div class="det-confirm-sheet__actions">
+                <stp-button variant="surface" btnStyle="outlined" size="md" (click)="cancelPayment()">
+                    Cancelar
+                </stp-button>
+                <stp-button variant="success" btnStyle="solid" size="md" (click)="confirmPayment()">
+                    <i stp-icon name="check" style="font-size: 1rem"></i>
+                    Confirmar pago
+                </stp-button>
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- ── Footer ──────────────────────────────────────────── -->
+    <div class="det-drawer__footer">
+        <stp-button variant="surface" btnStyle="outlined" size="md" (click)="close()">
+            Cerrar
+        </stp-button>
+    </div>
+
+</div>

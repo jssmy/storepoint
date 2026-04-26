@@ -48,6 +48,11 @@ export const routes: Routes = [
                     import('./features/suppliers/suppliers.component').then(m => m.SuppliersComponent),
             },
             {
+                path: AppRoutes.credits,
+                loadComponent: () =>
+                    import('./features/credits/credits.component').then(m => m.CreditsComponent),
+            },
+            {
                 path: AppRoutes.demo,
                 loadComponent: () =>
                     import('./features/demo/demo.component').then(m => m.DemoComponent),

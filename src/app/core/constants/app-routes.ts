@@ -7,6 +7,7 @@ export const AppRoutes = {
   caja:      'caja',
   profile:   'profile',
   suppliers: 'suppliers',
+  credits:   'credits',
   demo:      'demo',
 } as const;
 
