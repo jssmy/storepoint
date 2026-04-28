@@ -16,6 +16,8 @@ import { AlertComponent } from '../../shared/components/alert/alert.component';
 import { BadgeComponent } from '../../shared/components/badge/badge.component';
 import { TabsComponent } from '../../shared/components/tabs/tabs.component';
 import type { TabItem } from '../../shared/components/tabs/tabs.component';
+import { SearchComponent } from '../../shared/components/search/search.component';
+import { EmptyStateComponent } from '../../shared/components/empty-state/empty-state.component';
 import {
   CreditDrawerComponent,
   CreditDrawerResult,
@@ -55,7 +57,7 @@ export interface CustomerGroup {
 
 @Component({
   selector: 'stp-credits',
-  imports: [DecimalPipe, LowerCasePipe, ButtonComponent, IconComponent, AlertComponent, BadgeComponent, TabsComponent],
+  imports: [DecimalPipe, LowerCasePipe, ButtonComponent, IconComponent, AlertComponent, BadgeComponent, TabsComponent, SearchComponent, EmptyStateComponent],
   templateUrl: './credits.component.html',
   styleUrl: './credits.component.scss',
 })

@@ -48,62 +48,6 @@
 
 /* ── Sticky bar ───────────────────────────────────────────── */
 
-.credits-search {
-  &__field {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-
-  &__icon {
-    position: absolute;
-    left: 0.875rem;
-    color: var(--color-text-disabled);
-    display: flex;
-    pointer-events: none;
-  }
-
-  &__input {
-    width: 100%;
-    padding: 0.75rem 2.75rem;
-    border: 1.5px solid var(--color-border);
-    border-radius: var(--radius-sm);
-    background-color: var(--color-surface);
-    color: var(--color-text-primary);
-    font-size: 1rem;
-    outline: none;
-    appearance: textfield;
-    transition: border-color var(--duration-base) var(--ease-default),
-                box-shadow   var(--duration-base) var(--ease-default);
-
-    &::placeholder { color: var(--color-text-disabled); }
-    &::-webkit-search-cancel-button { display: none; }
-
-    &:focus {
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px var(--color-primary-light);
-    }
-  }
-
-  &__clear {
-    position: absolute;
-    right: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border: none;
-    border-radius: 50%;
-    background: var(--color-surface-alt, #ebebeb);
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    transition: background var(--duration-base) var(--ease-default);
-
-    &:hover { background: var(--color-border); }
-  }
-}
-
 .credits-filters {
   &__scroll {
     display: flex;
@@ -529,31 +473,3 @@
   font-weight: 500;
 }
 
-/* ── Empty state ──────────────────────────────────────────── */
-
-.credits-empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 3rem 1.5rem;
-  text-align: center;
-
-  &__icon { color: var(--color-text-disabled); opacity: 0.6; }
-
-  &__title {
-    margin: 0;
-    font-size: 1.125rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-  }
-
-  &__text {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--color-text-secondary);
-    max-width: 22rem;
-    line-height: 1.5;
-  }
-}

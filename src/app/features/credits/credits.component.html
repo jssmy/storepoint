@@ -44,25 +44,13 @@
             </stp-tabs>
         </div>
 
-        <section class="credits-search" aria-label="Buscar">
-            <div class="credits-search__field">
-                <span class="credits-search__icon" aria-hidden="true">
-                    <i stp-icon name="magnifying-glass" style="font-size: 1.125rem"></i>
-                </span>
-                <input class="credits-search__input" type="search"
-                    [placeholder]="viewMode() === 'credits' ? 'Buscar por nombre, teléfono o DNI...' : 'Buscar cliente...'"
-                    autocomplete="off"
-                    [attr.aria-label]="viewMode() === 'credits' ? 'Buscar créditos' : 'Buscar clientes'"
-                    [value]="searchQuery()"
-                    (input)="onSearchInput($any($event.target).value)" />
-                @if (searchQuery()) {
-                <button class="credits-search__clear" type="button" aria-label="Limpiar búsqueda"
-                    (click)="clearSearch()">
-                    <i stp-icon name="x" style="font-size: 1rem"></i>
-                </button>
-                }
-            </div>
-        </section>
+        <stp-search
+            [placeholder]="viewMode() === 'credits' ? 'Buscar por nombre, teléfono o DNI...' : 'Buscar cliente...'"
+            size="md"
+            [value]="searchQuery()"
+            (valueChange)="onSearchInput($event)"
+            (cleared)="clearSearch()">
+        </stp-search>
 
         <section class="credits-filters" aria-label="Filtrar">
             <div class="credits-filters__scroll" role="tablist">
@@ -189,26 +177,23 @@
         }
 
         @if (filteredCredits().length === 0) {
-        <div class="credits-empty-state" aria-live="polite">
-            <div class="credits-empty-state__icon" aria-hidden="true">
-                <i stp-icon name="receipt" style="font-size: 3.5rem"></i>
-            </div>
             @if (isFiltered()) {
-            <h2 class="credits-empty-state__title">Sin resultados</h2>
-            <p class="credits-empty-state__text">No se encontraron créditos con ese criterio.</p>
-            <stp-button variant="primary" btnStyle="solid" size="md" radius="md" (click)="openNewDrawer()">
-                <i stp-icon name="plus" style="font-size: 1rem"></i>
-                Agregar crédito
-            </stp-button>
+            <stp-empty-state icon="receipt" title="Sin resultados"
+                description="No se encontraron créditos con ese criterio.">
+                <stp-button variant="primary" btnStyle="solid" size="md" radius="md" (click)="openNewDrawer()">
+                    <i stp-icon name="plus" style="font-size: 1rem"></i>
+                    Agregar crédito
+                </stp-button>
+            </stp-empty-state>
             } @else {
-            <h2 class="credits-empty-state__title">Sin créditos registrados</h2>
-            <p class="credits-empty-state__text">Registra el primer crédito para empezar.</p>
-            <stp-button variant="primary" btnStyle="solid" size="md" radius="md" (click)="openNewDrawer()">
-                <i stp-icon name="plus" style="font-size: 1rem"></i>
-                Agregar crédito
-            </stp-button>
+            <stp-empty-state icon="receipt" title="Sin créditos registrados"
+                description="Registra el primer crédito para empezar.">
+                <stp-button variant="primary" btnStyle="solid" size="md" radius="md" (click)="openNewDrawer()">
+                    <i stp-icon name="plus" style="font-size: 1rem"></i>
+                    Agregar crédito
+                </stp-button>
+            </stp-empty-state>
             }
-        </div>
         }
 
     }
@@ -339,26 +324,23 @@
         }
 
         @if (filteredCustomers().length === 0) {
-        <div class="credits-empty-state" aria-live="polite">
-            <div class="credits-empty-state__icon" aria-hidden="true">
-                <i stp-icon name="users" style="font-size: 3.5rem"></i>
-            </div>
             @if (isFiltered()) {
-            <h2 class="credits-empty-state__title">Sin resultados</h2>
-            <p class="credits-empty-state__text">No se encontraron clientes con ese criterio.</p>
-            <stp-button variant="primary" btnStyle="solid" size="md" radius="md" (click)="openNewDrawer()">
-                <i stp-icon name="plus" style="font-size: 1rem"></i>
-                Agregar crédito
-            </stp-button>
+            <stp-empty-state icon="users" title="Sin resultados"
+                description="No se encontraron clientes con ese criterio.">
+                <stp-button variant="primary" btnStyle="solid" size="md" radius="md" (click)="openNewDrawer()">
+                    <i stp-icon name="plus" style="font-size: 1rem"></i>
+                    Agregar crédito
+                </stp-button>
+            </stp-empty-state>
             } @else {
-            <h2 class="credits-empty-state__title">Sin clientes con crédito</h2>
-            <p class="credits-empty-state__text">Registra el primer crédito de un cliente para empezar.</p>
-            <stp-button variant="primary" btnStyle="solid" size="md" radius="md" (click)="openNewDrawer()">
-                <i stp-icon name="plus" style="font-size: 1rem"></i>
-                Agregar crédito
-            </stp-button>
+            <stp-empty-state icon="users" title="Sin clientes con crédito"
+                description="Registra el primer crédito de un cliente para empezar.">
+                <stp-button variant="primary" btnStyle="solid" size="md" radius="md" (click)="openNewDrawer()">
+                    <i stp-icon name="plus" style="font-size: 1rem"></i>
+                    Agregar crédito
+                </stp-button>
+            </stp-empty-state>
             }
-        </div>
         }
 
     }

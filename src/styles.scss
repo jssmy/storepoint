@@ -248,6 +248,14 @@ $-p: (0, 1, 2, 3, 4, 5, 6, 7, 8);
   .pe-#{$i} { padding-inline-end:   var(--p-#{$i}); }
 }
 
+@each $i in $-p {
+  .m-#{$i}  { margin:              var(--p-#{$i}); }
+  .mt-#{$i} { margin-top:          var(--p-#{$i}); }
+  .mb-#{$i} { margin-bottom:       var(--p-#{$i}); }
+  .ms-#{$i} { margin-inline-start: var(--p-#{$i}); }
+  .me-#{$i} { margin-inline-end:   var(--p-#{$i}); }
+}
+
 /* =========================================================
    Gap, Radius & Size tokens
    ========================================================= */
