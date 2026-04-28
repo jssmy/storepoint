@@ -250,7 +250,7 @@
     gap: 0.375rem;
     font-size: 0.8125rem;
     color: var(--color-text-secondary);
-    margin: 0;
+    
   }
 
   &__actions {
@@ -265,4 +265,117 @@
 @keyframes det-sheet-in {
   from { transform: translateY(100%); }
   to   { transform: translateY(0); }
+}
+
+/* ── Success step ─────────────────────────────────────────── */
+
+.det-success-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+
+  &__title {
+    margin: 0.25rem 0 0;
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-text-primary);
+  }
+
+  &__desc {
+    margin: 0;
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    background: var(--color-success-light);
+    border-radius: var(--radius-md);
+    padding: var(--p-4);
+    width: 100%;
+    margin: 0.5rem 0 1rem;
+  }
+
+  &__meta-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-success-hover, #15803d);
+
+    &--total {
+      font-size: var(--text-base);
+      font-weight: var(--font-bold);
+      padding-top: 0.375rem;
+      border-top: 1px solid color-mix(in srgb, var(--color-success) 25%, transparent);
+      margin-top: 0.125rem;
+    }
+  }
+
+  stp-button { width: 100%; }
+}
+
+/* ── Payment inputs ───────────────────────────────────────── */
+
+.det-pay-inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+/* ── Payment breakdown (confirm step) ─────────────────────── */
+
+.det-pay-breakdown {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-sm);
+  padding: 0.625rem 0.875rem;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+
+    strong { color: var(--color-text-primary); }
+  }
+}
+
+/* ── Payment amount field ─────────────────────────────────── */
+
+.det-amount-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.det-amount-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  margin: 0;
+
+  &--partial { color: var(--color-warning-hover, #b45309); }
+  &--error   { color: var(--color-error); }
 }
