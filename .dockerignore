@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+dist/
+
+# Capacitor native projects
+android/
+ios/
+
+# Environment / secrets
+.env
+.env.*
+
+# Editor / OS
+.DS_Store
+*.log
